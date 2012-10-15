@@ -1,0 +1,8 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+  
+      .nav-collapse
+        = tabs_tag open_tabs: {class: 'nav'}, builder: MenuBuilder do |tab|
+          = tab.kine kine_path
+

@@ -1,0 +1,26 @@
+- content_for :meta_title do
+  = "#{ t(".title") }"
+
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span9
+            %h2 VACAS
+          .span2
+            = link_to t(".new_cow"), new_cow_path , class: "btn btn-info"
+        .row
+          .span11
+            #teams_catalogue
+              #catalogue_body
+                #letter_filter_side_bar
+                  = kine_letter_filter_links_sidebar
+
+              #catalogue_items_list_container
+                = @kine.in_groups_of(3).each do |n_kine_group|
+                  .catalogue_items_container_row
+                    = n_kine_group.compact.each do |kine|
+                      .catalogue_item_container.clickable_container
+                        fgersge
+           

@@ -1,0 +1,47 @@
+%hr.space
+.span8
+  .well
+    = form_for(@cow) do |f|
+      = if @cow.errors.any?
+        #error_explanation
+          %h2 = pluralize(@cow.errors.count, "error")  prohibited this cow from being saved:
+
+        %ul
+        = @cow.errors.full_messages.each do |msg|
+          %li = msg
+      .field
+        = f.label :ring
+        %br
+        = f.text_field :ring
+
+      .field
+        = f.label :name
+        %br
+        = f.text_field :name
+
+      .field
+        = f.label :years
+        %br
+        = f.number_field :years
+
+      .field
+        = f.label :num_borns
+        %br
+        = f.number_field :num_borns
+
+      .field
+        = f.label :father
+        %br
+        = f.text_field :father
+
+      .actions
+        %button.btn.btn-success{:type => "submit"} t('.accept_new_cow')
+
+.span2
+  .well
+    %p
+      = link_to t(".ctrl_cow"), new_cow_path , class: "btn btn-info"
+    %p
+      =link_to t(".repro_cow"), new_cow_path , class: "btn btn-info"
+    %p
+      = link_to t(".down_cow"), new_cow_path , class: "btn btn-info"

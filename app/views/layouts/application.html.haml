@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title XEGRA
+
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+
+    = csrf_meta_tags
+
+  %body{class: "#{controller_path.split("/").join(" ")}"}
+    .container
+      %header
+        .row
+          .span12
+            %h1 XEGRA
+            %p.lead Xestión de Granxas
+      = yield
+
+    = render 'footer'

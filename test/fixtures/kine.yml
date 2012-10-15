@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ring: MyString
+  name: MyString
+  years: 1
+  num_borns: 1
+  father: MyString
+
+two:
+  ring: MyString
+  name: MyString
+  years: 1
+  num_borns: 1
+  father: MyString
