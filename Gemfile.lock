@@ -104,6 +104,7 @@ GEM
       activesupport (>= 2.3.2)
       cocaine (>= 0.0.2)
       mime-types
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -169,13 +170,14 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass (~> 2.1.0.0)
   bootswatch-rails!
-  coffee-rails (~> 3.2.1)
+  coffee-rails (~> 3.2.2)
   haml (>= 3.0.0)
   haml-rails
   jquery-rails
   paperclip (~> 2.5)
+  pg
   rails (= 3.2.6)
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.2.4)
   simple_form
   sqlite3
   tabs_on_rails
