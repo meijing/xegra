@@ -1,8 +1,14 @@
-.navbar.navbar-fixed-top
+.navbar
   .navbar-inner
     .container
-  
+      
       .nav-collapse
-        = tabs_tag open_tabs: {class: 'nav'}, builder: MenuBuilder do |tab|
-          = tab.kine kine_path
-
+        %ul.nav
+          %li
+            = link_to 'Vacas',kine_path
+          %li
+            = link_to 'Piensos',kine_path
+          %li
+            = link_to 'Alimentación',kine_path
+          %li
+            = link_to 'Listados',kine_path
