@@ -1,4 +1,3 @@
-%hr.space
 .span11
   .well
     = form_for(@cow) do |f|
@@ -9,30 +8,29 @@
         %ul
         = @cow.errors.full_messages.each do |msg|
           %li = msg
-      .field
-        = f.label :ring
-        %br
+      .control-group
+        = f.label :ring       
         = f.text_field :ring
 
-      .field
+      .control-group
         = f.label :name
-        %br
         = f.text_field :name
 
-      .field
+      .control-group
         = f.label :years
-        %br
         = f.number_field :years
 
-      .field
+      .control-group
         = f.label :num_borns
-        %br
         = f.number_field :num_borns
 
-      .field
+      .control-group
         = f.label :father
-        %br
         = f.text_field :father
+
+      .control-group
+        = f.label :is_milk
+        = f.check_box :is_milk
 
       .actions
         %button.btn.btn-success{:type => "submit"} t('.accept_new_cow')

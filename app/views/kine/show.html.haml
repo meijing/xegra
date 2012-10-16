@@ -3,34 +3,47 @@
     .span12
       .well
         .row
-          .span8
-            %p
-              Ring:
-              = @cow.ring
+          .span11
+            %legend Datos para a vaca 
+          %hr.space
+            .span8
+              .well
+                
+                %p
+                  Ring:
+                  = @cow.ring
 
-            %p
-              Name:
-              = @cow.name
+                %p
+                  Name:
+                  = @cow.name
 
-            %p
-              Years:
-              = @cow.years
+                %p
+                  Years:
+                  = @cow.years
 
-            %p
-              Num borns:
-              = @cow.num_borns
+                %p
+                  Num borns:
+                  = @cow.num_borns
 
-            %p
-              Father:
-              = @cow.father
+                %p
+                  Father:
+                  = @cow.father
 
-          .span2
-            .well
-              %p
-                = link_to t(".ctrl_cow"), new_cow_path , class: "btn btn-info"
-              %p
-                =link_to t(".repro_cow"), new_cow_path , class: "btn btn-info"
-              %p
-                = link_to t(".down_cow"), new_cow_path , class: "btn btn-info"
-              %p
-                = link_to t(".modify_cow"), edit_cow_path(@cow) , class: "btn btn-info"
+                %p
+                  - if @cow.is_milk?
+                    .alert.alert-success
+                      A vaca está na fase de lactancia
+                  - else
+                    .alert.alert-error
+                      A vaca está na fase de secado
+
+            .span2
+              .well
+                %p
+                  = link_to t(".ctrl_cow"), new_cow_path , class: "btn btn-info"
+                %p
+                  =link_to t(".repro_cow"), new_cow_path , class: "btn btn-info"
+                %p
+                  = link_to t(".down_cow"), new_cow_path , class: "btn btn-info"
+                %p
+                  = link_to t(".modify_cow"), edit_cow_path(@cow) , class: "btn btn-info"
