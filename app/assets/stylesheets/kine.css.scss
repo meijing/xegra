@@ -22,7 +22,6 @@
   width: 240px;
   border-radius: 7px;
   marging:20px;
-  border:2px solid red;
 }
 
 .left_subpanel {
@@ -39,6 +38,9 @@
     text-overflow: ellipsis;
     background-color: white;
     border-radius: 7px;
+    height: 50px;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 
 .cow_ring{

@@ -18,9 +18,9 @@
                   = kine_letter_filter_links_sidebar
 
               #catalogue_items_list_container
-                = @kine.in_groups_of(3).each do |n_kine_group|
+                - @kine.in_groups_of(3).each do |n_kine_group|
                   .catalogue_items_container_row
-                    = n_kine_group.compact.each do |kine|
+                    - n_kine_group.compact.each do |kine|
                       .catalogue_item_container.clickable_container
-                        = render 'cow_panel'
+                        = render 'cow_panel', :kine => kine
            

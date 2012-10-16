@@ -1,5 +1,5 @@
 %hr.space
-.span8
+.span11
   .well
     = form_for(@cow) do |f|
       = if @cow.errors.any?
@@ -37,11 +37,3 @@
       .actions
         %button.btn.btn-success{:type => "submit"} t('.accept_new_cow')
 
-.span2
-  .well
-    %p
-      = link_to t(".ctrl_cow"), new_cow_path , class: "btn btn-info"
-    %p
-      =link_to t(".repro_cow"), new_cow_path , class: "btn btn-info"
-    %p
-      = link_to t(".down_cow"), new_cow_path , class: "btn btn-info"
