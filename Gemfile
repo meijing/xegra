@@ -26,7 +26,7 @@ gem "tabs_on_rails"
 
 gem 'jquery-rails'
 gem "aws-sdk"
-gem "asset_sync"
+
 gem "paperclip", "~> 2.5"
 gem "simple_form"
 

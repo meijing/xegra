@@ -14,3 +14,33 @@
       border-left: 0px;
       border-bottom: 2px solid #C4CDE0;
       border-color: #C4CDE0; }
+
+.cow_panel {
+  padding: 5px;
+  overflow: hidden;
+  background-color: #EBEBEB;
+  width: 240px;
+  border-radius: 7px;
+  marging:20px;
+  border:2px solid red;
+}
+
+.left_subpanel {
+    float: left;
+    width: 45px;
+}
+
+.team_photo img {
+      width: 40px;
+}
+
+.team_info {
+    padding-left: 26px;
+    text-overflow: ellipsis;
+    background-color: white;
+    border-radius: 7px;
+}
+
+.cow_ring{
+  padding-left: 90px;
+}
