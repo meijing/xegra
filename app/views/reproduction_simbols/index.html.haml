@@ -1,0 +1,21 @@
+%h1 Listing reproduction_simbols
+
+%table
+  %tr
+    %th Simbol
+    %th Meaning
+    %th
+    %th
+    %th
+
+  - @reproduction_simbols.each do |reproduction_simbol|
+    %tr
+      %td= reproduction_simbol.simbol
+      %td= reproduction_simbol.meaning
+      %td= link_to 'Show', reproduction_simbol
+      %td= link_to 'Edit', edit_reproduction_simbol_path(reproduction_simbol)
+      %td= link_to 'Destroy', reproduction_simbol, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Reproduction simbol', new_reproduction_simbol_path

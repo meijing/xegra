@@ -1,0 +1,37 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span9
+            %h2 REPRODUCCIÓN
+          .span2
+            = link_to 'Engadir vaca', new_reproduction_path , class: "btn btn-info"
+        .row
+          %table.table.table-bordered.table-striped
+            %thead
+              %tr
+                %th Vaca
+                %th Xaneiro
+                %th Febreiro
+                %th Marzo
+                %th Abril
+                %th Maio
+                %th Xuño
+                %th Xullo
+                %th Agosto
+                %th Setembro
+                %th Outubro
+                %th Novembro
+                %th Decembro
+                %th
+
+                - @cows.each do |cow|
+                  %tr
+                    %td
+                      %h5= cow.ring
+                      %h5= cow.name
+                    %td
+                      - proba = get_simbol_reproduction(@reproductions,cow.id)
+                      = proba
+                    

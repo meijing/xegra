@@ -10,23 +10,23 @@
               .well
                 
                 %p
-                  Ring:
+                  Pendiente:
                   = @cow.ring
 
                 %p
-                  Name:
+                  Nome:
                   = @cow.name
 
                 %p
-                  Years:
+                  Anos:
                   = @cow.years
 
                 %p
-                  Num borns:
+                  Número de partos:
                   = @cow.num_borns
 
                 %p
-                  Father:
+                  Pai:
                   = @cow.father
 
                 %p
@@ -37,13 +37,13 @@
                     .alert.alert-error
                       A vaca está na fase de secado
 
-            .span2
+            .span3
               .well
                 %p
-                  = link_to t(".ctrl_cow"), new_cow_path , class: "btn btn-info"
+                  = link_to 'Control leiteiro', new_cow_path , class: "btn btn-info"
                 %p
-                  =link_to t(".repro_cow"), new_cow_path , class: "btn btn-info"
+                  =link_to 'Reproducción', reproductions_path , class: "btn btn-info"
                 %p
-                  = link_to t(".down_cow"), new_cow_path , class: "btn btn-info"
+                  =link_to 'Dar de baixa', @cow , class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
                 %p
-                  = link_to t(".modify_cow"), edit_cow_path(@cow) , class: "btn btn-info"
+                  = link_to 'Modificar datos', edit_cow_path(@cow) , class: "btn btn-info"

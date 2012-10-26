@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Year:
+  = @reproduction.year
+%p
+  %b Month:
+  = @reproduction.month
+%p
+  %b Comment:
+  = @reproduction.comment
+
+= link_to 'Edit', edit_reproduction_path(@reproduction)
+\|
+= link_to 'Back', reproductions_path

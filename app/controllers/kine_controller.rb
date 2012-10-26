@@ -79,4 +79,15 @@ class KineController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def get_cow_down
+    p('proba')
+    @cow = Cow.find(params[:id])
+    p(@cow.name)
+    @cow.is_active = 0
+    #@cow.date_down = Time.new
+    @cow.save
+
+   
+  end
 end

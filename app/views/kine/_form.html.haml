@@ -9,29 +9,29 @@
         = @cow.errors.full_messages.each do |msg|
           %li = msg
       .control-group
-        = f.label :ring       
+        = f.label 'Pendiente:'
         = f.text_field :ring
 
       .control-group
-        = f.label :name
+        = f.label 'Nome:'
         = f.text_field :name
 
       .control-group
-        = f.label :years
+        = f.label 'Anos:'
         = f.number_field :years
 
       .control-group
-        = f.label :num_borns
+        = f.label 'Número de partos:'
         = f.number_field :num_borns
 
       .control-group
-        = f.label :father
+        = f.label 'Pai:'
         = f.text_field :father
 
       .control-group
-        = f.label :is_milk
+        = f.label '¿Está en fase de lactancia?'
         = f.check_box :is_milk
 
       .actions
-        %button.btn.btn-success{:type => "submit"} t('.accept_new_cow')
+        %button.btn.btn-success{:type => "submit"} Aceptar
 

@@ -1,6 +1,3 @@
-- content_for :meta_title do
-  = "#{ t(".title") }"
-
 .container
   .row
     .span12
@@ -9,7 +6,7 @@
           .span9
             %h2 VACAS
           .span2
-            = link_to t(".new_cow"), new_cow_path , class: "btn btn-info"
+            = link_to 'Alta dunha vaca', new_cow_path , class: "btn btn-info"
         .row
           .span11
             #teams_catalogue
@@ -23,4 +20,3 @@
                     - n_kine_group.compact.each do |kine|
                       .catalogue_item_container.clickable_container
                         = render 'cow_panel', :kine => kine
-           

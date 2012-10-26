@@ -1,0 +1,16 @@
+= form_for @reproduction_simbol do |f|
+  - if @reproduction_simbol.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@reproduction_simbol.errors.count, "error")} prohibited this reproduction_simbol from being saved:"
+      %ul
+        - @reproduction_simbol.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :simbol
+    = f.text_field :simbol
+  .field
+    = f.label :meaning
+    = f.text_field :meaning
+  .actions
+    = f.submit 'Save'

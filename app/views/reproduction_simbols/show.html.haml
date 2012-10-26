@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Simbol:
+  = @reproduction_simbol.simbol
+%p
+  %b Meaning:
+  = @reproduction_simbol.meaning
+
+= link_to 'Edit', edit_reproduction_simbol_path(@reproduction_simbol)
+\|
+= link_to 'Back', reproduction_simbols_path

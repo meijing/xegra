@@ -1,6 +1,19 @@
-es:
-  title: XEGRA. Xestión de granxas
-  kine:
-    index:
-      title: LISTADO DE VACAS
-      new_cow: Añadir
+gl:
+  activerecord:
+    errors:
+      models:
+        cow:
+          attributes:
+            ring:
+              blank: Pendiente
+              taken: Ten que indicar o número do pendiente
+              wrong_length: O pendiente debe de ter 6 números
+            years:
+              blank: Anos
+              taken: Ten que indicar os anos da vaca
+            num_borns:
+              blank: Número de partos
+              taken: Ten que indicar o número de partos. Se non tivo ningún marque 0
+            is_milk:
+              blank: Fase de lactancia
+              taken: Debe de indicar se a vaca esta en fase de lactancia ou non
