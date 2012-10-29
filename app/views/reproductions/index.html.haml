@@ -25,13 +25,15 @@
                 %th Novembro
                 %th Decembro
                 %th
-
+                
                 - @cows.each do |cow|
                   %tr
                     %td
                       %h5= cow.ring
                       %h5= cow.name
-                    %td
-                      - proba = get_simbol_reproduction(@reproductions,cow.id)
-                      = proba
+                    - repro = get_simbol_reproduction(@reproductions, cow.id)
+                    - repro.each do |r|
+                      %td
+                        - if r != {}
+                          = r
                     
