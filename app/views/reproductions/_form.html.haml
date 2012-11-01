@@ -4,7 +4,7 @@
       %table.table.table-bordered.table-striped.repro_hover
         %thead
           %tr
-            %th Vaca
+            %th
             %th Xaneiro
             %th Febreiro
             %th Marzo
@@ -17,7 +17,6 @@
             %th Outubro
             %th Novembro
             %th Decembro
-            %th
 
 
             %tr
@@ -28,5 +27,21 @@
                 - if @reproductions[i].nil?
                   %td
                 - else
-                  %td= @reproductions[i].id
+                  %td
+                    = link_to ReproductionSimbol.find_by_id(@reproductions[i].reproduction_simbol_id).simbol+ @reproductions[i].comment, proba_repro_path(:id=>@cow.id,:repro_id=>@reproductions[i].reproduction_simbol_id)
+    .span11
+      %form.form-horizontal.well
+        .control-group
+          %label.control-label Símbolo
+          .controls
+            %select
+              = options_for_select(get_array_simbols, @repro_selected)
 
+        .control-group
+          %label.control-label Comentario
+          .controls
+            = text_field :reproduction, :comment, :value=>@comment
+
+        .form-actions
+          %button.btn.btn-primary{:type => "submit"} Aceptar
+          %button.reset Borrar

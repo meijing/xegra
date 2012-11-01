@@ -90,5 +90,14 @@ class ReproductionsController < ApplicationController
   def single_reproduction
     @cow = Cow.find_by_id(params[:id])
     @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id])
+    @repro_id = params[:repro_id]
+    if @repro_id.nil?
+      @repro_selected="Ningun"
+    else
+      @repro = ReproductionSimbol.find_by_id(@repro_id)
+      @repro_selected=@repro.simbol + " "+ @repro.meaning
+      @comment = Reproduction.find_by_id(@repro_id).comment
+    end
+
   end
 end
