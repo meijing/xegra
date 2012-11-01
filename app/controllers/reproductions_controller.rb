@@ -31,11 +31,10 @@ class ReproductionsController < ApplicationController
   # GET /reproductions/new
   # GET /reproductions/new.json
   def new
-    @reproduction = Reproduction.new
+    @reproductions = Reproduction.find_by_cow_id(params[:id])
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @reproduction }
     end
   end
 
@@ -86,5 +85,10 @@ class ReproductionsController < ApplicationController
       format.html { redirect_to reproductions_url }
       format.json { head :no_content }
     end
+  end
+
+  def single_reproduction
+    @cow = Cow.find_by_id(params[:id])
+    @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id])
   end
 end

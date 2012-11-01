@@ -42,7 +42,7 @@
                 %p
                   = link_to 'Control leiteiro', new_cow_path , class: "btn btn-info"
                 %p
-                  =link_to 'Reproducción', reproductions_path , class: "btn btn-info"
+                  =link_to 'Reproducción', proba_path(@cow.id) , class: "btn btn-info"
                 %p
                   =link_to 'Dar de baixa', @cow , class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
                 %p

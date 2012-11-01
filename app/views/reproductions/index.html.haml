@@ -4,9 +4,7 @@
       .well
         .row
           .span9
-            %h2 REPRODUCCIÓN
-          .span2
-            = link_to 'Engadir vaca', new_reproduction_path , class: "btn btn-info"
+            %h2 CARTA DE REPRODUCCIÓN
         .row
           %table.table.table-bordered.table-striped
             %thead
@@ -32,8 +30,9 @@
                       %h5= cow.ring
                       %h5= cow.name
                     - repro = get_simbol_reproduction(@reproductions, cow.id)
-                    - repro.each do |r|
-                      %td
-                        - if r != {}
-                          = r
+                    - if !repro.nil?
+                      - repro.each do |r|
+                        %td
+                          - if r != {}
+                            = r
                     

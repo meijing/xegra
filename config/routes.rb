@@ -1,4 +1,5 @@
 Xegra::Application.routes.draw do
+  match 'reproductions/new/:id' =>'reproductions#single_reproduction', :as =>'proba'
   resources :reproductions
 
   resources :reproduction_simbols

@@ -13,6 +13,7 @@ class KineController < ApplicationController
   # GET /kine/1.json
   def show
     @cow = Cow.find(params[:id])
+    @reproductions = Reproduction.find_by_cow_id(@cow.id)
 
     respond_to do |format|
       format.html # show.html.erb

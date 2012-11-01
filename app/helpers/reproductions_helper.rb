@@ -12,9 +12,4 @@ module ReproductionsHelper
     end
     return info_repro
   end
-
-  def proba
-    a=""
-    a+=content_tag(:h1,"kk")
-  end
 end
