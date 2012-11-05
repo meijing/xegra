@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .repro_hover td{
-  width:75px;
+  width:50px;
 }
 .repro_hover td:hover{
   background-color:#73c473;
@@ -11,4 +11,14 @@
 .repro_hover a:hover{
   background-color:#3a613a;
   color: black;
+}
+
+.btn_add_repro{
+  font-size: 6px;
+  color: red;
+  width:40px;
+}
+
+.id_repro_hidden{
+  visibility:hidden;
 }

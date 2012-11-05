@@ -82,7 +82,6 @@ class KineController < ApplicationController
   end
 
   def get_cow_down
-    p('proba')
     @cow = Cow.find(params[:id])
     p(@cow.name)
     @cow.is_active = 0

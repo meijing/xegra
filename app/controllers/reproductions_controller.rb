@@ -46,33 +46,44 @@ class ReproductionsController < ApplicationController
   # POST /reproductions
   # POST /reproductions.json
   def create
-    @reproduction = Reproduction.new(params[:reproduction])
+    @new_reproduction = Reproduction.new
+    @new_reproduction.cow_id = p params[:reproduction][:cow_id]
+    @new_reproduction.month = p params[:reproduction][:repro_month]
+    @new_reproduction.comment =p params[:reproduction][:comment]
+    @new_reproduction.save
 
-    respond_to do |format|
-      if @reproduction.save
-        format.html { redirect_to @reproduction, notice: 'Reproduction was successfully created.' }
-        format.json { render json: @reproduction, status: :created, location: @reproduction }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @reproduction.errors, status: :unprocessable_entity }
-      end
-    end
+    p '---------------'
+    p params[:reproduction][:comment]
+    
+    #respond_to do |format|
+    #  if @reproduction.save
+        redirect_to  proba_path(8)
+     #   format.json { render json: @reproduction, status: :created, location: @reproduction }
+     # else
+     #   format.html { render action: "new" }
+     #   format.json { render json: @reproduction.errors, status: :unprocessable_entity }
+     # end
+   # end
   end
 
   # PUT /reproductions/1
   # PUT /reproductions/1.json
   def update
-    @reproduction = Reproduction.find(params[:id])
+    @reproduction = Reproduction.find_by_id(params[:reproduction][:idReproduccion])
+    @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
 
-    respond_to do |format|
-      if @reproduction.update_attributes(params[:reproduction])
-        format.html { redirect_to @reproduction, notice: 'Reproduction was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @reproduction.errors, status: :unprocessable_entity }
-      end
+    if (@simbolId[0] != 'Ningun')
+      @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
+      @reproduction.reproduction_simbol_id = @simbol.id
+    else
+      @reproduction.reproduction_simbol_id = nil
     end
+    @reproduction.comment = params[:reproduction][:comment]
+    
+    
+    @reproduction.save
+    redirect_to proba_path(@reproduction.cow_id)
+
   end
 
   # DELETE /reproductions/1
@@ -89,15 +100,47 @@ class ReproductionsController < ApplicationController
 
   def single_reproduction
     @cow = Cow.find_by_id(params[:id])
-    @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id])
-    @repro_id = params[:repro_id]
-    if @repro_id.nil?
-      @repro_selected="Ningun"
-    else
-      @repro = ReproductionSimbol.find_by_id(@repro_id)
-      @repro_selected=@repro.simbol + " "+ @repro.meaning
-      @comment = Reproduction.find_by_id(@repro_id).comment
+
+    @info_repro = Array.new(12, Hash.new)
+    @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id]+' order by month')
+    @reproductions.each do |r|
+      @info_repro[r.month-1] =r
     end
 
+    @cont=0
+    @info_repro.each do |r|
+      if (r == {})
+        @info_repro[@cont]=Reproduction.new
+        @info_repro[@cont].month = @cont+1
+        @cont +=1
+      else
+        @info_repro[@cont]=r
+        @cont +=1
+      end
+    end
+    
+    @simbol_id = params[:simbol_id]
+    
+    if @simbol_id.nil? or @simbol_id =='-1'
+      @repro_selected="Ningun"
+    else
+      @repro = ReproductionSimbol.find_by_id(@simbol_id)
+      @repro_selected=@repro.simbol + " "+ @repro.meaning
+    end
+   
+    if !params[:repro_id].nil? and params[:repro_id] =='-1'
+      @reproduction = Reproduction.new
+      @reproduction.month =  p params[:month]
+      @is_add_enabled = false
+    elsif !params[:repro_id].nil? and params[:repro_id] !='-1'
+      @reproduction = Reproduction.find_by_id(params[:repro_id])
+      @comment = @reproduction.comment
+      @is_add_enabled = false
+    elsif params[:repro_id].nil?
+      @reproduction = Reproduction.new
+      @reproduction.month =  p params[:month]
+      @is_add_enabled = true
+    end
+    
   end
 end

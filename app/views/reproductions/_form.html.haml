@@ -4,7 +4,6 @@
       %table.table.table-bordered.table-striped.repro_hover
         %thead
           %tr
-            %th
             %th Xaneiro
             %th Febreiro
             %th Marzo
@@ -18,30 +17,31 @@
             %th Novembro
             %th Decembro
 
-
             %tr
-              %td
-                %h5= @cow.ring
-                %h5= @cow.name
-              - for i in 0..11
-                - if @reproductions[i].nil?
-                  %td
+              - @info_repro.each do |r|
+                - if r.reproduction_simbol_id.nil? and r.comment.nil?
+                  %td= link_to 'Engadir', proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'btn btn-info btn-small btn_add_repro'
                 - else
                   %td
-                    = link_to ReproductionSimbol.find_by_id(@reproductions[i].reproduction_simbol_id).simbol+ @reproductions[i].comment, proba_repro_path(:id=>@cow.id,:repro_id=>@reproductions[i].reproduction_simbol_id)
+                    = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
+
     .span11
-      %form.form-horizontal.well
+      =form_for @reproduction do |f|
+        .id_repro_hidden
+          = f.text_field :idReproduccion, :value=>@reproduction.id
+          = f.text_field :cow_id, :value=>@cow.id
+          = f.text_field :repro_month, :value=>@reproduction.month
         .control-group
           %label.control-label Símbolo
           .controls
-            %select
-              = options_for_select(get_array_simbols, @repro_selected)
+            = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
 
         .control-group
           %label.control-label Comentario
           .controls
-            = text_field :reproduction, :comment, :value=>@comment
+            = text_field :reproduction, :comment, :value=>@comment        
 
         .form-actions
-          %button.btn.btn-primary{:type => "submit"} Aceptar
-          %button.reset Borrar
+          %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
+          %button.reset{:type => "submit",:disabled=>@is_add_enabled} Borrar
+        

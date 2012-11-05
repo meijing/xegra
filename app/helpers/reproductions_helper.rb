@@ -12,4 +12,22 @@ module ReproductionsHelper
     end
     return info_repro
   end
+
+  def get_text_simbol_reproduction(reproduction)
+    @text = ""
+    @simbol = ReproductionSimbol.find_by_id(reproduction.reproduction_simbol_id)
+    if !@simbol.nil?
+      @text += @simbol.simbol
+    end
+
+    @text += "<br />"+reproduction.comment
+    return @text
+  end
+
+  def get_title_individual_repro_page(cow)
+    @title = 'Modifica a carta de reproduccion para a vaca '
+    @title += @cow.ring + '('
+    @title += @cow.name + ')'
+    return @title
+  end
 end
