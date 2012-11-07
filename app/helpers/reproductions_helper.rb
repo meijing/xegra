@@ -30,4 +30,38 @@ module ReproductionsHelper
     @title += @cow.name + ')'
     return @title
   end
+
+  def get_name_of_name(month)
+    if (month.nil?)
+      return '(Non se seleccionou ningun mes)'
+    else
+      case month
+      when 1
+        return 'Xaneiro'
+      when 2
+        return 'Febreiro'
+      when 3
+        return 'Marzo'
+      when 4
+        return 'Abril'
+      when 5
+        return 'Maio'
+      when 6
+        return 'Xunho'
+      when 7
+        return 'Xullo'
+      when 8
+        return 'Agosto'
+      when 9
+        return 'Setembro'
+      when 10
+        return 'Outubro'
+      when 11
+        return 'Novembro'
+      when 12
+        return 'Decembro'
+
+      end
+    end
+  end
 end

@@ -19,7 +19,7 @@
 
             %tr
               - @info_repro.each do |r|
-                - if r.reproduction_simbol_id.nil? and r.comment.nil?
+                - if (r.reproduction_simbol_id.nil? and r.comment.nil?) or (r.reproduction_simbol_id.nil? and r.comment=='')
                   %td= link_to 'Engadir', proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'btn btn-info btn-small btn_add_repro'
                 - else
                   %td
@@ -27,21 +27,27 @@
 
     .span11
       =form_for @reproduction do |f|
-        .id_repro_hidden
-          = f.text_field :idReproduccion, :value=>@reproduction.id
-          = f.text_field :cow_id, :value=>@cow.id
-          = f.text_field :repro_month, :value=>@reproduction.month
-        .control-group
-          %label.control-label Símbolo
-          .controls
-            = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
+        .span10
+          %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
+          .control-group
+            %label.control-label Símbolo
+            .controls
+              = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
 
-        .control-group
-          %label.control-label Comentario
-          .controls
-            = text_field :reproduction, :comment, :value=>@comment        
+            .control-group
+              %label.control-label Comentario
+              .controls
+                = text_field :reproduction, :comment, :value=>@comment
 
-        .form-actions
-          %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
-          %button.reset{:type => "submit",:disabled=>@is_add_enabled} Borrar
+            .form-actions
+              %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
+              =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
+
+        .span1
+          .id_repro_hidden
+         
+            = f.text_field :idReproduccion, :value=>@reproduction.id
+            = f.text_field :cow_id, :value=>@cow.id
+            = f.text_field :repro_month, :value=>@reproduction.month
         
+       

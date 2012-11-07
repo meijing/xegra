@@ -27,8 +27,7 @@
                 - @cows.each do |cow|
                   %tr
                     %td
-                      %h5= cow.ring
-                      %h5= cow.name
+                      = link_to (cow.ring+'<br />'+cow.name).html_safe, proba_path(cow.id)
                     - repro = get_simbol_reproduction(@reproductions, cow.id)
                     - if !repro.nil?
                       - repro.each do |r|

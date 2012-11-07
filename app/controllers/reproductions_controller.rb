@@ -2,12 +2,14 @@ class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
   def index
+    p'-----------------------------------------'
     @reproductions = Reproduction.find_by_sql('select * from reproductions
       where year = 2012 order by cow_id, month')
+    p @reproductions
     if @reproductions.nil?
       @reproductions = []
     end
-
+p @reproductions
     #@cows = Cow.find_by_is_active(true)
     @cows = Cow.all
 
@@ -47,23 +49,21 @@ class ReproductionsController < ApplicationController
   # POST /reproductions.json
   def create
     @new_reproduction = Reproduction.new
-    @new_reproduction.cow_id = p params[:reproduction][:cow_id]
-    @new_reproduction.month = p params[:reproduction][:repro_month]
-    @new_reproduction.comment =p params[:reproduction][:comment]
+    @new_reproduction.cow_id = params[:reproduction][:cow_id]
+    @new_reproduction.month = params[:reproduction][:repro_month]
+    @new_reproduction.comment = params[:reproduction][:comment]
+    @new_reproduction.year = Date.new.year
+    @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
+
+    if (@simbolId[0] != 'Ningun')
+      @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
+      @new_reproduction.reproduction_simbol_id = @simbol.id
+    end
     @new_reproduction.save
 
-    p '---------------'
-    p params[:reproduction][:comment]
     
-    #respond_to do |format|
-    #  if @reproduction.save
-        redirect_to  proba_path(8)
-     #   format.json { render json: @reproduction, status: :created, location: @reproduction }
-     # else
-     #   format.html { render action: "new" }
-     #   format.json { render json: @reproduction.errors, status: :unprocessable_entity }
-     # end
-   # end
+    
+    redirect_to proba_path(params[:reproduction][:cow_id])
   end
 
   # PUT /reproductions/1
@@ -92,10 +92,7 @@ class ReproductionsController < ApplicationController
     @reproduction = Reproduction.find(params[:id])
     @reproduction.destroy
 
-    respond_to do |format|
-      format.html { redirect_to reproductions_url }
-      format.json { head :no_content }
-    end
+    redirect_to proba_path(@reproduction.cow_id)
   end
 
   def single_reproduction
