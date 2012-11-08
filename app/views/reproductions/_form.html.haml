@@ -27,7 +27,7 @@
 
   .row
     =form_for @reproduction do |f|
-      .span6
+      .span7
         %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
         .control-group
           %label.control-label Símbolo
@@ -43,7 +43,7 @@
             %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
             =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
 
-      .span5
+      .span4
         .id_repro_hidden
           = f.text_field :idReproduccion, :value=>@reproduction.id, :class=>'input-small'
           = f.text_field :cow_id, :value=>@cow.id, :class=>'input-small'
