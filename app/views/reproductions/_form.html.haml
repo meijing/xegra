@@ -25,29 +25,28 @@
                   %td
                     = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
 
-    .span11
-      =form_for @reproduction do |f|
-        .span10
-          %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
+  .row
+    =form_for @reproduction do |f|
+      .span6
+        %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
+        .control-group
+          %label.control-label Símbolo
+          .controls
+            = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
+
           .control-group
-            %label.control-label Símbolo
+            %label.control-label Comentario
             .controls
-              = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
+              = text_field :reproduction, :comment, :value=>@comment
 
-            .control-group
-              %label.control-label Comentario
-              .controls
-                = text_field :reproduction, :comment, :value=>@comment
+          .form-actions
+            %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
+            =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
 
-            .form-actions
-              %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
-              =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
-
-        .span1
-          .id_repro_hidden
-         
-            = f.text_field :idReproduccion, :value=>@reproduction.id
-            = f.text_field :cow_id, :value=>@cow.id
-            = f.text_field :repro_month, :value=>@reproduction.month
+      .span5
+        .id_repro_hidden
+          = f.text_field :idReproduccion, :value=>@reproduction.id, :class=>'input-small'
+          = f.text_field :cow_id, :value=>@cow.id, :class=>'input-small'
+          = f.text_field :repro_month, :value=>@reproduction.month, :class=>'input-small'
         
        
