@@ -2,9 +2,8 @@ class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
   def index
-    p'-----------------------------------------'
     @reproductions = Reproduction.find_by_sql('select * from reproductions
-      where year = '+DateTime.now.year+' order by cow_id, month')
+      where year = 2012 order by cow_id, month')
     p @reproductions
     if @reproductions.nil?
       @reproductions = []
