@@ -4,7 +4,7 @@ class ReproductionsController < ApplicationController
   def index
     p'-----------------------------------------'
     @reproductions = Reproduction.find_by_sql('select * from reproductions
-      where year = 2012 order by cow_id, month')
+      where year = '+DateTime.now.year+' order by cow_id, month')
     p @reproductions
     if @reproductions.nil?
       @reproductions = []
@@ -52,7 +52,7 @@ p @reproductions
     @new_reproduction.cow_id = params[:reproduction][:cow_id]
     @new_reproduction.month = params[:reproduction][:repro_month]
     @new_reproduction.comment = params[:reproduction][:comment]
-    @new_reproduction.year = Date.new.year
+    @new_reproduction.year = DateTime.now.year
     @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
 
     if (@simbolId[0] != 'Ningun')

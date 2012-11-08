@@ -33,7 +33,7 @@ module ReproductionsHelper
 
   def get_name_of_name(month)
     if (month.nil?)
-      return '(Non se seleccionou ningun mes)'
+      return '(Seleccione un mes)'
     else
       case month
       when 1
