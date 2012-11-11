@@ -41,6 +41,8 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
+    bootstrap-datepicker-rails (0.6.24)
+      railties (>= 3.0)
     bootstrap-sass (2.1.0.0)
     builder (3.0.3)
     cocaine (0.3.2)
@@ -146,6 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  bootstrap-datepicker-rails
   bootstrap-sass (~> 2.1.0.0)
   bootswatch-rails!
   coffee-rails (~> 3.2.2)

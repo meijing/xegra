@@ -4,11 +4,11 @@ class ReproductionsController < ApplicationController
   def index
     @reproductions = Reproduction.find_by_sql('select * from reproductions
       where year = 2012 order by cow_id, month')
-    p @reproductions
+
     if @reproductions.nil?
       @reproductions = []
     end
-p @reproductions
+
     #@cows = Cow.find_by_is_active(true)
     @cows = Cow.all
 

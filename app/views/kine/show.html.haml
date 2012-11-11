@@ -40,7 +40,7 @@
             .span3
               .well
                 %p
-                  = link_to 'Control leiteiro', new_cow_path , class: "btn btn-info"
+                  = link_to 'Control leiteiro', lactation_path(@cow.id) , class: "btn btn-info"
                 %p
                   =link_to 'Reproducción', proba_path(@cow.id) , class: "btn btn-info"
                 %p

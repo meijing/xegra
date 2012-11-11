@@ -1,5 +1,7 @@
 class Cow < ActiveRecord::Base
+  has_many :lactation
   has_many :reproduction
+  
   attr_accessible :father, :name, :num_borns, :ring, :years, :short_ring, :is_milk
   validates :ring, :presence => true, :uniqueness => true
   #, :length => { :is => 6 }

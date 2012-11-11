@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  greasy_kg: 1
+  protein_kg: 1
+  greasy_percentage: 1.5
+  protein_percentage: 1.5
+  cell: 1
+  date: 
+  lactation_duration: 1
+  milk_kg: 1
+
+two:
+  greasy_kg: 1
+  protein_kg: 1
+  greasy_percentage: 1.5
+  protein_percentage: 1.5
+  cell: 1
+  date: 
+  lactation_duration: 1
+  milk_kg: 1

@@ -1,0 +1,54 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span9
+            %h2 CONTROL DO LEITE
+        .row
+          %table.table.table-bordered.table-striped.table_header
+            %tr
+              %th{:rowspan => "3"}  VACA
+              %th{:colspan => "7"} LACTACION REAL
+              %th{:colspan => "5"} LACTACION 305 DIAS
+              %th{:rowspan => "3"} PRODUCION VITALICIA
+              %th{:colspan=>"2"} BAIXA
+            %tr
+              %th{:rowspan => "2"} DURACION DE LACTACION
+              %th{:rowspan => "2"} LEITE KG.
+              %th{:colspan => "2"} GRAXA
+              %th{:colspan => "2"} PROTEINA
+              %th R. CELULAR
+              %th{:rowspan => "2"} LEITE KG.
+              %th{:colspan => "2"} GRAXA
+              %th{:colspan => "2"} PROTEINA
+              %th{:rowspan => "2"} DATA
+              %th{:rowspan => "2"} CAUSA
+            %tr
+              %th KG.
+              %th %
+              %th KG.
+              %th %
+              %th P. LINEAL
+              %th KG.
+              %th %
+              %th KG.
+              %th %
+              
+          - @lactations.each do |lactation|
+            %tr
+              %td= lactation.greasy_kg
+              %td= lactation.protein_kg
+              %td= lactation.greasy_percentage
+              %td= lactation.protein_percentage
+              %td= lactation.cell
+              %td= lactation.date
+              %td= lactation.lactation_duration
+              %td= lactation.milk_kg
+              %td= link_to 'Show', lactation
+              %td= link_to 'Edit', edit_lactation_path(lactation)
+              %td= link_to 'Destroy', lactation, method: :delete, data: { confirm: 'Are you sure?' }
+
+        %br
+
+        = link_to 'New Lactation', new_lactation_path

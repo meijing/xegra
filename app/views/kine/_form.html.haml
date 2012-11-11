@@ -18,11 +18,11 @@
 
       .control-group
         = f.label 'Anos:'
-        = f.number_field :years
+        = f.number_field :years, :min=>0
 
       .control-group
         = f.label 'Número de partos:'
-        = f.number_field :num_borns
+        = f.number_field :num_borns, :min=>0
 
       .control-group
         = f.label 'Pai:'

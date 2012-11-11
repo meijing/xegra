@@ -1,0 +1,39 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span9
+            %legend= get_header_show(@cow)
+          .span2
+            = link_to 'Engadir mostra', create_new_lactation_path(@cow.id) , class: "btn btn-info"
+        .row
+          .span11
+            %table.table.table-bordered.table-striped.table_header
+              %tr
+                %th{:rowspan => "3"} DATA
+                %th{:colspan => "7"} LACTACION REAL
+              %tr
+                %th{:rowspan => "2"} DURACION DE LACTACION
+                %th{:rowspan => "2"} LEITE KG.
+                %th{:colspan => "2"} GRAXA
+                %th{:colspan => "2"} PROTEINA
+                %th R. CELULAR
+              %tr
+                %th KG.
+                %th %
+                %th KG.
+                %th %
+                %th P. LINEAL
+              -@lactation.each do |l|
+                %tr
+                  %td= l.date
+                  %td= l.lactation_duration
+                  %td= l.milk_kg
+                  %td= l.greasy_kg
+                  %td= l.greasy_percentage
+                  %td= l.protein_kg
+                  %td= l.protein_percentage
+                  %td= l.cell
+                
+               
