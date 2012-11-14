@@ -1,0 +1,6 @@
+%td= (Lactation.where('cow_id='+cow.id.to_s).sum(:milk_kg)/12)
+%td= (Lactation.where('cow_id='+cow.id.to_s).sum(:greasy_kg)/12)
+%td= (Lactation.where('cow_id='+cow.id.to_s).sum(:greasy_percentage)/12.0).round(2)
+%td= (Lactation.where('cow_id='+cow.id.to_s).sum(:protein_kg)/12)
+%td= (Lactation.where('cow_id='+cow.id.to_s).sum(:protein_percentage)/12.0).round(2)
+%td

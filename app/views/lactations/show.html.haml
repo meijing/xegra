@@ -11,14 +11,17 @@
           .span11
             %table.table.table-bordered.table-striped.table_header
               %tr
-                %th{:rowspan => "3"} DATA
-                %th{:colspan => "7"} LACTACION REAL
+                %td
+                  %th{:colspan=>"8"}
+                    %h6 LACTACION REAL
               %tr
+                %th{:rowspan => "2"} DATA
                 %th{:rowspan => "2"} DURACION DE LACTACION
                 %th{:rowspan => "2"} LEITE KG.
                 %th{:colspan => "2"} GRAXA
                 %th{:colspan => "2"} PROTEINA
                 %th R. CELULAR
+                %th{:rowspan => "2"}
               %tr
                 %th KG.
                 %th %
@@ -27,7 +30,7 @@
                 %th P. LINEAL
               -@lactation.each do |l|
                 %tr
-                  %td= l.date
+                  %td= l.date.strftime("%d-%m-%Y")
                   %td= l.lactation_duration
                   %td= l.milk_kg
                   %td= l.greasy_kg
@@ -35,5 +38,34 @@
                   %td= l.protein_kg
                   %td= l.protein_percentage
                   %td= l.cell
-                
-               
+                  %td
+                    = link_to image_tag("lapiz.jpg", :size=>"18x18"), update_lactation_path(:cow_id=>@cow.id, :id=>l.id)
+                    = link_to image_tag("images.jpg", :size=>"17x17"), l,method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }
+
+            .alert.alert-block
+              %tfoot
+                %tr
+                  %td
+                    %h6 P. LINEAL
+                %tr
+                  %td 0-4: Valores óptimos
+                  %td >4: Risco de mamite
+
+            %table.table.table-bordered.table-striped.table_header
+              %tr
+                %td
+                  %th{:colspan=>"8"}
+                    %h6 LACTACION 305 DIAS
+              %tr
+                %th{:rowspan => "2"} LEITE KG.
+                %th{:colspan => "2"} GRAXA
+                %th{:colspan => "2"} PROTEINA
+                %th{:rowspan => "2"} PRODUCION VITALICIA
+                %th{:rowspan => "2"}
+              %tr
+                %th KG.
+                %th %
+                %th KG.
+                %th %
+              %tr
+                = render :partial=>'total_lactations',  locals: {cow:@cow}

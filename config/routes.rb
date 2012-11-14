@@ -1,7 +1,5 @@
 Xegra::Application.routes.draw do
-  match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
-  resources :lactations
-
+  
   match 'reproductions/new/:id/:repro_id/:simbol_id/:month' =>'reproductions#single_reproduction', :as =>'proba_repro'
   match 'reproductions/new/:id' =>'reproductions#single_reproduction', :as =>'proba'
 
@@ -9,7 +7,9 @@ Xegra::Application.routes.draw do
 
   resources :reproduction_simbols
   scope "/:locale", :constraints => {:locale => /es|gl/} do
-
+    match 'lactations/2/edit/:cow_id/:id' => 'lactations#edit', :as => 'update_lactation'
+    match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
+    resources :lactations
     
     match 'kine/:id/down_cow' => 'kine#get_cow_down', :as => 'down_cow'
     resources :kine

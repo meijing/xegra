@@ -2,12 +2,10 @@ class LactationsController < ApplicationController
   # GET /lactations
   # GET /lactations.json
   def index
-    @lactations = Lactation.all
     @cows = Cow.all
-
+@proba = Cow.first
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @lactations }
     end
   end
 
@@ -18,13 +16,9 @@ class LactationsController < ApplicationController
     if @lactation.nil?
       @lactation = []
     elsif @lactation.instance_of? Lactation 
-      p '----------------------------------Lactation'
       @aux = @lactation
       @lactation = []
       @lactation[0]= @aux
-    elsif @lactation.instance_of? Array
-      p '----------------------____Array'
-    elsif @lactation.length
 
     end
     @cow = Cow.find(params[:id])
@@ -47,6 +41,7 @@ class LactationsController < ApplicationController
 
   # GET /lactations/1/edit
   def edit
+    @cow_id = Cow.find(params[:cow_id]).id
     @lactation = Lactation.find(params[:id])
   end
 
@@ -55,28 +50,23 @@ class LactationsController < ApplicationController
   def create
     @lactation = Lactation.new(params[:lactation])
 
-    respond_to do |format|
-      if @lactation.save
-        redirect_to lactation_path(8)
-      else
-        redirect_to lactation_path(params[:lactation][:cow_id])
-      end
+
+    if @lactation.save
+      redirect_to lactation_path(params[:lactation][:cow_id])
+    else
+      redirect_to lactation_path(params[:lactation][:cow_id])
     end
+    
   end
 
   # PUT /lactations/1
   # PUT /lactations/1.json
   def update
     @lactation = Lactation.find(params[:id])
+    params[:lactation][:date] = Date.strptime(params[:lactation][:date], "%d-%m-%Y")
 
-    respond_to do |format|
-      if @lactation.update_attributes(params[:lactation])
-        format.html { redirect_to @lactation, notice: 'Lactation was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @lactation.errors, status: :unprocessable_entity }
-      end
+    if @lactation.update_attributes(params[:lactation])
+      redirect_to lactation_path(params[:lactation][:cow_id])
     end
   end
 
@@ -87,7 +77,7 @@ class LactationsController < ApplicationController
     @lactation.destroy
 
     respond_to do |format|
-      format.html { redirect_to lactations_url }
+      format.html { redirect_to lactation_path(@lactation.cow_id) }
       format.json { head :no_content }
     end
   end
