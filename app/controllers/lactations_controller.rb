@@ -2,8 +2,8 @@ class LactationsController < ApplicationController
   # GET /lactations
   # GET /lactations.json
   def index
-    @cows = Cow.all
-@proba = Cow.first
+    @cows = Cow.where('is_active=1')
+
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -12,7 +12,7 @@ class LactationsController < ApplicationController
   # GET /lactations/1
   # GET /lactations/1.json
   def show
-    @lactation = Lactation.find_by_sql('select * from Lactations where cow_id = '+params[:id])
+    @lactation = Lactation.find_by_sql('select * from Lactations where cow_id = '+params[:id]+' and year = '+Time.new.year.to_s)
     if @lactation.nil?
       @lactation = []
     elsif @lactation.instance_of? Lactation 
@@ -35,7 +35,6 @@ class LactationsController < ApplicationController
     @cow_id = params[:cow_id]
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @lactation }
     end
   end
 
@@ -49,12 +48,12 @@ class LactationsController < ApplicationController
   # POST /lactations.json
   def create
     @lactation = Lactation.new(params[:lactation])
-
+    @lactation.year = Time.now.year
 
     if @lactation.save
       redirect_to lactation_path(params[:lactation][:cow_id])
     else
-      redirect_to lactation_path(params[:lactation][:cow_id])
+      redirect_to create_new_lactation_path(params[:lactation][:cow_id])
     end
     
   end
@@ -67,6 +66,8 @@ class LactationsController < ApplicationController
 
     if @lactation.update_attributes(params[:lactation])
       redirect_to lactation_path(params[:lactation][:cow_id])
+    else
+      redirect_to create_new_lactation_path(params[:lactation][:cow_id])
     end
   end
 

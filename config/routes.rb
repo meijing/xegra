@@ -10,8 +10,7 @@ Xegra::Application.routes.draw do
     match 'lactations/2/edit/:cow_id/:id' => 'lactations#edit', :as => 'update_lactation'
     match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
     resources :lactations
-    
-    match 'kine/:id/down_cow' => 'kine#get_cow_down', :as => 'down_cow'
+  
     resources :kine
 
     root :to => 'kine#index'

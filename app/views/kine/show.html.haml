@@ -18,8 +18,8 @@
                   = @cow.name
 
                 %p
-                  Anos:
-                  = @cow.years
+                  Data de nacemento:
+                  = @cow.date_born
 
                 %p
                   Número de partos:
@@ -44,6 +44,6 @@
                 %p
                   =link_to 'Reproducción', proba_path(@cow.id) , class: "btn btn-info"
                 %p
-                  =link_to 'Dar de baixa', @cow , class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
+                  =link_to 'Dar de baixa', @cow ,method: :delete, class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
                 %p
                   = link_to 'Modificar datos', edit_cow_path(@cow) , class: "btn btn-info"

@@ -27,26 +27,45 @@
 
   .row
     =form_for @reproduction do |f|
-      .span7
-        %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
-        .control-group
-          %label.control-label Símbolo
-          .controls
-            = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
+      .span5
+        .form-horizontal
+          .control-group
+            %h4= 'Datos para o mes de ' + get_name_of_name(@reproduction.month)
+          .control-group
+            %label.control-label Símbolo:
+            .controls
+              = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
 
           .control-group
-            %label.control-label Comentario
+            %label.control-label Comentario:
             .controls
-              = text_field :reproduction, :comment, :value=>@comment
+              = text_field :reproduction, :comment, :value=>@comment, :disabled=>@is_add_enabled
 
-          .form-actions
-            %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
-            =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
+      .span5
+      - if @is_add_bull_enabled
+        .id_repro_hidden
+          .form-horizontal
+            .control-group
+              %h4= 'Datos para a inseminación '
+            .control-group
+              %label.control-label Touro:
+              .controls
+                = text_field :reproduction, :comment, :value=>@comment
 
-      .span4
+            .control-group
+              %label.control-label Data:
+              .controls
+                = text_field :reproduction, :comment, :value=>@comment
+
+      .span1
         .id_repro_hidden
           = f.text_field :idReproduccion, :value=>@reproduction.id, :class=>'input-small'
           = f.text_field :cow_id, :value=>@cow.id, :class=>'input-small'
           = f.text_field :repro_month, :value=>@reproduction.month, :class=>'input-small'
-        
-       
+
+  .row
+    .span11
+      .form-horizontal
+        .form-actions
+          %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
+          =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled

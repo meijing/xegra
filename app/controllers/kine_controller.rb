@@ -2,7 +2,7 @@ class KineController < ApplicationController
   # GET /kine
   # GET /kine.json
   def index
-    @kine = Cow.all
+    @kine = Cow.where('is_active=1')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,7 +41,7 @@ class KineController < ApplicationController
   # POST /kine.json
   def create
     @cow = Cow.new(params[:cow])
-
+    @cow.is_active=1
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }
@@ -73,21 +73,13 @@ class KineController < ApplicationController
   # DELETE /kine/1.json
   def destroy
     @cow = Cow.find(params[:id])
-    @cow.destroy
+    @cow.is_active = 0
+    #@cow.date_down = Time.new
+    @cow.save
 
     respond_to do |format|
       format.html { redirect_to kine_url }
       format.json { head :no_content }
     end
-  end
-
-  def get_cow_down
-    @cow = Cow.find(params[:id])
-    p(@cow.name)
-    @cow.is_active = 0
-    #@cow.date_down = Time.new
-    @cow.save
-
-   
   end
 end

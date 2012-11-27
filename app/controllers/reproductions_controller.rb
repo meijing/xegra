@@ -3,14 +3,13 @@ class ReproductionsController < ApplicationController
   # GET /reproductions.json
   def index
     @reproductions = Reproduction.find_by_sql('select * from reproductions
-      where year = 2012 order by cow_id, month')
+      where year ='+Time.new.year.to_s+' order by cow_id, month')
 
     if @reproductions.nil?
       @reproductions = []
     end
 
-    #@cows = Cow.find_by_is_active(true)
-    @cows = Cow.all
+    @cows = Cow.where('is_active=1')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -122,6 +121,12 @@ class ReproductionsController < ApplicationController
     else
       @repro = ReproductionSimbol.find_by_id(@simbol_id)
       @repro_selected=@repro.simbol + " "+ @repro.meaning
+
+      if @repro.meaning = "Inseminacion"
+        @is_add_bull_enabled = true
+      else
+        @is_add_bull_enabled = false
+      end
     end
    
     if !params[:repro_id].nil? and params[:repro_id] =='-1'
