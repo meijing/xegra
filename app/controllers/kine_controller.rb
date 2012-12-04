@@ -2,8 +2,8 @@ class KineController < ApplicationController
   # GET /kine
   # GET /kine.json
   def index
-    @kine = Cow.where('is_active=1').page(params[:page])
-
+    @kine = Cow.order('short_ring').where('is_active=1').page(params[:page]).per(15)
+    
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -84,4 +84,5 @@ class KineController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 end

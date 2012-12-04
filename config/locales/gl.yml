@@ -1,4 +1,11 @@
 gl:
+  views:
+    pagination:
+      previous: "&lt; Anterior"
+      next: "Seguinte &gt;"
+      truncate: "&hellip;&rdquo;"
+      first: Primeira
+      last: Ultima
   activerecord:
     errors:
       models:
