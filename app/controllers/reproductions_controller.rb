@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
@@ -56,6 +57,12 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != 'Ningun')
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @new_reproduction.reproduction_simbol_id = @simbol.id
+      if (@simbolId[0] == '▲')
+        @new_reproduction.bull = params[:reproduction][:bull]
+        if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
+          @new_reproduction.date = params[:reproduction][:date]
+        end
+      end
     end
     @new_reproduction.save
 
@@ -73,6 +80,15 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != 'Ningun')
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @reproduction.reproduction_simbol_id = @simbol.id
+      if (@simbolId[0] == '▲')
+        @reproduction.bull = params[:reproduction][:bull]
+        if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
+          @reproduction.date = params[:reproduction][:date]
+        end
+      else
+        @reproduction.bull = nil
+        @reproduction.date = nil
+      end
     else
       @reproduction.reproduction_simbol_id = nil
     end
@@ -118,14 +134,14 @@ class ReproductionsController < ApplicationController
     
     if @simbol_id.nil? or @simbol_id =='-1'
       @repro_selected="Ningun"
+      @is_bull_enabled=true
     else
       @repro = ReproductionSimbol.find_by_id(@simbol_id)
       @repro_selected=@repro.simbol + " "+ @repro.meaning
-
-      if @repro.meaning = "Inseminacion"
-        @is_add_bull_enabled = true
+      if (@repro.simbol == '▲')
+        @is_bull_enabled = false
       else
-        @is_add_bull_enabled = false
+        @is_bull_enabled = true
       end
     end
    
@@ -136,6 +152,8 @@ class ReproductionsController < ApplicationController
     elsif !params[:repro_id].nil? and params[:repro_id] !='-1'
       @reproduction = Reproduction.find_by_id(params[:repro_id])
       @comment = @reproduction.comment
+      @bull = @reproduction.bull
+      @date = @reproduction.date
       @is_add_enabled = false
     elsif params[:repro_id].nil?
       @reproduction = Reproduction.new

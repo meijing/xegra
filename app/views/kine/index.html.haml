@@ -7,16 +7,8 @@
             %h2 Vacas
           .span4
             = link_to 'Alta dunha vaca', new_cow_path , class: "btn btn-info"
+            = paginate @kine
         .row
           .span11
-            #teams_catalogue
-              #catalogue_body
-                #letter_filter_side_bar
-                  = kine_letter_filter_links_sidebar
-
-              #catalogue_items_list_container
-                - @kine.in_groups_of(3).each do |n_kine_group|
-                  .catalogue_items_container_row
-                    - n_kine_group.compact.each do |kine|
-                      .catalogue_item_container.clickable_container
-                        = render 'cow_panel', :kine => kine
+            sss
+            = paginate @kine

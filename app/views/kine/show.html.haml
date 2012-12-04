@@ -4,22 +4,22 @@
       .well
         .row
           .span11
-            %legend Datos para a vaca 
+            %legend Datos da vaca
           %hr.space
             .span8
               .well
                 
                 %p
                   Pendiente:
-                  = @cow.ring
-
+                  = @cow.ring.concat(' ')
                 %p
                   Nome:
                   = @cow.name
 
                 %p
                   Data de nacemento:
-                  = @cow.date_born
+                  - if !@cow.date_born.nil?
+                    = @cow.date_born.strftime("%d/%m/%Y")
 
                 %p
                   Número de partos:

@@ -15,6 +15,21 @@
       border-bottom: 2px solid #C4CDE0;
       border-color: #C4CDE0; }
 
+#catalogue_items_list_container {
+  height: 100%;
+  margin-left: 20px;
+  padding-top: 2px; }
+  #catalogue_items_list_container .catalogue_items_container_row {
+    border-bottom: 0 solid #222222;
+    border-color: #222222;
+    padding-left: 6px;
+    padding-right: 3px; }
+    #catalogue_items_list_container .catalogue_items_container_row .catalogue_item_container {
+      background-color: #CFCFCF;
+      border-radius: 4px 4px 4px 4px;
+      float: left;
+      margin: 5px; }
+
 .cow_panel {
   padding: 5px;
   overflow: hidden;

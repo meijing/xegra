@@ -2,7 +2,7 @@ class KineController < ApplicationController
   # GET /kine
   # GET /kine.json
   def index
-    @kine = Cow.where('is_active=1')
+    @kine = Cow.where('is_active=1').page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,7 @@ class KineController < ApplicationController
   # GET /kine/1/edit
   def edit
     @cow = Cow.find(params[:id])
+    @cow.date_born = @cow.date_born.strftime('%d/%m/%Y')
   end
 
   # POST /kine
@@ -42,6 +43,7 @@ class KineController < ApplicationController
   def create
     @cow = Cow.new(params[:cow])
     @cow.is_active=1
+    @cow.short_ring = @cow.ring[0..3]
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }
@@ -57,7 +59,7 @@ class KineController < ApplicationController
   # PUT /kine/1.json
   def update
     @cow = Cow.find(params[:id])
-
+    @cow.short_ring = @cow.ring[0..3]
     respond_to do |format|
       if @cow.update_attributes(params[:cow])
         format.html { redirect_to @cow, notice: 'Cow was successfully updated.' }

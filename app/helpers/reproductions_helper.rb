@@ -6,8 +6,15 @@ module ReproductionsHelper
         if (r.reproduction_simbol_id.nil?)
           info_repro[r.month-1] = "".concat(r.comment)
         else
-          info_repro[r.month-1] = ReproductionSimbol.find_by_id(r.reproduction_simbol_id).simbol.concat(" "+r.comment)
+          info_repro[r.month-1] = ReproductionSimbol.find_by_id(r.reproduction_simbol_id).simbol.concat(" "+r.comment)+'<br/>'
+          if (!r.bull.nil?)
+            info_repro[r.month-1] = info_repro[r.month-1] + '<br/>'+r.bull
+          end
+          if (!r.date.nil?)
+            info_repro[r.month-1] = info_repro[r.month-1] + '<br/>'+ r.date.strftime('%d/%m/%Y')
+          end
         end
+        info_repro[r.month-1] = info_repro[r.month-1].html_safe
       end
     end
     return info_repro

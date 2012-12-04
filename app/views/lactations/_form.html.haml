@@ -10,7 +10,10 @@
 
       .field
         = 'Data da mostra'
-        = f.text_field  :date, :as => :string, :input_html => {:class => 'span2 date_picker', "data-date" => "2012-10-12" },:id=>'date_picker'
+        #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+          = f.text_field  :date,:size => "16", :type => "text"
+          %span.add-on
+            %i.icon-th
       .field
         = f.label 'Graxa'
         = f.number_field :greasy_kg, :min=>0, :class =>'input-small'

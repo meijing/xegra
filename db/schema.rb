@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126185222) do
+ActiveRecord::Schema.define(:version => 20121129223838) do
 
   create_table "kine", :force => true do |t|
     t.string   "ring"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(:version => 20121126185222) do
     t.datetime "updated_at", :null => false
     t.boolean  "is_milk"
     t.integer  "short_ring"
-    t.boolean  "is_active"
     t.date     "date_down"
     t.date     "date_born"
+    t.integer  "is_active"
   end
 
   create_table "lactations", :force => true do |t|
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20121126185222) do
     t.string   "comment"
     t.datetime "created_at",             :null => false
     t.datetime "updated_at",             :null => false
+    t.string   "bull"
+    t.date     "date"
   end
 
 end

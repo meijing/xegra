@@ -24,6 +24,9 @@
                 - else
                   %td
                     = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
+                    = r.bull
+                    - if !r.date.nil?
+                      = ('<br/>'+r.date.strftime('%d/%m/%Y')).html_safe
 
   .row
     =form_for @reproduction do |f|
@@ -42,30 +45,29 @@
               = text_field :reproduction, :comment, :value=>@comment, :disabled=>@is_add_enabled
 
       .span5
-      - if @is_add_bull_enabled
-        .id_repro_hidden
-          .form-horizontal
-            .control-group
-              %h4= 'Datos para a inseminación '
-            .control-group
-              %label.control-label Touro:
-              .controls
-                = text_field :reproduction, :comment, :value=>@comment
+        .form-horizontal
+          .control-group
+            %h4= 'Datos para a inseminación '
+          .control-group
+            %label.control-label Touro:
+            .controls
+              = text_field :reproduction, :bull, :value=>@bull, :disabled=>@is_bull_enabled
 
-            .control-group
-              %label.control-label Data:
-              .controls
-                = text_field :reproduction, :comment, :value=>@comment
+          .control-group
+            %label.control-label Data:
+            .controls
+              #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+                = text_field :reproduction, :date, :value=>@date, :disabled=>@is_bull_enabled,:size => "16"
+                %span.add-on
+                  %i.icon-th
 
       .span1
         .id_repro_hidden
           = f.text_field :idReproduccion, :value=>@reproduction.id, :class=>'input-small'
           = f.text_field :cow_id, :value=>@cow.id, :class=>'input-small'
           = f.text_field :repro_month, :value=>@reproduction.month, :class=>'input-small'
-
-  .row
-    .span11
-      .form-horizontal
-        .form-actions
-          %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
-          =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
+      .span11
+        .form-horizontal
+          .form-actions
+            %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled} Aceptar
+            =link_to 'Borrar', @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled

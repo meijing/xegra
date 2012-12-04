@@ -18,7 +18,10 @@
 
       .control-group
         = f.label 'Data de nacemento:'
-        = f.number_field :date_born, :min=>0
+        #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+          = f.text_field  :date_born,:size => "16", :type => "text"
+          %span.add-on
+            %i.icon-th
 
       .control-group
         = f.label 'Número de partos:'
