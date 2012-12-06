@@ -35,3 +35,5 @@ gem "haml-rails"
 gem "bootstrap-datepicker-rails"
 
 gem "kaminari"
+gem 'kaminari-bootstrap'
+
