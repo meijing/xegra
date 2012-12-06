@@ -36,5 +36,3 @@ gem "bootstrap-datepicker-rails"
 
 gem "kaminari"
 
-gem 'kaminari-bootstrap'
-
