@@ -1,3 +1,4 @@
+# encoding: utf-8
 module ReproductionsHelper
   def get_simbol_reproduction(reproductions, cow_id)
     info_repro = Array.new(12, Hash.new)
@@ -54,7 +55,7 @@ module ReproductionsHelper
       when 5
         return 'Maio'
       when 6
-        return 'Xunho'
+        return 'Xuño'
       when 7
         return 'Xullo'
       when 8

@@ -5,9 +5,15 @@
         .row
           .span9
             %legend= get_header_show(@cow)
+            .alert.alert-success
+              = get_month_lactation(@month)
+            
           .span2
             = link_to 'Engadir mostra', create_new_lactation_path(@cow.id) , class: "btn btn-info"
         .row
+          .span11
+            - (1..12).each do |m|
+              = link_to get_name_of_name(m), lactation_path(:cow_id=>@cow_id,:month=>m) , class: "btn btn-info btn-small"
           .span11
             %table.table.table-bordered.table-striped.table_header
               %tr

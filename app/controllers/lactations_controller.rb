@@ -12,7 +12,16 @@ class LactationsController < ApplicationController
   # GET /lactations/1
   # GET /lactations/1.json
   def show
-    @lactation = Lactation.find_by_sql('select * from Lactations where cow_id = '+params[:id]+' and year = '+Time.new.year.to_s)
+    if params[:month].nil?
+      @month = DateTime.now.month
+    else
+      @month = params[:month]
+    end
+
+    @start_month_date = Time.new.year.to_s+'-'+@month.to_s+'-01'
+    @end_month_date = Time.new.year.to_s+'-'+@month.to_s+'-31'
+
+    @lactation = Lactation.find(:all, :conditions=>["cow_id = ? and date between ? and ? ",params[:id],@start_month_date,@end_month_date])
     if @lactation.nil?
       @lactation = []
     elsif @lactation.instance_of? Lactation 
