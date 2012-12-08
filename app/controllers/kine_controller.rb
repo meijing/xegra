@@ -15,8 +15,19 @@ class KineController < ApplicationController
     @cow = Cow.find(params[:id])
     @reproductions = Reproduction.find_by_cow_id(@cow.id)
 
-    #@last_insemination = Reproduction.where('cow_id = '+@cow.id+' and ')
+    @last_insemination = Reproduction.where('cow_id = '+@cow.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+@cow.id.to_s+' and reproduction_simbol_id = 11)')
 
+    if @last_insemination != []
+      @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
+      p '---------------'
+      p @num_months_pregnant
+      if @num_months_pregnant<=9
+        @previous_lactation = @last_insemination[0].date.advance(:months=>7)
+        @previous_parturition = @last_insemination[0].date.advance(:months=>9)
+      else
+        @last_insemination = []
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @cow }

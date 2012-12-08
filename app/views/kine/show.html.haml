@@ -38,6 +38,15 @@
                     .alert.alert-error
                       A vaca está na fase de secado
 
+                %p
+                  - if @last_insemination != []
+                    .alert.alert-info
+                      %p
+                        = 'A vaca está preñada de '+ @num_months_pregnant.to_s + ' meses.'
+                      %p
+                        = 'A data prevista para secala é '+@previous_lactation.strftime("%d/%m/%Y") + '.'
+                      = 'A data prevista para o parto é '+ @previous_parturition.strftime("%d/%m/%Y") + '.'
+
             .span3
               .well
                 %p
