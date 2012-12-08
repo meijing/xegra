@@ -25,9 +25,10 @@
                   Número de partos:
                   = @cow.num_borns
 
-                %p
-                  Pai:
-                  = @cow.father
+                - if @cow.father != ''
+                  %p
+                    Pai:
+                    = @cow.father
 
                 %p
                   - if @cow.is_milk?

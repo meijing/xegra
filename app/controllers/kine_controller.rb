@@ -15,6 +15,8 @@ class KineController < ApplicationController
     @cow = Cow.find(params[:id])
     @reproductions = Reproduction.find_by_cow_id(@cow.id)
 
+    #@last_insemination = Reproduction.where('cow_id = '+@cow.id+' and ')
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @cow }

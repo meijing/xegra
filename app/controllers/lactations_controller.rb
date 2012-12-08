@@ -19,7 +19,7 @@ class LactationsController < ApplicationController
     end
 
     @start_month_date = Time.new.year.to_s+'-'+@month.to_s+'-01'
-    @end_month_date = Time.new.year.to_s+'-'+@month.to_s+'-31'
+    @end_month_date = Time.new.year.to_s+'-'+@month.to_s+'-'+@start_month_date.to_date.end_of_month.day.to_s
 
     @lactation = Lactation.find(:all, :conditions=>["cow_id = ? and date between ? and ? ",params[:id],@start_month_date,@end_month_date])
     if @lactation.nil?
