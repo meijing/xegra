@@ -10,6 +10,9 @@
 
         .row
           .span11
+            -if (!@notification_lactation.nil? and @notification_lactation != []) or (!@notification_parturition.nil? and @notification_parturition != [])
+              = link_to 'AVISOS', notifications_path , class: "btn btn-danger btn-large"
+          .span11
             #teams_catalogue
               = paginate @kine
               #catalogue_items_list_container

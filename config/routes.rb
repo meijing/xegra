@@ -7,7 +7,7 @@ Xegra::Application.routes.draw do
 
   resources :reproduction_simbols
   scope "/:locale", :constraints => {:locale => /es|gl/} do
-
+    match 'kine/notifications' =>'kine#notifications', :as =>'notifications'
     match 'lactations/2/edit/:cow_id/:id' => 'lactations#edit', :as => 'update_lactation'
     match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
     resources :lactations

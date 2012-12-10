@@ -3,6 +3,8 @@ class KineController < ApplicationController
   # GET /kine.json
   def index
     @kine = Cow.order('short_ring').where('is_active=1').page(params[:page]).per(15)
+    @notification_lactation = get_notification_lactation()
+    @notification_parturition = get_notification_parturition()
     
     respond_to do |format|
       format.html # index.html.erb
@@ -19,8 +21,7 @@ class KineController < ApplicationController
 
     if @last_insemination != []
       @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
-      p '---------------'
-      p @num_months_pregnant
+      
       if @num_months_pregnant<=9
         @previous_lactation = @last_insemination[0].date.advance(:months=>7)
         @previous_parturition = @last_insemination[0].date.advance(:months=>9)
@@ -56,7 +57,7 @@ class KineController < ApplicationController
   def create
     @cow = Cow.new(params[:cow])
     @cow.is_active=1
-    @cow.short_ring = @cow.ring[0..3]
+    @cow.short_ring = @cow.ring[@cow.ring.length-4..@cow.ring.length]
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }
@@ -72,7 +73,7 @@ class KineController < ApplicationController
   # PUT /kine/1.json
   def update
     @cow = Cow.find(params[:id])
-    @cow.short_ring = @cow.ring[0..3]
+    @cow.short_ring = @cow.ring[@cow.ring.length-4..@cow.ring.length]
     respond_to do |format|
       if @cow.update_attributes(params[:cow])
         format.html { redirect_to @cow, notice: 'Cow was successfully updated.' }
@@ -98,4 +99,41 @@ class KineController < ApplicationController
     end
   end
 
+  def notifications
+    @notification_lactation = get_notification_lactation()
+    @notification_parturition = get_notification_parturition()
+  end
+
+  private
+
+  def get_notification_lactation()
+    @notifications = []
+  
+    @start_date = DateTime.now.ago(7.months)
+    @end_date = DateTime.now.advance(:days => 5).ago(7.months)
+  
+    @reproductions = Reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+  
+    @reproductions.each do |r|
+      if r.cow.is_milk
+        @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
+      end
+    end
+    return @notifications
+  end
+
+  def get_notification_parturition()
+    @notifications = []
+
+    @start_date = DateTime.now.ago(9.months)
+    @end_date = DateTime.now.advance(:days => 5).ago(9.months)
+
+    @reproductions = Reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+
+    @reproductions.each do |r|
+      @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
+    end
+    return @notifications
+  end
 end
+

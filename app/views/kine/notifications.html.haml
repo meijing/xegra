@@ -1,0 +1,26 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span7
+            %h2 AVISOS
+            = @proba
+
+        .row
+          .span5
+            .well
+              %h4 Avisos de secado
+              - if !@notification_lactation.nil? and @notification_lactation != []
+                %ul
+                  - @notification_lactation.each do |n|
+                    %li
+                      = 'Vaca: '+n
+          .span6
+            .well
+              %h4 Avisos de parto
+              - if !@notification_parturition.nil? and @notification_parturition != []
+                %ul
+                  - @notification_parturition.each do |n|
+                    %li
+                      = 'Vaca: '+n
