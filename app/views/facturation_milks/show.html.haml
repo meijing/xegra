@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @facturation_milk.date
+%p
+  %b Liters:
+  = @facturation_milk.liters
+
+= link_to 'Edit', edit_facturation_milk_path(@facturation_milk)
+\|
+= link_to 'Back', facturation_milks_path

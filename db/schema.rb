@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129223838) do
+ActiveRecord::Schema.define(:version => 20121210221042) do
+
+  create_table "facturation_milks", :force => true do |t|
+    t.date     "date"
+    t.integer  "liters"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "kine", :force => true do |t|
     t.string   "ring"

@@ -18,10 +18,12 @@ class LactationsController < ApplicationController
       @month = params[:month]
     end
 
-    @start_month_date = Time.new.year.to_s+'-'+@month.to_s+'-01'
-    @end_month_date = Time.new.year.to_s+'-'+@month.to_s+'-'+@start_month_date.to_date.end_of_month.day.to_s
+    @month_to_rest = DateTime.now.month - @month.to_i
+    @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
+    @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
 
-    @lactation = Lactation.find(:all, :conditions=>["cow_id = ? and date between ? and ? ",params[:id],@start_month_date,@end_month_date])
+    @lactation = Lactation.find(:all, :conditions=>["cow_id = ? and date between ? and ? ",params[:id],@start_date,@end_date])
+    p @lactation
     if @lactation.nil?
       @lactation = []
     elsif @lactation.instance_of? Lactation 

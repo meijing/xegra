@@ -1,0 +1,16 @@
+= form_for @facturation_milk do |f|
+  - if @facturation_milk.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@facturation_milk.errors.count, "error")} prohibited this facturation_milk from being saved:"
+      %ul
+        - @facturation_milk.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :date
+    = f.date_select :date
+  .field
+    = f.label :liters
+    = f.number_field :liters
+  .actions
+    = f.submit 'Save'

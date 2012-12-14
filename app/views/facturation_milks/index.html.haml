@@ -1,0 +1,12 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span7
+            %h2 Facturación do leite
+
+        .row
+          .span11
+            - (1..12).each do |m|
+              = link_to get_name_of_name(m), facturation_milks_path(:month=>m) , class: "btn btn-info btn-small"
