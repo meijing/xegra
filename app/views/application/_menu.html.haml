@@ -11,6 +11,6 @@
           %li
             = link_to 'Control do leite', lactations_path
           %li
-            = link_to 'Facturación do leite', facturation_milks_path
+            = link_to 'Facturación do leite', facturation_milks_path(:month=>DateTime.now.month)
           %li
             = link_to 'Listados',kine_path

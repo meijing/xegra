@@ -62,7 +62,7 @@ class LactationsController < ApplicationController
     @lactation.year = Time.now.year
 
     if @lactation.save
-      redirect_to lactation_path(params[:lactation][:cow_id])
+      redirect_to lactation_path(:id=>params[:lactation][:cow_id],:month=>@lactation.date.month)
     else
       redirect_to create_new_lactation_path(params[:lactation][:cow_id])
     end

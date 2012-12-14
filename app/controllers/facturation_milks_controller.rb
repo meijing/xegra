@@ -2,8 +2,15 @@ class FacturationMilksController < ApplicationController
   # GET /facturation_milks
   # GET /facturation_milks.json
   def index
-    
-    @facturation_milks = FacturationMilk.all
+
+    @month = params[:month]
+    @month_to_rest = DateTime.now.month - @month.to_i
+    @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
+    @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
+
+    @facturation_milks = FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+
+    @last_day = @end_date.day
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,17 +48,19 @@ class FacturationMilksController < ApplicationController
   # POST /facturation_milks
   # POST /facturation_milks.json
   def create
-    @facturation_milk = FacturationMilk.new(params[:facturation_milk])
+    #@facturation_milk = FacturationMilk.new(params[:facturation_milk])
+    @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date])
 
-    respond_to do |format|
+    if @facturation_milk.nil?
+      @facturation_milk = FacturationMilk.new(params[:facturation_milk])
       if @facturation_milk.save
-        format.html { redirect_to @facturation_milk, notice: 'Facturation milk was successfully created.' }
-        format.json { render json: @facturation_milk, status: :created, location: @facturation_milk }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @facturation_milk.errors, status: :unprocessable_entity }
+        #redirect_to
       end
+    else
+      @facturation_milk.liters = FacturationMilk.new(params[:facturation_milk][:liters])
+      @facturation_milk.update
     end
+   
   end
 
   # PUT /facturation_milks/1

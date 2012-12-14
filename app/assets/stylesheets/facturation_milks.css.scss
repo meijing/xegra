@@ -1,3 +1,19 @@
 // Place all the styles related to the facturation_milks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.facturation_cell{
+    border:2px solid #92a5cb;
+    width:110px;
+}
+
+.facturation_title_cell{
+    background-color: #C4CDE0;
+    text-align: center;
+}
+
+.facturation_data_cell{
+    height:75px;
+    background-color: white;
+    text-align: center;
+}

@@ -4,9 +4,42 @@
       .well
         .row
           .span7
-            %h2 Facturación do leite
+            %h2 FACTURACIÓN DO LEITE
+        .row
+          .span9
+            .alert.alert-success
+              = get_month_lactation(@month)
 
         .row
           .span11
             - (1..12).each do |m|
               = link_to get_name_of_name(m), facturation_milks_path(:month=>m) , class: "btn btn-info btn-small"
+        .row
+          .span7
+            %table
+              - (1..@last_day).to_a.in_groups_of(7).each do |d|
+                %tr
+                  - d.each do |k|
+                    %td.facturation_cell.facturation_title_cell= k
+                %tr
+                  - d.each do |k|
+                    %td.facturation_cell.facturation_data_cell 600.000
+          .span4
+            .well
+              = form_for FacturationMilk.new do |f|
+                .field
+                  = f.label 'Data:'
+                  #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+                    = f.text_field  :date,:size => "16", :type => "text"
+                    %span.add-on
+                      %i.icon-th
+                      
+                .field
+                  = f.label 'Litros:'
+                  = f.number_field :liters, :min=>0, :class =>'input-small'
+                .actions
+                  %button.btn.btn-success{:type => "submit"} Aceptar
+            .well
+              Facturación total do mes
+            .well
+              Facturación total do ano
