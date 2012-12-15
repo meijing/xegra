@@ -11,6 +11,13 @@ class FacturationMilksController < ApplicationController
     @facturation_milks = FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
 
     @last_day = @end_date.day
+    
+    @liters = get_liters_for_month(@month)
+    @total_fact_month = FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date,@end_date])
+
+    @start_date_year = DateTime.now.beginning_of_year
+    @end_date_year = DateTime.now.end_of_year
+    @total_fact_year = FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date_year,@end_date_year])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -48,19 +55,27 @@ class FacturationMilksController < ApplicationController
   # POST /facturation_milks
   # POST /facturation_milks.json
   def create
-    #@facturation_milk = FacturationMilk.new(params[:facturation_milk])
-    @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date])
-
-    if @facturation_milk.nil?
-      @facturation_milk = FacturationMilk.new(params[:facturation_milk])
-      if @facturation_milk.save
-        #redirect_to
+    if params[:facturation_milk][:date] != ""
+      @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
+    
+      if @facturation_milk.nil?
+        @facturation_milk = FacturationMilk.new(params[:facturation_milk])
+        if @facturation_milk.save
+          redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
+        end
+      else
+        if params[:facturation_milk][:liters] == ""
+          @facturation_milk.delete
+          redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
+        else
+          if @facturation_milk.update_column('liters',params[:facturation_milk][:liters].to_i)
+            redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
+          end
+        end
       end
     else
-      @facturation_milk.liters = FacturationMilk.new(params[:facturation_milk][:liters])
-      @facturation_milk.update
+      redirect_to facturation_milks_path(:month=>DateTime.now.month)
     end
-   
   end
 
   # PUT /facturation_milks/1
@@ -89,5 +104,22 @@ class FacturationMilksController < ApplicationController
       format.html { redirect_to facturation_milks_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def get_liters_for_month(month)
+    @liters = Array.new(31, Hash.new)
+    @month_to_rest = DateTime.now.month - month.to_i
+    @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
+    @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
+
+    @array_liters = FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    
+    @array_liters.each do |l|
+      @liters[l.date.day-1] = l.liters
+    end
+
+    return @liters
   end
 end

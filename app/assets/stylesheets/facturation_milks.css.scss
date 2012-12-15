@@ -12,8 +12,14 @@
     text-align: center;
 }
 
-.facturation_data_cell{
+.facturation_without_data_cell{
     height:75px;
     background-color: white;
+    text-align: center;
+}
+
+.facturation_with_data_cell{
+    height:75px;
+    background-color: #bfec85;
     text-align: center;
 }

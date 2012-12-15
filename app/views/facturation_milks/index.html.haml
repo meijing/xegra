@@ -23,7 +23,10 @@
                     %td.facturation_cell.facturation_title_cell= k
                 %tr
                   - d.each do |k|
-                    %td.facturation_cell.facturation_data_cell 600.000
+                    - if @liters[k.to_i-1] == {} || @liters[k.to_i-1] == 0
+                      %td.facturation_cell.facturation_without_data_cell
+                    - else
+                      %td.facturation_cell.facturation_with_data_cell= @liters[k.to_i-1]
           .span4
             .well
               = form_for FacturationMilk.new do |f|
@@ -40,6 +43,6 @@
                 .actions
                   %button.btn.btn-success{:type => "submit"} Aceptar
             .well
-              Facturación total do mes
+              %h5= 'Facturación total do mes '+@total_fact_month.to_s + ' litros'
             .well
-              Facturación total do ano
+              %h5= 'Facturación total do ano '+@total_fact_year.to_s + ' litros'
