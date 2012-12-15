@@ -58,7 +58,7 @@ class FacturationMilksController < ApplicationController
     if params[:facturation_milk][:date] != ""
       @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
     
-      if @facturation_milk.nil?
+      if @facturation_milk.nil? && params[:facturation_milk][:liters] != ""
         @facturation_milk = FacturationMilk.new(params[:facturation_milk])
         if @facturation_milk.save
           redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
