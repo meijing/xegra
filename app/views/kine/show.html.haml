@@ -39,13 +39,22 @@
                       A vaca está na fase de secado
 
                 %p
-                  - if @last_insemination != []
-                    .alert.alert-info
-                      %p
-                        = 'A vaca está preñada de '+ @num_months_pregnant.to_s + ' meses.'
-                      %p
-                        = 'A data prevista para secala é '+@previous_lactation.strftime("%d/%m/%Y") + '.'
-                      = 'A data prevista para o parto é '+ @previous_parturition.strftime("%d/%m/%Y") + '.'
+                  - if @last_insemination != [] and !@exists_born.nil? and @exists_born ==[]
+                    - if @cow.is_pregnant.nil? || (@cow.is_pregnant==0 && (@cow.last_failed_insemination.nil? || @last_insemination[0].date>@cow.last_failed_insemination))
+                      .alert.alert-info
+                        %p
+                          = 'A última semilla púxose o día: '+@last_insemination[0].date.strftime("%d/%m/%Y")
+                        %p
+                          =link_to 'Quedou preñada', is_pregnant_path(:id=>@cow.id), class: "label label-success"
+                          =link_to 'Non quedou preñada', is_not_pregnant_path(:id=>@cow.id), class: "label label-important"
+                    -elsif @cow.is_pregnant == 1
+                      .alert.alert-info
+                        %p
+                          = 'A vaca está preñada de '+ @num_months_pregnant.to_s + ' meses.'
+                        %p
+                          = 'A data prevista para secala é '+@previous_lactation.strftime("%d/%m/%Y") + '.'
+                        %p
+                          = 'A data prevista para o parto é '+ @previous_parturition.strftime("%d/%m/%Y") + '.'
 
             .span3
               .well

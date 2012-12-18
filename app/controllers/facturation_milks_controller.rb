@@ -18,7 +18,7 @@ class FacturationMilksController < ApplicationController
     @start_date_year = DateTime.now.beginning_of_year
     @end_date_year = DateTime.now.end_of_year
     @total_fact_year = FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date_year,@end_date_year])
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @facturation_milks }
@@ -97,13 +97,13 @@ class FacturationMilksController < ApplicationController
   # DELETE /facturation_milks/1
   # DELETE /facturation_milks/1.json
   def destroy
-    @facturation_milk = FacturationMilk.find(params[:id])
-    @facturation_milk.destroy
-
-    respond_to do |format|
-      format.html { redirect_to facturation_milks_url }
-      format.json { head :no_content }
+    if params[:facturation_milk][:date] != ""
+      @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
+      @facturation_milk.destroy
+      redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
     end
+    
+    redirect_to facturation_milks_path(:month=>DateTime.now.month)
   end
 
   private

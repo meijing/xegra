@@ -17,9 +17,13 @@ class KineController < ApplicationController
     @cow = Cow.find(params[:id])
     @reproductions = Reproduction.find_by_cow_id(@cow.id)
 
-    @last_insemination = Reproduction.where('cow_id = '+@cow.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+@cow.id.to_s+' and reproduction_simbol_id = 11)')
-
+    @last_insemination = get_last_insemination(@cow)
+    p'-------------------'
+    p @last_insemination
     if @last_insemination != []
+      @exists_born = Reproduction.find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 6 or reproduction_simbol_id=7',@cow.id,@last_insemination[0].date,DateTime.now])
+      p @exists_born
+      p @cow
       @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
       
       if @num_months_pregnant<=9
@@ -31,7 +35,6 @@ class KineController < ApplicationController
     end
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @cow }
     end
   end
 
@@ -104,6 +107,21 @@ class KineController < ApplicationController
     @notification_parturition = get_notification_parturition()
   end
 
+  def set_is_pregnant
+    @cow = Cow.find(params[:id])
+    @cow.update_column('is_pregnant',1)
+    @cow.update_column('last_failed_insemination',nil)
+    redirect_to cow_path(:id=>@cow.id)
+  end
+
+  def set_is_not_pregnant
+    @cow = Cow.find(params[:id])
+    @cow.update_column('is_pregnant',0)
+    @last_insemination = get_last_insemination(@cow)
+    @cow.update_column('last_failed_insemination',@last_insemination[0].date)
+    redirect_to cow_path(:id=>@cow.id)
+  end
+
   private
 
   def get_notification_lactation()
@@ -134,6 +152,10 @@ class KineController < ApplicationController
       @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
     end
     return @notifications
+  end
+
+  def get_last_insemination(cow)
+    return Reproduction.where('cow_id = '+cow.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+cow.id.to_s+' and reproduction_simbol_id = 11)')
   end
 end
 

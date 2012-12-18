@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210221042) do
+ActiveRecord::Schema.define(:version => 20121218155401) do
 
   create_table "facturation_milks", :force => true do |t|
     t.date     "date"
@@ -25,13 +25,15 @@ ActiveRecord::Schema.define(:version => 20121210221042) do
     t.string   "name"
     t.integer  "num_borns"
     t.string   "father"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
     t.boolean  "is_milk"
     t.integer  "short_ring"
     t.date     "date_down"
     t.date     "date_born"
     t.integer  "is_active"
+    t.integer  "is_pregnant"
+    t.date     "last_failed_insemination"
   end
 
   create_table "lactations", :force => true do |t|

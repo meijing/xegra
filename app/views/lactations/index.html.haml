@@ -24,6 +24,6 @@
               %th %
             -@cows.each do |c|
               %tr
-                %td= link_to (c.ring+'<br />'+c.name).html_safe, lactation_path(c.id)
+                %td= link_to (c.short_ring.to_s+'<br />'+c.name).html_safe, lactation_path(c.id)
                 = render :partial=>'total_lactations',  locals: {cow:c}
             

@@ -3,7 +3,7 @@
 #= require_tree .
 $ ->
  $('#reproduction_reproduction_simbol').change () ->
-   if ($('#reproduction_reproduction_simbol').val() == '▲ Inseminación')
+   if ($('#reproduction_reproduction_simbol').val() == '♂ Pariu macho')
      $('#reproduction_bull').attr('disabled', false)
      $('#reproduction_date').attr('disabled', false)
    else

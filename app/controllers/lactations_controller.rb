@@ -2,7 +2,7 @@ class LactationsController < ApplicationController
   # GET /lactations
   # GET /lactations.json
   def index
-    @cows = Cow.where('is_active=1')
+    @cows = Cow.order('short_ring').where('is_active=1')
 
     respond_to do |format|
       format.html # index.html.erb

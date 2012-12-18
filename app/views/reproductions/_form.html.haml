@@ -20,7 +20,7 @@
             %tr
               - @info_repro.each do |r|
                 - if (r.reproduction_simbol_id.nil? and r.comment.nil?) or (r.reproduction_simbol_id.nil? and r.comment=='')
-                  %td= link_to 'Engadir', proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'btn btn-info btn-small btn_add_repro'
+                  %td= link_to 'Engadir', proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'label label-success'
                 - else
                   %td
                     = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
@@ -57,7 +57,7 @@
             %label.control-label Data:
             .controls
               #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
-                = text_field :reproduction, :date, :value=>@date, :disabled=>@is_bull_enabled,:size => "16"
+                = text_field :reproduction, :date, :value=>@date,:size => "16",:disabled=>@is_add_enabled
                 %span.add-on
                   %i.icon-th
 

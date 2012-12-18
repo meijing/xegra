@@ -42,6 +42,7 @@
                   = f.number_field :liters, :min=>0, :class =>'input-small'
                 .actions
                   %button.btn.btn-success{:type => "submit"} Aceptar
+                  
             .well
               %h5= 'Facturación total do mes: '+@total_fact_month.to_s + ' litros'
             .well

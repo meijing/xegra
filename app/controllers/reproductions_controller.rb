@@ -10,7 +10,7 @@ class ReproductionsController < ApplicationController
       @reproductions = []
     end
 
-    @cows = Cow.where('is_active=1')
+    @cows = Cow.order('short_ring').where('is_active=1')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -57,7 +57,7 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != 'Ningun')
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @new_reproduction.reproduction_simbol_id = @simbol.id
-      if (@simbolId[0] == '▲')
+      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
         @new_reproduction.bull = params[:reproduction][:bull]
         if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
           @new_reproduction.date = params[:reproduction][:date]
@@ -80,7 +80,7 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != 'Ningun')
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @reproduction.reproduction_simbol_id = @simbol.id
-      if (@simbolId[0] == '▲')
+      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
         @reproduction.bull = params[:reproduction][:bull]
         if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
           @reproduction.date = params[:reproduction][:date]
@@ -138,10 +138,15 @@ class ReproductionsController < ApplicationController
     else
       @repro = ReproductionSimbol.find_by_id(@simbol_id)
       @repro_selected=@repro.simbol + " "+ @repro.meaning
-      if (@repro.simbol == '▲')
+      if (@repro.simbol == '▲' )
         @is_bull_enabled = false
       else
         @is_bull_enabled = true
+      end
+
+      if @repro.simbol == '♀' || @repro.simbol == '♂'
+        @cow.is_pregnant = nil
+        @cow.save
       end
     end
    
