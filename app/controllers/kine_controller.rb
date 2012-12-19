@@ -115,7 +115,7 @@ class KineController < ApplicationController
   def set_is_not_pregnant
     @cow = Cow.find(params[:id])
     @cow.update_column('is_pregnant',0)
-    @last_insemination = get_last_insemination(@cow)
+    @last_insemination = @cow.get_last_insemination(@cow)
     @cow.update_column('last_failed_insemination',@last_insemination[0].date)
     redirect_to cow_path(:id=>@cow.id)
   end
