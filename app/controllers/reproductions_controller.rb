@@ -10,7 +10,7 @@ class ReproductionsController < ApplicationController
       @reproductions = []
     end
 
-    @cows = Cow.order('short_ring').where('is_active=1')
+    @cows = Cow.order('short_ring').is_active
 
     respond_to do |format|
       format.html # index.html.erb

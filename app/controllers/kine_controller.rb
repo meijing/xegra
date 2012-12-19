@@ -2,9 +2,9 @@ class KineController < ApplicationController
   # GET /kine
   # GET /kine.json
   def index
-    @kine = Cow.order('short_ring').where('is_active=1').page(params[:page]).per(15)
-    @notification_lactation = get_notification_lactation()
-    @notification_parturition = get_notification_parturition()
+    @kine = Cow.order('short_ring').is_active.page(params[:page]).per(15)
+    @notification_lactation = Cow.get_notification_lactation()
+    @notification_parturition = Cow.get_notification_parturition()
     
     respond_to do |format|
       format.html # index.html.erb
@@ -15,15 +15,13 @@ class KineController < ApplicationController
   # GET /kine/1.json
   def show
     @cow = Cow.find(params[:id])
-    @reproductions = Reproduction.find_by_cow_id(@cow.id)
+    @reproductions = @cow.reproductions
 
-    @last_insemination = get_last_insemination(@cow)
-    p'-------------------'
-    p @last_insemination
+    @last_insemination = @cow.get_last_insemination
+    
     if @last_insemination != []
-      @exists_born = Reproduction.find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 6 or reproduction_simbol_id=7',@cow.id,@last_insemination[0].date,DateTime.now])
-      p @exists_born
-      p @cow
+      @exists_born = @cow.get_last_parturitiun(@last_insemination[0])
+      
       @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
       
       if @num_months_pregnant<=9
@@ -45,7 +43,6 @@ class KineController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @cow }
     end
   end
 
@@ -103,8 +100,9 @@ class KineController < ApplicationController
   end
 
   def notifications
-    @notification_lactation = get_notification_lactation()
-    @notification_parturition = get_notification_parturition()
+    @cow = Cow.find(params[:id])
+    @notification_lactation = @cow.get_notification_lactation
+    @notification_parturition = @cow.get_notification_parturition
   end
 
   def set_is_pregnant
@@ -122,40 +120,5 @@ class KineController < ApplicationController
     redirect_to cow_path(:id=>@cow.id)
   end
 
-  private
-
-  def get_notification_lactation()
-    @notifications = []
-  
-    @start_date = DateTime.now.ago(7.months)
-    @end_date = DateTime.now.advance(:days => 5).ago(7.months)
-  
-    @reproductions = Reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
-  
-    @reproductions.each do |r|
-      if r.cow.is_milk
-        @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
-      end
-    end
-    return @notifications
-  end
-
-  def get_notification_parturition()
-    @notifications = []
-
-    @start_date = DateTime.now.ago(9.months)
-    @end_date = DateTime.now.advance(:days => 5).ago(9.months)
-
-    @reproductions = Reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
-
-    @reproductions.each do |r|
-      @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
-    end
-    return @notifications
-  end
-
-  def get_last_insemination(cow)
-    return Reproduction.where('cow_id = '+cow.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+cow.id.to_s+' and reproduction_simbol_id = 11)')
-  end
 end
 

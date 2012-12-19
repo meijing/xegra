@@ -2,7 +2,7 @@ class LactationsController < ApplicationController
   # GET /lactations
   # GET /lactations.json
   def index
-    @cows = Cow.order('short_ring').where('is_active=1')
+    @cows = Cow.order('short_ring').is_active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,24 +18,11 @@ class LactationsController < ApplicationController
       @month = params[:month]
     end
 
-    @month_to_rest = DateTime.now.month - @month.to_i
-    @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
-    @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
-
-    @lactation = Lactation.find(:all, :conditions=>["cow_id = ? and date between ? and ? ",params[:id],@start_date,@end_date])
-    p @lactation
-    if @lactation.nil?
-      @lactation = []
-    elsif @lactation.instance_of? Lactation 
-      @aux = @lactation
-      @lactation = []
-      @lactation[0]= @aux
-
-    end
     @cow = Cow.find(params[:id])
+    @lactations = @cow.lactations.for_month @month
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @lactation }
     end
   end
 
