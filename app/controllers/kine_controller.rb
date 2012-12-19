@@ -18,21 +18,15 @@ class KineController < ApplicationController
     @reproductions = @cow.reproductions
 
     @last_insemination = @cow.get_last_insemination
-    p '-----------------'
-    p @last_insemination
     
     if @last_insemination != []
       @exists_born = @cow.get_last_parturitiun(@last_insemination[0])
-      p '--- exist'
-      p @exists_born
+   
       @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
-      p @num_months_pregnant
+   
       if @num_months_pregnant<=9
         @previous_lactation = @last_insemination[0].date.advance(:months=>7)
         @previous_parturition = @last_insemination[0].date.advance(:months=>9)
-        p '--'
-        p @previous_lactation
-        p @previous_parturition
       else
         @last_insemination = []
       end
