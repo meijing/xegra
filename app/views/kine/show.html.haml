@@ -37,16 +37,6 @@
                   - else
                     .alert.alert-error
                       A vaca está na fase de secado
-                %p
-                  = @last_insemination[0].date
-                  %br
-                  = @exists_born
-                  %br
-                  = @num_months_pregnant
-                  %br
-                  = @previous_lactation
-                  %br
-                  = @previous_parturition
 
                 %p
                   - if @last_insemination != [] and !@exists_born.nil? and @exists_born ==[]

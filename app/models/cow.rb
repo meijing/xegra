@@ -47,6 +47,6 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_parturitiun(last_insemination)
-    return Reproduction.find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 6 or reproduction_simbol_id=7',self.id,last_insemination.date,DateTime.now])
+    return Reproduction.find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
   end
 end
