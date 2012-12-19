@@ -43,7 +43,7 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_insemination
-    return Reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 11)')
+    return Reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
   end
 
   def get_last_parturitiun(last_insemination)
