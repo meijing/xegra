@@ -47,6 +47,24 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_parturitiun(last_insemination)
-    return Reproduction.find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
+    return Reproduction.order('date desc').find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
+  end
+
+  def set_is_pregnant(is_or_not_pregnant)
+    self.update_column('is_pregnant',is_or_not_pregnant)
+  end
+
+  def set_last_failed_insemination(date)
+    self.update_column('last_failed_insemination',date)
+  end
+
+  def increment_num_borns
+    self.update_column('num_borns',self.num_borns + 1)
+  end
+
+  def decrement_num_borns
+    if (self.num_borns.to_i - 1) > 0
+      self.update_column('num_borns',self.num_borns.to_i - 1)
+    end
   end
 end

@@ -58,6 +58,9 @@ class ReproductionsController < ApplicationController
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @new_reproduction.reproduction_simbol_id = @simbol.id
       if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
+        if @simbolId[0] == '♀' || @simbolId[0] == '♂'
+          @new_reproduction.cow.increment_num_borns
+        end
         @new_reproduction.bull = params[:reproduction][:bull]
         if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
           @new_reproduction.date = params[:reproduction][:date]
@@ -66,9 +69,8 @@ class ReproductionsController < ApplicationController
     end
     @new_reproduction.save
 
-    
-    
-    redirect_to proba_path(params[:reproduction][:cow_id])
+    #redirect_to proba_path(params[:reproduction][:cow_id])
+    redirect_to proba_repro_path(:id=>@new_reproduction.cow_id,:repro_id=>@new_reproduction.id,:simbol_id=>@new_reproduction.reproduction_simbol_id,:month=>@new_reproduction.month)
   end
 
   # PUT /reproductions/1
@@ -81,6 +83,9 @@ class ReproductionsController < ApplicationController
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @reproduction.reproduction_simbol_id = @simbol.id
       if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
+        if (@reproduction.reproduction_simbol_id != 1 && @reproduction.reproduction_simbol_id != 1) && @simbolId[0] == '♀' || @simbolId[0] == '♂'
+          @reproduction.cow.increment_num_borns
+        end
         @reproduction.bull = params[:reproduction][:bull]
         if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
           @reproduction.date = params[:reproduction][:date]
@@ -96,14 +101,18 @@ class ReproductionsController < ApplicationController
     
     
     @reproduction.save
-    redirect_to proba_path(@reproduction.cow_id)
-
+    #redirect_to proba_path(@reproduction.cow_id)
+    redirect_to proba_repro_path(:id=>@reproduction.cow_id,:repro_id=>@reproduction.id,:simbol_id=>@reproduction.reproduction_simbol_id,:month=>@reproduction.month)
   end
 
   # DELETE /reproductions/1
   # DELETE /reproductions/1.json
   def destroy
     @reproduction = Reproduction.find(params[:id])
+    if @reproduction.reproduction_simbol_id == 1 || @reproduction.reproduction_simbol_id == 2
+      @reproduction.check_is_pregnant
+      @reproduction.cow.decrement_num_borns
+    end
     @reproduction.destroy
 
     redirect_to proba_path(@reproduction.cow_id)
@@ -131,7 +140,6 @@ class ReproductionsController < ApplicationController
     end
     
     @simbol_id = params[:simbol_id]
-    
     if @simbol_id.nil? or @simbol_id =='-1'
       @repro_selected="Ningun"
       @is_bull_enabled=true
@@ -143,10 +151,8 @@ class ReproductionsController < ApplicationController
       else
         @is_bull_enabled = true
       end
-
       if @repro.simbol == '♀' || @repro.simbol == '♂'
-        @cow.is_pregnant = nil
-        @cow.save
+        @cow.set_is_pregnant(nil)
       end
     end
    
