@@ -4,8 +4,7 @@ class Cow < ActiveRecord::Base
   belongs_to :user
   
   attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk
-  validates :ring, :presence => true
-  #, :length => { :is => 6 }
+  validates :ring, :presence => true, :length => { :is => 14 }
   validates :num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
 

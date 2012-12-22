@@ -9,4 +9,3 @@ $ ->
      $('#reproduction_bull').attr('disabled', true)
  $( "#dp3" ).datepicker({format: 'dd/mm/yyyy', changeMonth: true, changeYear: true, weekStart: 1});
 
- 

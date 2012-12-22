@@ -62,15 +62,15 @@ class ReproductionsController < ApplicationController
           @new_reproduction.cow.increment_num_borns
         end
         @new_reproduction.bull = params[:reproduction][:bull]
-        if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
-          @new_reproduction.date = params[:reproduction][:date]
-        end
+      end
+      if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
+        @new_reproduction.date = params[:reproduction][:date]
       end
     end
     @new_reproduction.save
 
-    #redirect_to proba_path(params[:reproduction][:cow_id])
-    redirect_to proba_repro_path(:id=>@new_reproduction.cow_id,:repro_id=>@new_reproduction.id,:simbol_id=>@new_reproduction.reproduction_simbol_id,:month=>@new_reproduction.month)
+    redirect_to proba_path(params[:reproduction][:cow_id])
+    #redirect_to proba_repro_path(:id=>@new_reproduction.cow_id,:repro_id=>@new_reproduction.id,:simbol_id=>@new_reproduction.reproduction_simbol_id,:month=>@new_reproduction.month)
   end
 
   # PUT /reproductions/1
@@ -87,9 +87,6 @@ class ReproductionsController < ApplicationController
           @reproduction.cow.increment_num_borns
         end
         @reproduction.bull = params[:reproduction][:bull]
-        if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
-          @reproduction.date = params[:reproduction][:date]
-        end
       else
         @reproduction.bull = nil
         @reproduction.date = nil
@@ -98,11 +95,13 @@ class ReproductionsController < ApplicationController
       @reproduction.reproduction_simbol_id = nil
     end
     @reproduction.comment = params[:reproduction][:comment]
-    
+    if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
+      @reproduction.date = params[:reproduction][:date]
+    end
     
     @reproduction.save
-    #redirect_to proba_path(@reproduction.cow_id)
-    redirect_to proba_repro_path(:id=>@reproduction.cow_id,:repro_id=>@reproduction.id,:simbol_id=>@reproduction.reproduction_simbol_id,:month=>@reproduction.month)
+    redirect_to proba_path(@reproduction.cow_id)
+    #redirect_to proba_repro_path(:id=>@reproduction.cow_id,:repro_id=>@reproduction.id,:simbol_id=>@reproduction.reproduction_simbol_id,:month=>@reproduction.month)
   end
 
   # DELETE /reproductions/1

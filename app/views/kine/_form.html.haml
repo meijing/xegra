@@ -1,40 +1,48 @@
 .span11
   .well
-    = form_for(@cow) do |f|
-      = if @cow.errors.any?
-        #error_explanation
-          %h2 = pluralize(@cow.errors.count, "error")  prohibited this cow from being saved:
+    .form-horizontal
+      = form_for(@cow) do |f|
+        = if @cow.errors.any?
+          #error_explanation
+            %h2 = pluralize(@cow.errors.count, "error")  prohibited this cow from being saved:
 
-        %ul
-        = @cow.errors.full_messages.each do |msg|
-          %li = msg
-      .control-group
-        = f.label 'Pendiente:'
-        = f.text_field :ring
+          %ul
+          = @cow.errors.full_messages.each do |msg|
+            %li = msg
+        .control-group
+          %label.control-label Pendiente:
+          .controls
+            = f.text_field :ring
 
-      .control-group
-        = f.label 'Nome:'
-        = f.text_field :name
+        .control-group
+          %label.control-label Nome:
+          .controls
+            = f.text_field :name
 
-      .control-group
-        = f.label 'Data de nacemento:'
-        #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
-          = f.text_field  :date_born,:size => "16", :type => "text"
-          %span.add-on
-            %i.icon-th
+        .control-group
+          %label.control-label Data de nacemento:
+          .controls
+            #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+              = f.text_field  :date_born,:size => "16", :type => "text"
+              %span.add-on
+                %i.icon-th
 
-      .control-group
-        = f.label 'Número de partos:'
-        = f.number_field :num_borns, :min=>0
+        .control-group
+          %label.control-label Número de partos:
+          .controls
+            = f.number_field :num_borns, :min=>0
 
-      .control-group
-        = f.label 'Pai:'
-        = f.text_field :father
+        .control-group
+          %label.control-label Pai:
+          .controls
+            = f.text_field :father
 
-      .control-group
-        = f.label '¿Está en fase de lactancia?'
-        = f.check_box :is_milk
+        .control-group
+          %label.control-label ¿Está en fase de lactancia?
+          .controls
+            = f.check_box :is_milk
 
-      .actions
-        %button.btn.btn-success{:type => "submit"} Aceptar
+        .form-horizontal
+          .form-actions
+            %button.btn.btn-success{:type => "submit"} Aceptar
 
