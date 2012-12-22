@@ -1,0 +1,17 @@
+<div class="well">
+  <h2>Entra na páxina</h2>
+
+  <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <div class="inputs">
+      <%= f.input :email, :required => false, :autofocus => true%>
+      <%= f.input :password, :required => false, :label=>'Contrasinal' %>
+      <%= f.input :remember_me, :label=>'Recórdame',:as => :boolean if devise_mapping.rememberable?%>
+    </div>
+
+    <div class="actions">
+      <%= f.button :submit, "Aceptar" , :class=>'btn btn-success'%>
+    </div>
+  <% end %>
+
+  <%= render "links" %>
+</div>

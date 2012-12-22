@@ -1,0 +1,22 @@
+<div class="well">
+<h2>Rexístrate</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.input :password, :required => true, :label=>'Contrasinal' %>
+    <%= f.input :password_confirmation, :required => true, :label=>'Repite o contrasinal' %>
+    <%= f.input :cea, :required => true, :label=>'C.E.A.' %>
+    <%= f.input :name, :required => true, :label=>'Nome' %>
+    <%= f.input :surname1, :required => true, :label=>'Primeiro apelido' %>
+    <%= f.input :surname2, :required => true, :label=>'Segundo apelido' %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit, "Aceptar" , :class=>'btn btn-success'%>
+  </div>
+<% end %>
+
+<%= render "links" %>

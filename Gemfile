@@ -36,3 +36,4 @@ gem "bootstrap-datepicker-rails"
 
 gem "kaminari"
 
+gem 'devise', '2.0.4'

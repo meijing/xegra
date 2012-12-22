@@ -1,0 +1,26 @@
+<h2>Modificar os datos do usuario</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="inputs">
+    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.input :password, :autocomplete => "off", :hint => "Déixao en branco se non queres cambialo", :required => false, :label=>'Contrasinal' %>
+    <%= f.input :password_confirmation, :required => false, :label=>'Repite o contrasinal' %>
+    <%= f.input :current_password, :hint => "Introduce o teu contrasinal para confirmar os cambios", :required => true, :label=>'Contrasinal actual' %>
+    <%= f.input :cea, :required => false, :label=>'C.E.A.' %>
+    <%= f.input :name, :required => false, :label=>'Nome' %>
+    <%= f.input :surname1, :required => false, :label=>'Primeiro apelido' %>
+    <%= f.input :surname2, :required => false, :label=>'Segundo apelido' %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit, "Aceptar" , :class=>'btn btn-success'%>
+    <%= link_to 'Modificar contrasinal', edit_user_password_path, :class =>'btn btn-info'%>
+  </div>
+
+<% end %>
+
+<h3>Eliminar a conta</h3>
+
+<p><%= link_to "Eliminar", registration_path(resource_name), :confirm => "¿Está seguro? Eliminaranse todos os datos desta conta", :method => :delete, :class=>'btn btn-danger' %>.</p>

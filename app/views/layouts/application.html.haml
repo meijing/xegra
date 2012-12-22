@@ -12,9 +12,23 @@
     .container
       %header
         .row
-          .span12
+          .span7
             %h1 XEGRA
             %p.lead Xestión de Granxas
+          .span5
+            -if !current_user.nil?
+              .bsa.well
+                .bsap_1277971
+                  .bsa_it.one
+                    .bsa_it_ad.ad1.odd
+                      .row
+                        .span4
+                          %strong= '¡Hola! '+current_user.name + ' ' + current_user.surname1 + ' ' + current_user.surname2
+                      .row
+                        .span2
+                          = 'C.E.A. ' + current_user.cea
+                        .span2
+                          = link_to 'Saír', destroy_user_session_path, :method => :delete, class: "btn btn-inverse"
       =render 'menu'
       = yield
 

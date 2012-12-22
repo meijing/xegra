@@ -1,5 +1,8 @@
 Xegra::Application.routes.draw do
   
+
+  devise_for :users
+
   match 'reproductions/new/:id/:repro_id/:simbol_id/:month' =>'reproductions#single_reproduction', :as =>'proba_repro'
   match 'reproductions/new/:id' =>'reproductions#single_reproduction', :as =>'proba'
   

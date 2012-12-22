@@ -1,4 +1,11 @@
 gl:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: O email xa está rexistrado
   views:
     pagination:
       previous: "&lt; Anterior"
