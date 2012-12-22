@@ -8,16 +8,16 @@ class FacturationMilksController < ApplicationController
     @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
     @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
 
-    @facturation_milks = FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    @facturation_milks = current_user.FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
 
     @last_day = @end_date.day
     
     @liters = get_liters_for_month(@month)
-    @total_fact_month = FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    @total_fact_month = current_user.FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date,@end_date])
 
     @start_date_year = DateTime.now.beginning_of_year
     @end_date_year = DateTime.now.end_of_year
-    @total_fact_year = FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date_year,@end_date_year])
+    @total_fact_year = current_user.FacturationMilk.sum(:liters, :conditions=>["date between ? and ? ",@start_date_year,@end_date_year])
     
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +28,7 @@ class FacturationMilksController < ApplicationController
   # GET /facturation_milks/1
   # GET /facturation_milks/1.json
   def show
-    @facturation_milk = FacturationMilk.find(params[:id])
+    @facturation_milk = current_user.FacturationMilk.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -49,17 +49,18 @@ class FacturationMilksController < ApplicationController
 
   # GET /facturation_milks/1/edit
   def edit
-    @facturation_milk = FacturationMilk.find(params[:id])
+    @facturation_milk = current_user.FacturationMilk.find(params[:id])
   end
 
   # POST /facturation_milks
   # POST /facturation_milks.json
   def create
     if params[:facturation_milk][:date] != ""
-      @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
+      @facturation_milk = current_user.FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
     
       if @facturation_milk.nil? && params[:facturation_milk][:liters] != ""
         @facturation_milk = FacturationMilk.new(params[:facturation_milk])
+        @facturation_milk.user_id = current_user.id
         if @facturation_milk.save
           redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
         end
@@ -81,7 +82,7 @@ class FacturationMilksController < ApplicationController
   # PUT /facturation_milks/1
   # PUT /facturation_milks/1.json
   def update
-    @facturation_milk = FacturationMilk.find(params[:id])
+    @facturation_milk = current_user.FacturationMilk.find(params[:id])
 
     respond_to do |format|
       if @facturation_milk.update_attributes(params[:facturation_milk])
@@ -98,7 +99,7 @@ class FacturationMilksController < ApplicationController
   # DELETE /facturation_milks/1.json
   def destroy
     if params[:facturation_milk][:date] != ""
-      @facturation_milk = FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
+      @facturation_milk = current_user.FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
       @facturation_milk.destroy
       redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
     end
@@ -114,7 +115,7 @@ class FacturationMilksController < ApplicationController
     @start_date = DateTime.now.ago(@month_to_rest.months).beginning_of_month
     @end_date = DateTime.now.ago(@month_to_rest.months).end_of_month
 
-    @array_liters = FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    @array_liters = current_user.FacturationMilk.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
     
     @array_liters.each do |l|
       @liters[l.date.day-1] = l.liters
