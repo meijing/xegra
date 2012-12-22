@@ -3,7 +3,7 @@ class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
   def index
-    @reproductions = Reproduction.find_by_sql('select * from reproductions
+    @reproductions = current_user.reproduction.find_by_sql('select * from reproductions
       where year ='+Time.new.year.to_s+' order by cow_id, month')
 
     if @reproductions.nil?
@@ -21,7 +21,7 @@ class ReproductionsController < ApplicationController
   # GET /reproductions/1
   # GET /reproductions/1.json
   def show
-    @reproduction = Reproduction.find(params[:id])
+    @reproduction = current_user.reproduction.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -32,7 +32,7 @@ class ReproductionsController < ApplicationController
   # GET /reproductions/new
   # GET /reproductions/new.json
   def new
-    @reproductions = Reproduction.find_by_cow_id(params[:id])
+    @reproductions = current_user.reproduction.find_by_cow_id(params[:id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,7 +41,7 @@ class ReproductionsController < ApplicationController
 
   # GET /reproductions/1/edit
   def edit
-    @reproduction = Reproduction.find(params[:id])
+    @reproduction = current_user.reproduction.find(params[:id])
   end
 
   # POST /reproductions
@@ -76,7 +76,7 @@ class ReproductionsController < ApplicationController
   # PUT /reproductions/1
   # PUT /reproductions/1.json
   def update
-    @reproduction = Reproduction.find_by_id(params[:reproduction][:idReproduccion])
+    @reproduction = current_user.reproduction.find_by_id(params[:reproduction][:idReproduccion])
     @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
 
     if (@simbolId[0] != 'Ningun')
@@ -107,7 +107,7 @@ class ReproductionsController < ApplicationController
   # DELETE /reproductions/1
   # DELETE /reproductions/1.json
   def destroy
-    @reproduction = Reproduction.find(params[:id])
+    @reproduction = current_user.reproduction.find(params[:id])
     if @reproduction.reproduction_simbol_id == 1 || @reproduction.reproduction_simbol_id == 2
       @reproduction.check_is_pregnant
       @reproduction.cow.decrement_num_borns
@@ -121,7 +121,7 @@ class ReproductionsController < ApplicationController
     @cow = current_user.cow.find_by_id(params[:id])
 
     @info_repro = Array.new(12, Hash.new)
-    @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id]+' order by month')
+    @reproductions = current_user.reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id]+' order by month')
     @reproductions.each do |r|
       @info_repro[r.month-1] =r
     end
@@ -160,7 +160,7 @@ class ReproductionsController < ApplicationController
       @reproduction.month =  p params[:month]
       @is_add_enabled = false
     elsif !params[:repro_id].nil? and params[:repro_id] !='-1'
-      @reproduction = Reproduction.find_by_id(params[:repro_id])
+      @reproduction = current_user.reproduction.find_by_id(params[:repro_id])
       @comment = @reproduction.comment
       @bull = @reproduction.bull
       @date = @reproduction.date

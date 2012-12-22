@@ -1,6 +1,7 @@
 class Reproduction < ActiveRecord::Base
   belongs_to :cow
   belongs_to :reproduction_simbol
+  belongs_to :user
   attr_accessible :comment, :month, :year
 
   def check_is_pregnant

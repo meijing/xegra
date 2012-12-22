@@ -3,8 +3,8 @@ class KineController < ApplicationController
   # GET /kine.json
   def index
     @kine = current_user.cow.order('short_ring').is_active.page(params[:page]).per(15)
-    @notification_lactation = Cow.get_notification_lactation()
-    @notification_parturition = Cow.get_notification_parturition()
+    @notification_lactation = Cow.get_notification_lactation(current_user)
+    @notification_parturition = Cow.get_notification_parturition(current_user)
     
     respond_to do |format|
       format.html # index.html.erb

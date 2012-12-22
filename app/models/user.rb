@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :cow
   has_many :FacturationMilk
+  has_many :reproduction
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
