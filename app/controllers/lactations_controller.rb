@@ -2,7 +2,7 @@ class LactationsController < ApplicationController
   # GET /lactations
   # GET /lactations.json
   def index
-    @cows = Cow.order('short_ring').is_active
+    @cows = current_user.cow.order('short_ring').is_active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,7 +18,7 @@ class LactationsController < ApplicationController
       @month = params[:month]
     end
 
-    @cow = Cow.find(params[:id])
+    @cow = current_user.cow.find(params[:id])
     @lactations = @cow.lactations.for_month @month
     
     respond_to do |format|
@@ -38,7 +38,7 @@ class LactationsController < ApplicationController
 
   # GET /lactations/1/edit
   def edit
-    @cow_id = Cow.find(params[:cow_id]).id
+    @cow_id = current_user.cow.find(params[:cow_id]).id
     @lactation = Lactation.find(params[:id])
   end
 

@@ -1,9 +1,10 @@
 class Cow < ActiveRecord::Base
   has_many :lactations
   has_many :reproductions
+  belongs_to :user
   
   attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk
-  validates :ring, :presence => true, :uniqueness => true
+  validates :ring, :presence => true
   #, :length => { :is => 6 }
   validates :num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
@@ -66,5 +67,10 @@ class Cow < ActiveRecord::Base
     if (self.num_borns.to_i - 1) > 0
       self.update_column('num_borns',self.num_borns.to_i - 1)
     end
+  end
+
+  def set_ring_data
+    self.is_active=1
+    self.short_ring = self.ring[self.ring.length-4..self.ring.length]
   end
 end

@@ -10,7 +10,7 @@ class ReproductionsController < ApplicationController
       @reproductions = []
     end
 
-    @cows = Cow.order('short_ring').is_active
+    @cows = current_user.cow.order('short_ring').is_active
 
     respond_to do |format|
       format.html # index.html.erb
@@ -119,7 +119,7 @@ class ReproductionsController < ApplicationController
   end
 
   def single_reproduction
-    @cow = Cow.find_by_id(params[:id])
+    @cow = current_user.cow.find_by_id(params[:id])
 
     @info_repro = Array.new(12, Hash.new)
     @reproductions = Reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id]+' order by month')

@@ -2,7 +2,7 @@ class KineController < ApplicationController
   # GET /kine
   # GET /kine.json
   def index
-    @kine = Cow.order('short_ring').is_active.page(params[:page]).per(15)
+    @kine = current_user.cow.order('short_ring').is_active.page(params[:page]).per(15)
     @notification_lactation = Cow.get_notification_lactation()
     @notification_parturition = Cow.get_notification_parturition()
     
@@ -56,8 +56,8 @@ class KineController < ApplicationController
   # POST /kine.json
   def create
     @cow = Cow.new(params[:cow])
-    @cow.is_active=1
-    @cow.short_ring = @cow.ring[@cow.ring.length-4..@cow.ring.length]
+    @cow.set_ring_data
+    @cow.user_id = current_user.id
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }
