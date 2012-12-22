@@ -66,8 +66,12 @@ class FacturationMilksController < ApplicationController
         end
       else
         if params[:facturation_milk][:liters] == ""
-          @facturation_milk.delete
-          redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
+          if !@facturation_milk.nil?
+            @facturation_milk.delete
+            redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
+          else
+            redirect_to facturation_milks_path(:month=>DateTime.now.month)
+          end
         else
           if @facturation_milk.update_column('liters',params[:facturation_milk][:liters].to_i)
             redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
@@ -100,7 +104,9 @@ class FacturationMilksController < ApplicationController
   def destroy
     if params[:facturation_milk][:date] != ""
       @facturation_milk = current_user.FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
-      @facturation_milk.destroy
+      if !@facturation_milk.nil?
+        @facturation_milk.destroy
+      end
       redirect_to facturation_milks_path(:month=>@facturation_milk.date.month)
     end
     
