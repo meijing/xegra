@@ -102,8 +102,13 @@ class FacturationMilksController < ApplicationController
   # DELETE /facturation_milks/1
   # DELETE /facturation_milks/1.json
   def destroy
-    if params[:facturation_milk][:date] != ""
+    p '--------'
+    
+    if !params[:facturation_milk].nil? and params[:facturation_milk][:date] != ""
+      p '-------------------------'
+      p params[:facturation_milk][:date]
       @facturation_milk = current_user.FacturationMilk.find_by_date(params[:facturation_milk][:date].to_date)
+      p @facturation_milk
       if !@facturation_milk.nil?
         @facturation_milk.destroy
       end

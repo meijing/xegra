@@ -52,6 +52,7 @@ class ReproductionsController < ApplicationController
     @new_reproduction.month = params[:reproduction][:repro_month]
     @new_reproduction.comment = params[:reproduction][:comment]
     @new_reproduction.year = DateTime.now.year
+    @new_reproduction.user_id = current_user.id
     @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
 
     if (@simbolId[0] != 'Ningun')

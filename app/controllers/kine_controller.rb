@@ -17,10 +17,10 @@ class KineController < ApplicationController
     @cow = Cow.find(params[:id])
     @reproductions = @cow.reproductions
 
-    @last_insemination = @cow.get_last_insemination
+    @last_insemination = @cow.get_last_insemination(current_user)
     
     if @last_insemination != []
-      @exists_born = @cow.get_last_parturitiun(@last_insemination[0])
+      @exists_born = @cow.get_last_parturitiun(@last_insemination[0],current_user)
    
       @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
    
@@ -100,9 +100,8 @@ class KineController < ApplicationController
   end
 
   def notifications
-    @cow = Cow.find(params[:id])
-    @notification_lactation = @cow.get_notification_lactation
-    @notification_parturition = @cow.get_notification_parturition
+    @notification_lactation = Cow.get_notification_lactation(current_user)
+    @notification_parturition = Cow.get_notification_parturition(current_user)
   end
 
   def set_is_pregnant
@@ -115,7 +114,7 @@ class KineController < ApplicationController
   def set_is_not_pregnant
     @cow = Cow.find(params[:id])
     @cow.set_is_pregnant(0)
-    @last_insemination = @cow.get_last_insemination
+    @last_insemination = @cow.get_last_insemination(current_user)
     @cow.set_last_failed_insemination(@last_insemination[0].date)
     redirect_to cow_path(:id=>@cow.id)
   end
