@@ -1,7 +1,7 @@
 module ReproductionSimbolsHelper
   def get_array_simbols
     simbols = []
-    simbols[0] = 'Ningun'
+    simbols[0] = t('reproductions.no_simbol')
     cont = 1
 
     ReproductionSimbol.all.each do |r|

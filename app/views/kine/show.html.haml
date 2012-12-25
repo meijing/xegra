@@ -4,65 +4,65 @@
       .well
         .row
           .span11
-            %legend Datos da vaca
+            %legend= t('kine.show.data_cow')
           %hr.space
             .span8
               .well
                 
                 %p
-                  Pendiente:
+                  =t('kine.ring') +':'
                   = @cow.ring.concat(' ')
                 %p
-                  Nome:
+                  =t('kine.name') +':'
                   = @cow.name
 
                 %p
-                  Data de nacemento:
+                  =t('kine.data_born') +':'
                   - if !@cow.date_born.nil?
                     = @cow.date_born.strftime("%d/%m/%Y")
 
                 %p
-                  Número de partos:
+                  =t('kine.num_borns') +':'
                   = @cow.num_borns
 
                 - if @cow.father != ''
                   %p
-                    Pai:
+                    =t('kine.father') +':'
                     = @cow.father
 
                 %p
                   - if @cow.is_milk?
                     .alert.alert-success
-                      A vaca está na fase de lactancia
+                      =t('kine.show.is_milk')
                   - else
                     .alert.alert-error
-                      A vaca está na fase de secado
+                      =t('kine.show.is_not_milk')
 
                 %p
                   - if @last_insemination != [] and !@exists_born.nil? and @exists_born ==[]
                     - if @cow.is_pregnant.nil? || (@cow.is_pregnant==0 && (@cow.last_failed_insemination.nil? || @last_insemination[0].date>@cow.last_failed_insemination))
                       .alert.alert-info
                         %p
-                          = 'A última semilla púxose o día: '+@last_insemination[0].date.strftime("%d/%m/%Y")
+                          = t('kine.show.last_insemination')+': '+@last_insemination[0].date.strftime("%d/%m/%Y")
                         %p
-                          =link_to 'Quedou preñada', is_pregnant_path(:id=>@cow.id), class: "label label-success"
-                          =link_to 'Non quedou preñada', is_not_pregnant_path(:id=>@cow.id), class: "label label-important"
+                          =link_to t('kine.show.is_pregnant'), is_pregnant_path(:id=>@cow.id), class: "label label-success"
+                          =link_to t('kine.show.is_not_pregnant'), is_not_pregnant_path(:id=>@cow.id), class: "label label-important"
                     -elsif @cow.is_pregnant == 1
                       .alert.alert-info
                         %p
-                          = 'A vaca está preñada de '+ @num_months_pregnant.to_s + ' meses.'
+                          = t('kine.show.cow_is_pregnant')+' '+ @num_months_pregnant.to_s + ' '+ t('kine.show.cow_is_pregnant_months')
                         %p
-                          = 'A data prevista para secala é '+@previous_lactation.strftime("%d/%m/%Y") + '.'
+                          = t('kine.show.previous_month_lactation')+' '+@previous_lactation.strftime("%d/%m/%Y") 
                         %p
-                          = 'A data prevista para o parto é '+ @previous_parturition.strftime("%d/%m/%Y") + '.'
+                          = t('kine.show.previous_month_parturition')+' '+ @previous_parturition.strftime("%d/%m/%Y") 
 
             .span3
               .well
                 %p
-                  = link_to 'Control leiteiro', lactation_path(@cow.id) , class: "btn btn-info"
+                  = link_to t('kine.show.btn_lactation'), lactation_path(@cow.id) , class: "btn btn-info"
                 %p
-                  =link_to 'Reproducción', proba_path(@cow.id) , class: "btn btn-info"
+                  =link_to t('kine.show.btn_reproduction'), proba_path(@cow.id) , class: "btn btn-info"
                 %p
-                  =link_to 'Dar de baixa', @cow ,method: :delete, class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
+                  =link_to t('kine.show.btn_down_cow'), @cow ,method: :delete, class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
                 %p
-                  = link_to 'Modificar datos', edit_cow_path(@cow) , class: "btn btn-info"
+                  = link_to t('kine.show.btn_update_cow'), edit_cow_path(@cow) , class: "btn btn-info"

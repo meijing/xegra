@@ -5,7 +5,7 @@ class Cow < ActiveRecord::Base
   
   attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk
   validates :ring, :presence => true, :length => { :is => 14 }
-  validates :num_borns, :presence => true
+  validates :name,:num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
 
   scope :is_active, lambda {
@@ -18,7 +18,7 @@ class Cow < ActiveRecord::Base
     @start_date = DateTime.now - 7.months - 1.day
     @end_date = DateTime.now.advance(:days => 5) - 7.months + 1.day
 
-    @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
     
     @reproductions.each do |r|
       if r.cow.is_milk
@@ -35,7 +35,7 @@ class Cow < ActiveRecord::Base
     @start_date = DateTime.now - 9.months - 1.day
     @end_date = DateTime.now.advance(:days => 5) - 9.months + 1.day
 
-    @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date,@end_date])
+    @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
 
     @reproductions.each do |r|
       @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")

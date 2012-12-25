@@ -1,25 +1,25 @@
-<h2>Modificar os datos do usuario</h2>
+<h2><%=t('session.update') %></h2>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="inputs">
     <%= f.input :email, :required => true, :autofocus => true %>
-    <%= f.input :password, :autocomplete => "off", :hint => "Déixao en branco se non queres cambialo", :required => false, :label=>'Contrasinal' %>
-    <%= f.input :password_confirmation, :required => false, :label=>'Repite o contrasinal' %>
-    <%= f.input :current_password, :hint => "Introduce o teu contrasinal para confirmar os cambios", :required => true, :label=>'Contrasinal actual' %>
-    <%= f.input :cea, :required => false, :label=>'C.E.A.' %>
-    <%= f.input :name, :required => false, :label=>'Nome' %>
-    <%= f.input :surname1, :required => false, :label=>'Primeiro apelido' %>
-    <%= f.input :surname2, :required => false, :label=>'Segundo apelido' %>
+    <%= f.input :password, :autocomplete => "off", :hint => t('session.pass_blank'), :required => false, :label=>t('session.password') %>
+    <%= f.input :password_confirmation, :required => false, :label=>t('session.repeat_pass') %>
+    <%= f.input :current_password, :hint => t('session.pass_to_save'), :required => true, :label=>t('session.actual_pass') %>
+    <%= f.input :cea, :required => false, :label=> t('session.cea') %>
+    <%= f.input :name, :required => false, :label=> t('session.name') %>
+    <%= f.input :surname1, :required => false, :label=> t('session.first_surname') %>
+    <%= f.input :surname2, :required => false, :label=> t('session.second_surname') %>
   </div>
 
   <div class="actions">
-    <%= f.button :submit, "Aceptar" , :class=>'btn btn-success'%>
+    <%= f.button :submit,  t('session.btn_aceptar'), :class=>'btn btn-success'%>
   </div>
 
 <% end %>
 
-<h3>Eliminar a conta</h3>
+<h3><%=t('session.delete_account') %></h3>
 
-<p><%= link_to "Eliminar", registration_path(resource_name), :confirm => "¿Está seguro? Eliminaranse todos os datos desta conta", :method => :delete, :class=>'btn btn-danger' %>.</p>
+<p><%= link_to t('session.btn_delete'), registration_path(resource_name), :confirm => t('session.confirm_delete'), :method => :delete, :class=>'btn btn-danger' %>.</p>

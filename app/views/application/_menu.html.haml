@@ -5,14 +5,14 @@
       .nav-collapse
         %ul.nav
           %li
-            = link_to 'Vacas',kine_path
+            = link_to t('menu.cow'),kine_path
           %li
-            = link_to 'Carta de reproducción', reproductions_path
+            = link_to t('menu.reproduction'), reproductions_path
           %li
-            = link_to 'Control do leite', lactations_path
+            = link_to t('menu.lactations'), lactations_path
           %li
-            = link_to 'Facturación do leite', facturation_milks_path(:month=>DateTime.now.month)
+            = link_to t('menu.facturation_milk'), facturation_milks_path(:month=>DateTime.now.month)
           %li
-            = link_to 'Listados',kine_path
+            = link_to t('menu.reports'),kine_path
           %li
-            = link_to 'Os meus datos',edit_user_registration_path
+            = link_to t('menu.account'),edit_user_registration_path

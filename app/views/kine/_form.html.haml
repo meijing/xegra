@@ -4,23 +4,24 @@
       = form_for(@cow) do |f|
         = if @cow.errors.any?
           #error_explanation
-            %h2 = pluralize(@cow.errors.count, "error")  prohibited this cow from being saved:
+            %h2= t('activerecord.errors.title')
 
           %ul
-          = @cow.errors.full_messages.each do |msg|
-            %li = msg
+          - @cow.errors.full_messages.each do |msg|
+            %li= msg
+
         .control-group
-          %label.control-label Pendiente:
+          %label.control-label= t('kine.ring') +':'
           .controls
             = f.text_field :ring
 
         .control-group
-          %label.control-label Nome:
+          %label.control-label=t('kine.name') +':'
           .controls
             = f.text_field :name
 
         .control-group
-          %label.control-label Data de nacemento:
+          %label.control-label=t('kine.data_born') +':'
           .controls
             #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
               = f.text_field  :date_born,:size => "16", :type => "text"
@@ -28,21 +29,21 @@
                 %i.icon-th
 
         .control-group
-          %label.control-label Número de partos:
+          %label.control-label=t('kine.num_borns') +':'
           .controls
             = f.number_field :num_borns, :min=>0
 
         .control-group
-          %label.control-label Pai:
+          %label.control-label=t('kine.father') +':'
           .controls
             = f.text_field :father
 
         .control-group
-          %label.control-label ¿Está en fase de lactancia?
+          %label.control-label=t('kine.ask_is_milk') +':'
           .controls
             = f.check_box :is_milk
 
         .form-horizontal
           .form-actions
-            %button.btn.btn-success{:type => "submit"} Aceptar
+            %button.btn.btn-success{:type => "submit"}= t('kine.btn_acept')
 

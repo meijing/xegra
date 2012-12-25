@@ -33,41 +33,41 @@ module ReproductionsHelper
   end
 
   def get_title_individual_repro_page(cow)
-    @title = 'Modifica a carta de reproduccion para a vaca '
-    @title += @cow.ring + '('
+    @title = t('reproductions.update.title')
+    @title += ' '+@cow.short_ring.to_s + '('
     @title += @cow.name + ')'
     return @title
   end
 
   def get_name_of_name(month)
     if (month.nil?)
-      return '(Seleccione un mes)'
+      return t('reproductions.update.select_month')
     else
       case month
       when 1
-        return 'Xaneiro'
+        return t('reproductions.table_index.january')
       when 2
-        return 'Febreiro'
+        return t('reproductions.table_index.february')
       when 3
-        return 'Marzo'
+        return t('reproductions.table_index.march')
       when 4
-        return 'Abril'
+        return t('reproductions.table_index.april')
       when 5
-        return 'Maio'
+        return t('reproductions.table_index.may')
       when 6
-        return 'Xuño'
+        return t('reproductions.table_index.june')
       when 7
-        return 'Xullo'
+        return t('reproductions.table_index.july')
       when 8
-        return 'Agosto'
+        return t('reproductions.table_index.august')
       when 9
-        return 'Setembro'
+        return t('reproductions.table_index.september')
       when 10
-        return 'Outubro'
+        return t('reproductions.table_index.october')
       when 11
-        return 'Novembro'
+        return t('reproductions.table_index.november')
       when 12
-        return 'Decembro'
+        return t('reproductions.table_index.december')
 
       end
     end

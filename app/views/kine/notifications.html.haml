@@ -4,23 +4,23 @@
       .well
         .row
           .span7
-            %h2 AVISOS
+            %h2= t('notifications.title')
             = @proba
 
         .row
           .span5
             .well
-              %h4 Avisos de secado
+              %h4= t('notifications.not_lactation')
               - if !@notification_lactation.nil? and @notification_lactation != []
                 %ul
                   - @notification_lactation.each do |n|
                     %li
-                      = 'Vaca: '+n
+                      = t('notifications.cow')+': '+n
           .span6
             .well
-              %h4 Avisos de parto
+              %h4= t('notifications.not_parturition')
               - if !@notification_parturition.nil? and @notification_parturition != []
                 %ul
                   - @notification_parturition.each do |n|
                     %li
-                      = 'Vaca: '+n
+                      = t('notifications.cow')+': '+n

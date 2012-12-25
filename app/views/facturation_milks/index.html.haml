@@ -4,7 +4,7 @@
       .well
         .row
           .span7
-            %h2 FACTURACIÓN DO LEITE
+            %h2= t('facturation_milk.title')
         .row
           .span9
             .alert.alert-success
@@ -31,7 +31,7 @@
             .well
               = form_for FacturationMilk.new do |f|
                 .field
-                  = f.label 'Data:'
+                  = f.label t('facturation_milk.data')+':'
                   #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
                     = f.text_field  :date,:size => "16", :type => "text"
                     %span.add-on
@@ -42,9 +42,9 @@
                   = f.number_field :liters, :min=>0, :class =>'input-small'
                 .actions
                   %button.btn.btn-success{:type => "submit"} Aceptar
-                = 'Para eliminar un rexistro introduce a data, deixa en branco número de litros e finalmente preme en Aceptar.'
+                = t('facturation_milk.info_to_delete')
                   
             .well
-              %h5= 'Facturación total do mes: '+@total_fact_month.to_s + ' litros'
+              %h5= t('facturation_milk.fact_month')+': '+@total_fact_month.to_s + ' '+t('facturation_milk.fact_liters')
             .well
-              %h5= 'Facturación total do ano: '+@total_fact_year.to_s + ' litros'
+              %h5= t('facturation_milk.fact_year')+': '+@total_fact_year.to_s + ' '+t('facturation_milk.fact_liters')

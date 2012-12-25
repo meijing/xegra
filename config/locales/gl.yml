@@ -15,19 +15,177 @@ gl:
       last: Ultima
   activerecord:
     errors:
+      title: Atoparonse algunhos erros
       models:
         cow:
           attributes:
             ring:
-              blank: Pendiente
-              taken: Ten que indicar o número do pendiente
-              wrong_length: O pendiente debe de ter 6 números
-            years:
-              blank: Anos
-              taken: Ten que indicar os anos da vaca
+              blank: Ten que indicar o número do pendiente
+              taken: Xa existe unha vaca con ese pendiente
+              wrong_length: O pendiente debe de ter 14 números
+            date_born:
+              blank: Indique a data de nacemento
             num_borns:
-              blank: Número de partos
-              taken: Ten que indicar o número de partos. Se non tivo ningún marque 0
-            is_milk:
-              blank: Fase de lactancia
-              taken: Debe de indicar se a vaca esta en fase de lactancia ou non
+              blank: Indique o número de partos
+            name:
+              blank: Especifique o nome da vaca
+
+        lactation:
+          attributes:
+            cell:
+              blank: Indique o número de células
+            greasy_kg:
+              blank: Indique os kilos de graxa
+            greasy_percentage:
+              blank: Indique o porcentaxe de graxa
+            lactation_duration:
+              blank: Indique a duración da lactación
+            milk_kg:
+              blank: Indique os kilos de leite
+            protein_kg:
+              blank: Indique os kilos de proteína
+            protein_percentage:
+              blank: Indique o porcentaxe de proteína
+          
+  menu:
+    cow: Vacas
+    reproduction: Carta de reprodución
+    lactations: Control do leite
+    facturation_milk: Facturación do leite
+    reports: Listados
+    account: A miña conta
+    
+  notifications:
+    title: AVISOS
+    not_lactation: Avisos de secado
+    not_parturition: Avisos de parto
+    cow: Vaca
+
+  kine:
+    up_cow: Alta dunha vaca
+    index: Vacas
+    ring: Pendiente
+    name: Nome
+    data_born: Data de nacemento
+    num_borns: Número de partos
+    father: Pai
+    ask_is_milk: ¿Está en fase de lactancia?
+    btn_acept: Aceptar
+    show:
+      data_cow: Datos da vaca
+      is_milk: A vaca está na fase de lactancia
+      is_not_milk: A vaca está na fase de secado
+      last_insemination: A última semilla púxose o día
+      is_pregnant: Quedou preñada
+      is_not_pregnant: Non quedou preñada
+      cow_is_pregnant: A vaca está preñada de
+      cow_is_pregnant_months: meses
+      previous_month_lactation: A data prevista para secala é
+      previous_month_parturition: A data prevista para o parto é
+      btn_reproduction: Reprodución
+      btn_lactation: Control leiteiro
+      btn_down_cow: Dar de baixa
+      btn_update_cow: Modificar datos
+    new:
+      set_data_new_cow: Introduce os datos para a nova vaca
+    update:
+      set_modify_data_cow: Modifica os datos para a vaca
+
+  reproductions:
+    title: Carta de reprodución
+    no_simbol: Ningún
+    table_index:
+      cow: Vaca
+      january: Xaneiro
+      february: Febreiro
+      march: Marzo
+      april: Abril
+      may: Maio
+      june: Xuño
+      july: Xullo
+      august: Agosto
+      september: Setembro
+      october: Outubro
+      november: Novembro
+      december: Decembro
+    update:
+      title: Modifica a carta de reproduccion para a vaca
+      select_month: (Seleccione un mes)
+      add: Engadir
+      data_for_month: Datos para o mes de
+      data_for_insemination: Datos para a inseminación
+      simbol: Símbolo
+      comment: Comentario
+      bull: Touro
+      data: Data
+    btn_acept: Aceptar
+    btn_delete: Borrar
+
+  lactations:
+    title: Control do leite
+    sample_table:
+      resume_title: LACTACION 305 DIAS
+      sample_title: LACTACION REAL
+      milk_kg: LEITE KG.
+      greasy: GRAXA
+      proteine: PROTEINA
+      production: PRODUCION VITALICIA
+      kg: KG.
+      data: DATA
+      lactation_duration: DURACION DE LACTACION
+      cell: R. CELULAR
+      lineal: P. LINEAL
+    p_lineal:
+      optimous: Valores óptimos
+      critical: Risco de mamite
+    add_sample: Engadir mostra
+    edit:
+      title: Introduza os datos da mostra
+      date: Data da mostra
+      greasy: Graxa
+      protein: Proteína
+      cell: R. Celular
+      duration_milk: Duración da lactación
+      milk_kg: Leite Kg.
+      btn_acept: Aceptar
+      kg: Kg.
+    show:
+      to_cow: Control leiteiro para a vaca
+      for_month: Datos para o mes de
+
+  facturation_milk:
+    title: Facturación do leite
+    data: Data
+    liters: Litros
+    btn_acept: Aceptar
+    info_to_delete: Para eliminar un rexistro introduce a data, deixa en branco número de litros e finalmente preme en Aceptar.
+    fact_month: Facturación total do mes
+    fact_year: Facturación total do ano
+    fact_liters: litros
+
+  session:
+    new_session: Entra na páxina
+    password: Contrasinal
+    remember_me: Recórdame
+    btn_aceptar: Aceptar
+    sing_up: Rexistrarse
+    forget_pass: ¿Olvidou o contrasinal?
+    repeat_pass: Repite o contrasinal
+    cea: C.E.A.
+    name: Nome
+    first_surname: Primeiro apelido
+    second_surname: Segundo apelido
+    get_in: Entrar
+    sing_up_now: Rexístrate
+    update: Modificar os datos do usuario
+    pass_blank: Déixao en branco se non queres cambialo
+    pass_to_save: Introduce o teu contrasinal para confirmar os cambios
+    delete_account: Eliminar a conta
+    btn_delete: Eliminar
+    confirm_delete: ¿Está seguro? Eliminaranse todos os datos desta conta
+    actual_pass: Contrasinal actual
+
+  welcome_user:
+    hi: ¡Hola!
+    sign_out: Saír
+    cea: C.E.A.

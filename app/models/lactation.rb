@@ -2,6 +2,7 @@ class Lactation < ActiveRecord::Base
   belongs_to :cow
   attr_accessible :cell, :date, :greasy_kg, :greasy_percentage, :lactation_duration, :milk_kg, :protein_kg, :protein_percentage, :cow_id
   validates :cell, :date, :greasy_kg, :greasy_percentage, :lactation_duration, :milk_kg, :protein_kg, :protein_percentage, :presence => true
+  validates_length_of :cell, :greasy_kg, :greasy_percentage, :lactation_duration, :milk_kg, :protein_kg, :protein_percentage, :minimum => 0
 
   scope :for_month, lambda {|month|
     

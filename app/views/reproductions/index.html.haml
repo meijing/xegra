@@ -4,24 +4,24 @@
       .well
         .row
           .span9
-            %h2 CARTA DE REPRODUCCIÓN
+            %h2= t('reproductions.title')
         .row
           %table.table.table-bordered.table-striped
             %thead
               %tr
-                %th Vaca
-                %th Xaneiro
-                %th Febreiro
-                %th Marzo
-                %th Abril
-                %th Maio
-                %th Xuño
-                %th Xullo
-                %th Agosto
-                %th Setembro
-                %th Outubro
-                %th Novembro
-                %th Decembro
+                %th= t('reproductions.table_index.cow')
+                %th= t('reproductions.table_index.january')
+                %th= t('reproductions.table_index.february')
+                %th= t('reproductions.table_index.march')
+                %th= t('reproductions.table_index.april')
+                %th= t('reproductions.table_index.may')
+                %th= t('reproductions.table_index.june')
+                %th= t('reproductions.table_index.july')
+                %th= t('reproductions.table_index.august')
+                %th= t('reproductions.table_index.september')
+                %th= t('reproductions.table_index.october')
+                %th= t('reproductions.table_index.november')
+                %th= t('reproductions.table_index.december')
                 %th
                 
                 - @cows.each do |cow|

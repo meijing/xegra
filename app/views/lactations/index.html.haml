@@ -4,23 +4,23 @@
       .well
         .row
           .span9
-            %h2 CONTROL DO LEITE
+            %h2= t('lactations.title')
         .row
           %table.table.table-bordered.table-striped.table_header
             %tr
               %td
                 %th{:colspan=>"8"}
-                  %h6 LACTACION 305 DIAS
+                  %h6= t('lactations.sample_table.resume_title')
             %tr
-              %th{:rowspan => "2"} LEITE KG.
-              %th{:colspan => "2"} GRAXA
-              %th{:colspan => "2"} PROTEINA
-              %th{:rowspan => "2"} PRODUCION VITALICIA
+              %th{:rowspan => "2"}= t('lactations.sample_table.milk_kg')
+              %th{:colspan => "2"}= t('lactations.sample_table.greasy')
+              %th{:colspan => "2"}= t('lactations.sample_table.proteine')
+              %th{:rowspan => "2"}= t('lactations.sample_table.production')
               %th{:rowspan => "2"}
             %tr
-              %th KG.
+              %th= t('lactations.sample_table.kg')
               %th %
-              %th KG.
+              %th= t('lactations.sample_table.kg')
               %th %
             -@cows.each do |c|
               %tr

@@ -1,9 +1,9 @@
 module LactationsHelper
   def get_header_show(cow)
-    return 'Control leiteiro para a vaca '+cow.ring + ' ('+cow.name+')'
+    return t('lactations.show.to_cow')+' '+cow.short_ring.to_s + ' ('+cow.name+')'
   end
 
   def get_month_lactation(month)
-    return 'Datos para o mes de ' + get_name_of_name(month.to_i)
+    return t('lactations.show.for_month')+' '+ get_name_of_name(month.to_i)
   end
 end

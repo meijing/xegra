@@ -9,7 +9,7 @@
               = get_month_lactation(@month)
             
           .span2
-            = link_to 'Engadir mostra', create_new_lactation_path(@cow.id) , class: "btn btn-info"
+            = link_to t('lactations.add_sample'), create_new_lactation_path(@cow.id) , class: "btn btn-info"
         .row
           .span11
             - (1..12).each do |m|
@@ -19,21 +19,21 @@
               %tr
                 %td
                   %th{:colspan=>"8"}
-                    %h6 LACTACION REAL
+                    %h6= t('lactations.sample_table.sample_title')
               %tr
-                %th{:rowspan => "2"} DATA
-                %th{:rowspan => "2"} DURACION DE LACTACION
-                %th{:rowspan => "2"} LEITE KG.
-                %th{:colspan => "2"} GRAXA
-                %th{:colspan => "2"} PROTEINA
-                %th R. CELULAR
+                %th{:rowspan => "2"}= t('lactations.sample_table.data')
+                %th{:rowspan => "2"}= t('lactations.sample_table.lactation_duration')
+                %th{:rowspan => "2"}= t('lactations.sample_table.milk_kg')
+                %th{:colspan => "2"}= t('lactations.sample_table.greasy')
+                %th{:colspan => "2"}= t('lactations.sample_table.proteine')
+                %th= t('lactations.sample_table.cell')
                 %th{:rowspan => "2"}
               %tr
-                %th KG.
+                %th= t('lactations.sample_table.kg')
                 %th %
-                %th KG.
+                %th= t('lactations.sample_table.kg')
                 %th %
-                %th P. LINEAL
+                %th= t('lactations.sample_table.lineal')
               -@lactations.each do |l|
                 %tr
                   %td= l.date.strftime("%d-%m-%Y")
@@ -52,26 +52,26 @@
               %tfoot
                 %tr
                   %td
-                    %h6 P. LINEAL
+                    %h6= t('lactations.sample_table.lineal')
                 %tr
-                  %td 0-4: Valores óptimos
-                  %td >4: Risco de mamite
+                  %td= '0-4: '+ t('lactations.p_lineal.optimous')
+                  %td= '>4: ' + t('lactations.p_lineal.critical')
 
             %table.table.table-bordered.table-striped.table_header
               %tr
                 %td
                   %th{:colspan=>"8"}
-                    %h6 LACTACION 305 DIAS
+                    %h6= t('lactations.sample_table.resume_title')
               %tr
-                %th{:rowspan => "2"} LEITE KG.
-                %th{:colspan => "2"} GRAXA
-                %th{:colspan => "2"} PROTEINA
-                %th{:rowspan => "2"} PRODUCION VITALICIA
+                %th{:rowspan => "2"}= t('lactations.sample_table.milk_kg')
+                %th{:colspan => "2"}= t('lactations.sample_table.greasy')
+                %th{:colspan => "2"}= t('lactations.sample_table.proteine')
+                %th{:rowspan => "2"}= t('lactations.sample_table.production')
                 %th{:rowspan => "2"}
               %tr
-                %th KG.
+                %th= t('lactations.sample_table.kg')
                 %th %
-                %th KG.
+                %th= t('lactations.sample_table.kg')
                 %th %
               %tr
                 = render :partial=>'total_lactations',  locals: {cow:@cow}
