@@ -8,6 +8,8 @@ class Cow < ActiveRecord::Base
   validates :name,:num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
 
+  after_create :set_ring_data
+
   scope :is_active, lambda {
     where('is_active=1')
   }
@@ -72,5 +74,6 @@ class Cow < ActiveRecord::Base
   def set_ring_data
     self.is_active=1
     self.short_ring = self.ring[self.ring.length-4..self.ring.length]
+    self.save
   end
 end

@@ -55,9 +55,7 @@ class KineController < ApplicationController
   # POST /kine
   # POST /kine.json
   def create
-    @cow = Cow.new(params[:cow])
-    @cow.set_ring_data
-    @cow.user_id = current_user.id
+    @cow = current_user.cow.new(params[:cow])
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }

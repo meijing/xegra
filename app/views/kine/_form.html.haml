@@ -2,13 +2,8 @@
   .well
     .form-horizontal
       = form_for(@cow) do |f|
-        = if @cow.errors.any?
-          #error_explanation
-            %h2= t('activerecord.errors.title')
+        = error_messages_for @cow
 
-          %ul
-          - @cow.errors.full_messages.each do |msg|
-            %li= msg
 
         .control-group
           %label.control-label= t('kine.ring') +':'
