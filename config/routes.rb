@@ -11,6 +11,7 @@ Xegra::Application.routes.draw do
   resources :reproduction_simbols
   scope "/:locale", :constraints => {:locale => /es|gl/} do
     delete '/facturation_milks', :to => 'facturation_milks#destroy'
+    match 'reports' =>'reports#index', :as =>'reports'
     match 'kine/is_not_pregnant' =>'kine#set_is_not_pregnant', :as =>'is_not_pregnant'
     match 'kine/is_pregnant' =>'kine#set_is_pregnant', :as =>'is_pregnant'
     match 'kine/notifications' =>'kine#notifications', :as =>'notifications'
