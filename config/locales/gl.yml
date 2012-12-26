@@ -189,3 +189,14 @@ gl:
     hi: ¡Hola!
     sign_out: Saír
     cea: C.E.A.
+
+  reports:
+    title: Listados
+    activated_cow: Vacas activas na granxa
+    pregnant_cow: Vacas preñadas
+    not_pregnant_cow: Vacas non preñadas
+    lactation_cow: Vacas en fase de lactancia
+    not_lactation_cow: Vacas en fase de secado
+    total_facturation_milk: Total de facturación de leite no ano
+    total_lactation_cow: Resumo do control de leite
+    
