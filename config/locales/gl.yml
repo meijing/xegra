@@ -6,6 +6,7 @@ gl:
           attributes:
             email:
               taken: O email xa está rexistrado
+
   views:
     pagination:
       previous: "&lt; Anterior"
@@ -14,6 +15,10 @@ gl:
       first: Primeira
       last: Ultima
   activerecord:
+    attributes:
+      cow:
+        ring: Pendiente
+        #TODO: terminar todos los atributos
     errors:
       title: Atoparonse algunhos erros
       models:
