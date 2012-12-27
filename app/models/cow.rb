@@ -5,13 +5,29 @@ class Cow < ActiveRecord::Base
   
   attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk
   validates :ring, :presence => true, :length => { :is => 14 }
-  validates :name,:num_borns, :presence => true
+  validates :name,:date_born,:num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
 
   after_create :set_ring_data
 
   scope :is_active, lambda {
     where('is_active=1')
+  }
+
+  scope :is_pregnant, lambda {
+    where('is_pregnant = 1')
+  }
+
+  scope :is_not_pregnant, lambda {
+    where('is_pregnant = 0 or is_pregnant is null')
+  }
+
+  scope :is_milk, lambda {
+    where({is_milk: true})
+  }
+
+  scope :is_not_milk, lambda {
+    where({is_milk: false})
   }
 
   def self.get_notification_lactation(current_user)

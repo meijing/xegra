@@ -3,10 +3,6 @@ class LactationsController < ApplicationController
   # GET /lactations.json
   def index
     @cows = current_user.cow.order('short_ring').is_active
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
 
   # GET /lactations/1
@@ -20,10 +16,6 @@ class LactationsController < ApplicationController
 
     @cow = current_user.cow.find(params[:id])
     @lactations = @cow.lactations.for_month @month
-    
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
 
   # GET /lactations/new
@@ -31,9 +23,6 @@ class LactationsController < ApplicationController
   def new
     @lactation = Lactation.new
     @cow_id = params[:cow_id]
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   # GET /lactations/1/edit
@@ -74,10 +63,5 @@ class LactationsController < ApplicationController
   def destroy
     @lactation = Lactation.find(params[:id])
     @lactation.destroy
-
-    respond_to do |format|
-      format.html { redirect_to lactation_path(@lactation.cow_id) }
-      format.json { head :no_content }
-    end
   end
 end

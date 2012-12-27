@@ -4,7 +4,29 @@
  *= require_tree .
  */
 
-  .field_with_errors input {
+.field_with_errors input {
     border: 1px solid red;
-  }
+}
 
+.error_explanation ul li{
+    color: #9f0e0e;
+}
+
+.table{
+    border:2px solid #92a5cb;
+}
+
+.table th{
+    background-color: #C4CDE0;
+    border:2px solid #92a5cb;
+    text-align: center;
+}
+
+.cell_reports tr td{
+    border:1px solid #92a5cb;
+    text-align: center;
+}
+
+.table tr td{
+    text-align: center;
+}

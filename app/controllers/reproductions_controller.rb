@@ -11,32 +11,19 @@ class ReproductionsController < ApplicationController
     end
 
     @cows = current_user.cow.order('short_ring').is_active
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @reproductions }
-    end
+    #@reproductions = @cows.map {|cow| cow.reproductions.for_year}
   end
 
   # GET /reproductions/1
   # GET /reproductions/1.json
   def show
     @reproduction = current_user.reproduction.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @reproduction }
-    end
   end
 
   # GET /reproductions/new
   # GET /reproductions/new.json
   def new
     @reproductions = current_user.reproduction.find_by_cow_id(params[:id])
-
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   # GET /reproductions/1/edit

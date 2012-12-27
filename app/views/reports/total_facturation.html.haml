@@ -1,0 +1,27 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span7
+            %h2= t('reports.title')
+
+        .row
+          .span11
+            = link_to t('reports.back'), reports_path, class: "btn btn-info"
+        .row
+          .span11
+            %table.table.cell_reports
+              %tr
+                - (1..12).each do |m|
+                  %th= get_name_of_name(m.to_i)
+              %tr
+                - (1..12).each do |m|
+                  %td= @cont_liters[m.to_i-1]
+        .row
+          .span2
+            %table.table.cell_reports
+              %tr
+                %th= t('reports.total_anual_facturation')
+              %tr
+                %td= @cont_liters[12]

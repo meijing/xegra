@@ -1,0 +1,15 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span7
+            %h2= t('reports.title')
+
+        .row
+          .span11
+            = link_to t('reports.back'), reports_path, class: "btn btn-info"
+        .row
+          .span11
+            = table_for @cows, "cell_reports", :short_ring, :name
+        

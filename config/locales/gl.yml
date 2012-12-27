@@ -18,22 +18,25 @@ gl:
     attributes:
       cow:
         ring: Pendiente
-        #TODO: terminar todos los atributos
+        name: Nome
+        num_borns: Número de partos
+        date_born: Data de nacemento
+        short_ring: Pendiente
     errors:
       title: Atoparonse algunhos erros
       models:
         cow:
           attributes:
             ring:
-              blank: Ten que indicar o número do pendiente
-              taken: Xa existe unha vaca con ese pendiente
-              wrong_length: O pendiente debe de ter 14 números
+              blank: "- Non pode quedar en branco"
+              taken: "- Xa existe unha vaca con ese pendiente"
+              wrong_length: "- Debe ter 14 números"
             date_born:
-              blank: Indique a data de nacemento
+              blank: "- Non pode quedar en branco"
             num_borns:
-              blank: Indique o número de partos
+              blank: "- Non pode quedar en branco"
             name:
-              blank: Especifique o nome da vaca
+              blank: "- Non pode quedar en branco"
 
         lactation:
           attributes:
@@ -204,4 +207,6 @@ gl:
     not_lactation_cow: Vacas en fase de secado
     total_facturation_milk: Total de facturación de leite no ano
     total_lactation_cow: Resumo do control de leite
+    back: Volver ós listados
+    total_anual_facturation: Facturado no ano
     

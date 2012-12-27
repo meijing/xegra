@@ -3,33 +3,18 @@ class ReproductionSimbolsController < ApplicationController
   # GET /reproduction_simbols.json
   def index
     @reproduction_simbols = ReproductionSimbol.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @reproduction_simbols }
-    end
   end
 
   # GET /reproduction_simbols/1
   # GET /reproduction_simbols/1.json
   def show
     @reproduction_simbol = ReproductionSimbol.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @reproduction_simbol }
-    end
   end
 
   # GET /reproduction_simbols/new
   # GET /reproduction_simbols/new.json
   def new
     @reproduction_simbol = ReproductionSimbol.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @reproduction_simbol }
-    end
   end
 
   # GET /reproduction_simbols/1/edit
@@ -74,10 +59,5 @@ class ReproductionSimbolsController < ApplicationController
   def destroy
     @reproduction_simbol = ReproductionSimbol.find(params[:id])
     @reproduction_simbol.destroy
-
-    respond_to do |format|
-      format.html { redirect_to reproduction_simbols_url }
-      format.json { head :no_content }
-    end
   end
 end

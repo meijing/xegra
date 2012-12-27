@@ -5,10 +5,6 @@ class KineController < ApplicationController
     @kine = current_user.cow.order('short_ring').is_active.page(params[:page]).per(15)
     @notification_lactation = Cow.get_notification_lactation(current_user)
     @notification_parturition = Cow.get_notification_parturition(current_user)
-    
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
   
   # GET /kine/1
@@ -31,19 +27,12 @@ class KineController < ApplicationController
         @last_insemination = []
       end
     end
-    respond_to do |format|
-      format.html # show.html.erb
-    end
   end
 
   # GET /kine/new
   # GET /kine/new.json
   def new
     @cow = Cow.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-    end
   end
 
   # GET /kine/1/edit
@@ -90,11 +79,6 @@ class KineController < ApplicationController
     @cow.is_active = 0
     #@cow.date_down = Time.new
     @cow.save
-
-    respond_to do |format|
-      format.html { redirect_to kine_url }
-      format.json { head :no_content }
-    end
   end
 
   def notifications
