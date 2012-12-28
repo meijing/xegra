@@ -22,6 +22,7 @@ gl:
         num_borns: Número de partos
         date_born: Data de nacemento
         short_ring: Pendiente
+        is_pregnant: ¿Está preñada?
     errors:
       title: Atoparonse algunhos erros
       models:
@@ -100,7 +101,7 @@ gl:
       set_modify_data_cow: Modifica os datos para a vaca
 
   reproductions:
-    title: Carta de reprodución
+    title: Carta de reprodución 
     no_simbol: Ningún
     table_index:
       cow: Vaca
@@ -207,5 +208,6 @@ gl:
     not_lactation_cow: Vacas en fase de secado
     total_facturation_milk: Total de facturación de leite no ano
     total_lactation_cow: Resumo do control de leite
+    cow_without_born: Novillas
     back: Volver ós listados
     total_anual_facturation: Facturado no ano

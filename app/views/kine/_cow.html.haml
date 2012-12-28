@@ -1,4 +1,11 @@
 = content_tag_for  :tr, cow do
   %td= cow.short_ring
   %td= cow.name
+  %td= cow.date_born.strftime('%d/%m/%Y')
+  - if cow.is_pregnant == 1
+    %td
+      = 'Sí. Data:'
+      = cow.get_date_last_insemination(current_user).strftime('%d/%m/%Y')
+  - else
+    %td No
   

@@ -30,20 +30,24 @@ class Cow < ActiveRecord::Base
     where({is_milk: false})
   }
 
+  scope :without_born, lambda {
+    where('num_borns = 0')
+  }
+
   def self.get_notification_lactation(current_user)
     @notifications = []
-
+    
     @start_date = DateTime.now - 7.months - 1.day
     @end_date = DateTime.now.advance(:days => 5) - 7.months + 1.day
 
     @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
-    
+
     @reproductions.each do |r|
-      if r.cow.is_milk
+      if r.cow.is_milk && r.cow.is_pregnant == 1 && r.cow.is_active == 1
         @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
       end
     end
-
+    
     return @notifications
   end
 
@@ -56,13 +60,19 @@ class Cow < ActiveRecord::Base
     @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
 
     @reproductions.each do |r|
-      @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
+      if r.cow.is_pregnant == 1 && r.cow.is_active == 1
+        @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
+      end
     end
     return @notifications
   end
 
   def get_last_insemination(current_user)
     return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
+  end
+
+  def get_date_last_insemination(current_user)
+    return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)').first.date
   end
 
   def get_last_parturitiun(last_insemination, current_user)

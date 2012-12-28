@@ -19,6 +19,7 @@ Xegra::Application.routes.draw do
         get "is_milk_cow"
         get "is_not_milk_cow"
         get "total_facturation"
+        get "cow_without_born"
       end
     end
     match 'kine/is_not_pregnant' =>'kine#set_is_not_pregnant', :as =>'is_not_pregnant'
