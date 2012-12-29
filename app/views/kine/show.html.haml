@@ -31,12 +31,20 @@
                     = @cow.father
 
                 %p
-                  - if @cow.is_milk?
+                  - if @cow.get_has_not_borns
                     .alert.alert-success
-                      =t('kine.show.is_milk')
-                  - else
+                      =t('kine.show.has_not_borns')
+                  -else
+                    - if @cow.is_milk?
+                      .alert.alert-success
+                        =t('kine.show.is_milk')
+                    - else
+                      .alert.alert-error
+                        =t('kine.show.is_not_milk')
+                %p
+                  - if @cow.get_has_failed_insemination(@current_user)
                     .alert.alert-error
-                      =t('kine.show.is_not_milk')
+                      =t('kine.show.stoped_cow')
 
                 %p
                   - if @last_insemination != [] and !@exists_born.nil? and @exists_born ==[]

@@ -44,7 +44,7 @@ class Cow < ActiveRecord::Base
 
     @reproductions.each do |r|
       if r.cow.is_milk && r.cow.is_pregnant == 1 && r.cow.is_active == 1
-        @notifications << r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")
+        @notifications << [r.cow.id, r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")]
       end
     end
     
@@ -68,7 +68,6 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_insemination(current_user)
-    p 'entra ge lats'
     return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
   end
 
@@ -77,7 +76,6 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_parturitiun(last_insemination, current_user)
-    p ' entra partu'
     return current_user.reproduction.order('date desc').find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
   end
 
@@ -87,6 +85,10 @@ class Cow < ActiveRecord::Base
 
   def set_last_failed_insemination(date)
     self.update_column('last_failed_insemination',date)
+  end
+
+  def set_is_milk(milk)
+    self.update_column('is_milk',milk)
   end
 
   def increment_num_borns
@@ -103,5 +105,20 @@ class Cow < ActiveRecord::Base
     self.is_active=1
     self.short_ring = self.ring[self.ring.length-4..self.ring.length]
     self.save
+  end
+
+  def get_has_failed_insemination(current_user)
+    @last_inse = self.get_last_insemination(current_user).first
+    if !@last_inse.nil? && !self.last_failed_insemination.nil? && @last_inse.date.to_date == self.last_failed_insemination.to_date
+      return true
+    end
+    return false
+  end
+
+  def get_has_not_borns
+    if self.num_borns.nil? || self.num_borns == 0
+      return true
+    end
+    return false
   end
 end

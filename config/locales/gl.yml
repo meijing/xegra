@@ -69,6 +69,7 @@ gl:
     not_lactation: Avisos de secado
     not_parturition: Avisos de parto
     cow: Vaca
+    set_is_not_milk: Marcar a vaca como seca
 
   kine:
     up_cow: Alta dunha vaca
@@ -91,6 +92,8 @@ gl:
       cow_is_pregnant_months: meses
       previous_month_lactation: A data prevista para secala é
       previous_month_parturition: A data prevista para o parto é
+      stoped_cow: A vaca esta parada
+      has_not_borns: É novilla
       btn_reproduction: Reprodución
       btn_lactation: Control leiteiro
       btn_down_cow: Dar de baixa

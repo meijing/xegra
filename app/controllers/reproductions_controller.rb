@@ -47,6 +47,7 @@ class ReproductionsController < ApplicationController
       @new_reproduction.reproduction_simbol_id = @simbol.id
       if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
         if @simbolId[0] == '♀' || @simbolId[0] == '♂'
+          @cow.set_is_milk(true)
           @new_reproduction.cow.increment_num_borns
         end
         @new_reproduction.bull = params[:reproduction][:bull]

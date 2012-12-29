@@ -27,6 +27,7 @@ class KineController < ApplicationController
         @last_insemination = []
       end
     end
+    @current_user = current_user
   end
 
   # GET /kine/new
@@ -99,6 +100,12 @@ class KineController < ApplicationController
     @last_insemination = @cow.get_last_insemination(current_user)
     @cow.set_last_failed_insemination(@last_insemination[0].date)
     redirect_to cow_path(:id=>@cow.id)
+  end
+
+  def notifications_is_not_milk
+    @cow = Cow.find(params[:cow_id])
+    @cow.set_is_milk(false)
+    redirect_to notifications_path 
   end
 end
 
