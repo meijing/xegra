@@ -206,12 +206,15 @@ gl:
   reports:
     title: Listados
     activated_cow: Vacas activas na granxa
-    pregnant_cow: Vacas preñadas
-    not_pregnant_cow: Vacas non preñadas
-    lactation_cow: Vacas en fase de lactancia
-    not_lactation_cow: Vacas en fase de secado
+    pregnant_cow: Vacas preñadas (Non están incluidas as novillas)
+    not_pregnant_cow: Vacas non preñadas (Non están incluidas as novillas)
+    lactation_cow: Vacas en fase de lactancia (Non están incluidas as novillas)
+    not_lactation_cow: Vacas en fase de secado (Non están incluidas as novillas)
     total_facturation_milk: Total de facturación de leite no ano
     total_lactation_cow: Resumo do control de leite
     cow_without_born: Novillas
     back: Volver ós listados
     total_anual_facturation: Facturado no ano
+    is_pregnant: Sí. Data
+    is_not_pregnant: No.
+    is_stopped: Está parada

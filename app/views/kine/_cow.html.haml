@@ -4,8 +4,11 @@
   %td= cow.date_born.strftime('%d/%m/%Y')
   - if cow.is_pregnant == 1
     %td
-      = 'Sí. Data:'
+      = t('reports.is_pregnant')+':'
       = cow.get_date_last_insemination(current_user).strftime('%d/%m/%Y')
   - else
-    %td No
+    %td 
+      = t('reports.is_not_pregnant')
+      - if cow.get_has_failed_insemination(current_user)
+        = ' '+t('reports.is_stopped')
   

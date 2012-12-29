@@ -34,6 +34,10 @@ class Cow < ActiveRecord::Base
     where('num_borns = 0')
   }
 
+  scope :with_born, lambda {
+    where('num_borns > 0')
+  }
+
   def self.get_notification_lactation(current_user)
     @notifications = []
     
@@ -72,7 +76,10 @@ class Cow < ActiveRecord::Base
   end
 
   def get_date_last_insemination(current_user)
-    return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)').first.date
+    @last = current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
+    if !@last.nil?
+      return @last.first.date
+    end
   end
 
   def get_last_parturitiun(last_insemination, current_user)

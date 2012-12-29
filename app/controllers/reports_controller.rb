@@ -12,25 +12,25 @@ class ReportsController < ApplicationController
   end
 
   def pregnant_cow
-    @cows = current_user.cow.order('short_ring').is_active.is_pregnant
+    @cows = current_user.cow.order('short_ring').is_active.is_pregnant.with_born
     @title = t('reports.pregnant_cow')
     render 'report_cow'
   end
 
   def not_pregnant_cow
-    @cows = current_user.cow.order('short_ring').is_active.is_not_pregnant
+    @cows = current_user.cow.order('short_ring').is_active.is_not_pregnant.with_born
     @title = t('reports.not_pregnant_cow')
     render 'report_cow'
   end
 
   def is_milk_cow
-    @cows = current_user.cow.order('short_ring').is_active.is_milk
+    @cows = current_user.cow.order('short_ring').is_active.is_milk.with_born
     @title = t('reports.lactation_cow')
     render 'report_cow'
   end
 
   def is_not_milk_cow
-    @cows = current_user.cow.order('short_ring').is_active.is_not_milk
+    @cows = current_user.cow.order('short_ring').is_active.is_not_milk.with_born
     @title = t('reports.not_lactation_cow')
     render 'report_cow'
   end
