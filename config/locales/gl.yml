@@ -127,6 +127,7 @@ gl:
       comment: Comentario
       bull: Touro
       data: Data
+      month: Mes
     btn_acept: Aceptar
     btn_delete: Borrar
 

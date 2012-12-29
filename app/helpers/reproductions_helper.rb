@@ -1,24 +1,30 @@
 # encoding: utf-8
 module ReproductionsHelper
   def get_simbol_reproduction(reproductions, cow_id)
-    info_repro = Array.new(12, Hash.new)
+    @info_repro = Array.new(12, [])
     reproductions.each do |r|
       if (r.cow_id == cow_id)
+        @content = ""
         if (r.reproduction_simbol_id.nil?)
-          info_repro[r.month-1] = "".concat(r.comment)
+          @content = @content.concat(r.comment)
         else
-          info_repro[r.month-1] = ReproductionSimbol.find_by_id(r.reproduction_simbol_id).simbol.concat(" "+r.comment)+'<br/>'
+          @content = @content + ReproductionSimbol.find_by_id(r.reproduction_simbol_id).simbol.concat(" "+r.comment)+'<br/>'
           if (!r.bull.nil?)
-            info_repro[r.month-1] = info_repro[r.month-1] + '<br/>'+r.bull
+            @content = @content +'<br/>'+r.bull
           end
           if (!r.date.nil?)
-            info_repro[r.month-1] = info_repro[r.month-1] + '<br/>'+ r.date.strftime('%d/%m/%Y')
+            @content = @content + '<br/>'+ r.date.strftime('%d/%m/%Y')
           end
         end
-        info_repro[r.month-1] = info_repro[r.month-1].html_safe
+
+        if @info_repro[r.month-1] == []
+          @info_repro[r.month-1] = [@content.html_safe]
+        else
+          @info_repro[r.month-1] << @content.html_safe
+        end
       end
     end
-    return info_repro
+    return @info_repro
   end
 
   def get_text_simbol_reproduction(reproduction)
@@ -37,6 +43,14 @@ module ReproductionsHelper
     @title += ' '+cow.short_ring.to_s + '('
     @title += cow.name + ')'
     return @title
+  end
+
+  def get_array_months
+    @month_names = []
+    (1..12).each do |m|
+      @month_names << [get_name_of_name(m.to_i),m.to_i]
+    end
+    return @month_names
   end
 
 end

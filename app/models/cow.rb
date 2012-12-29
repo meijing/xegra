@@ -68,6 +68,7 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_insemination(current_user)
+    p 'entra ge lats'
     return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
   end
 
@@ -76,6 +77,7 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_parturitiun(last_insemination, current_user)
+    p ' entra partu'
     return current_user.reproduction.order('date desc').find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
   end
 

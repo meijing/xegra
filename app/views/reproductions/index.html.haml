@@ -22,7 +22,6 @@
                 %th= t('reproductions.table_index.october')
                 %th= t('reproductions.table_index.november')
                 %th= t('reproductions.table_index.december')
-                %th
                 
                 - @cows.each do |cow|
                   %tr
@@ -32,6 +31,6 @@
                     - if !repro.nil?
                       - repro.each do |r|
                         %td
-                          - if r != {}
-                            = r
+                          - r.each do |f|
+                            = f
                     

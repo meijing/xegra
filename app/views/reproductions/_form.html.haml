@@ -18,36 +18,43 @@
             %th= t('reproductions.table_index.december')
 
             %tr
-              - @info_repro.each do |r|
-                - if (r.reproduction_simbol_id.nil? and r.comment.nil?) or (r.reproduction_simbol_id.nil? and r.comment=='')
-                  %td= link_to t('reproductions.update.add'), proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'label label-success'
-                - else
-                  %td
-                    = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
-                    = r.bull
-                    - if !r.date.nil?
-                      = ('<br/>'+r.date.strftime('%d/%m/%Y')).html_safe
+              - @info_repro.each do |repro|
+                %td
+                  - repro.each do |r|
+                    - if (r.reproduction_simbol_id.nil? and r.comment.nil?) or (r.reproduction_simbol_id.nil? and r.comment=='')
+                      = ''
+                      - 'Esto e pa quitar'
+                      - link_to t('reproductions.update.add'), proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'label label-success'
+                    - else
+                      = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
+                      = r.bull
+                      - if !r.date.nil?
+                        = ('<br/>'+r.date.strftime('%d/%m/%Y')).html_safe
 
   .row
     =form_for @reproduction do |f|
       .span5
         .form-horizontal
           .control-group
-            %h4= t('reproductions.update.data_for_month')+' ' + get_name_of_name(@reproduction.month)
+            - t('reproductions.update.data_for_month')+' ' + get_name_of_name(@reproduction.month)
+          .control-group
+            %label.control-label= t('reproductions.update.month')+':'
+            .controls
+              = f.select :month, get_array_months
+
           .control-group
             %label.control-label= t('reproductions.update.simbol')+':'
             .controls
               = f.select :reproduction_simbol, options_for_select(get_array_simbols, @repro_selected)
-
           .control-group
             %label.control-label= t('reproductions.update.comment')+':'
             .controls
-              = text_field :reproduction, :comment, :value=>@comment, :disabled=>@is_add_enabled
+              = text_field :reproduction, :comment, :value=>@comment
 
       .span5
         .form-horizontal
           .control-group
-            %h4= t('reproductions.update.data_for_insemination')
+            - t('reproductions.update.data_for_insemination')
           .control-group
             %label.control-label= t('reproductions.update.bull')+':'
             .controls
@@ -58,11 +65,11 @@
             .controls
               #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
                 - if !@date.nil?
-                  = text_field :reproduction, :date, :value=>@date.strftime('%d/%m/%Y'),:size => "16",:disabled=>@is_add_enabled
+                  = text_field :reproduction, :date, :value=>@date.strftime('%d/%m/%Y'),:size => "16"
                   %span.add-on
                     %i.icon-th
                 - else
-                  = text_field :reproduction, :date, :value=>@date,:size => "16",:disabled=>@is_add_enabled
+                  = text_field :reproduction, :date, :value=>@date,:size => "16"
                   %span.add-on
                     %i.icon-th
 
@@ -74,5 +81,5 @@
       .span11
         .form-horizontal
           .form-actions
-            %button.btn.btn-primary{:type => "submit",:disabled=>@is_add_enabled}= t('reproductions.btn_acept')
-            =link_to t('reproductions.btn_delete'), @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger', :disabled=>@is_add_enabled
+            %button.btn.btn-primary{:type => "submit"}= t('reproductions.btn_acept')
+            =link_to t('reproductions.btn_delete'), @reproduction, method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }, :class =>'btn btn-danger'
