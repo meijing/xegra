@@ -4,6 +4,10 @@ class Reproduction < ActiveRecord::Base
   belongs_to :user
   attr_accessible :comment, :month, :year
 
+  scope :actual_year, lambda {
+    where('year = '+DateTime.now.year.to_s)
+  }
+
   def check_is_pregnant(current_user)
     p '------------------------'
     p ' entra is preg'

@@ -25,6 +25,16 @@
                   =t('kine.num_borns') +':'
                   = @cow.num_borns
 
+                
+                - if !@cow.mother.nil?
+                  %p
+                    =t('kine.mother') +':'
+                    = @cow.mother.name.concat(' (').concat(@cow.mother.short_ring.to_s).concat(')')
+                - elsif !@cow.ring_mother.nil? && @cow.ring_mother != ''
+                  %p
+                    =t('kine.mother') +':'
+                    = @cow.ring_mother
+
                 - if @cow.father != ''
                   %p
                     =t('kine.father') +':'

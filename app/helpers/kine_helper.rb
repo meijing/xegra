@@ -8,4 +8,13 @@ module KineHelper
       }.join(" ").html_safe
     end
   end
+
+  def get_ring_name_cows
+    @names = []
+    @names << ['',-1]
+    current_user.cow.is_active.with_born.each do |cow|
+      @names << [cow.name + ' ('+cow.short_ring.to_s+')', cow.id]
+    end
+    return @names
+  end
 end

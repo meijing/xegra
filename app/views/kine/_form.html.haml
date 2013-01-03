@@ -34,6 +34,14 @@
             = f.text_field :father
 
         .control-group
+          %label.control-label=t('kine.mother') +':'
+          .controls
+            = f.select :mother_in_farm, get_ring_name_cows
+            %br
+            = t('kine.new.mother_in_farm_load')
+            = f.text_field :ring_mother
+
+        .control-group
           %label.control-label=t('kine.ask_is_milk') +':'
           .controls
             = f.check_box :is_milk

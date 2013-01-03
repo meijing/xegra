@@ -46,6 +46,7 @@ class KineController < ApplicationController
   # POST /kine.json
   def create
     @cow = current_user.cow.new(params[:cow])
+    @cow.set_mother(params[:cow][:mother_in_farm],params[:cow][:ring_mother])
     respond_to do |format|
       if @cow.save
         format.html { redirect_to @cow, notice: 'Cow was successfully created.' }
@@ -62,6 +63,8 @@ class KineController < ApplicationController
   def update
     @cow = Cow.find(params[:id])
     @cow.short_ring = @cow.ring[@cow.ring.length-4..@cow.ring.length]
+    @cow.set_mother(params[:cow][:mother_in_farm],params[:cow][:ring_mother])
+    params[:cow][:ring_mother] = @cow.ring_mother
     respond_to do |format|
       if @cow.update_attributes(params[:cow])
         format.html { redirect_to @cow, notice: 'Cow was successfully updated.' }

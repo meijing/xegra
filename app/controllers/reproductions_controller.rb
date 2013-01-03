@@ -3,8 +3,7 @@ class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
   def index
-    @reproductions = current_user.reproduction.find_by_sql('select * from reproductions
-      where year ='+Time.new.year.to_s+' order by cow_id, month')
+    @reproductions = current_user.reproduction.actual_year.order('month')
 
     if @reproductions.nil?
       @reproductions = []
@@ -38,22 +37,25 @@ class ReproductionsController < ApplicationController
     @new_reproduction.cow_id = params[:reproduction][:cow_id]
     @new_reproduction.month = params[:reproduction][:month]
     @new_reproduction.comment = params[:reproduction][:comment]
-    @new_reproduction.year = DateTime.now.year
+    
     @new_reproduction.user_id = current_user.id
     @simbolId = params[:reproduction][:reproduction_simbol].split(' ')
+    if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
+      @new_reproduction.date = params[:reproduction][:date]
+      @new_reproduction.year = @new_reproduction.date.year
+    else
+      @new_reproduction.year = DateTime.now.year
+    end
 
     if (@simbolId[0] != t('reproductions.no_simbol'))
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @new_reproduction.reproduction_simbol_id = @simbol.id
       if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
         if @simbolId[0] == '♀' || @simbolId[0] == '♂'
-          @cow.set_is_milk(true)
+          @new_reproduction.cow.set_is_milk(true)
           @new_reproduction.cow.increment_num_borns
         end
         @new_reproduction.bull = params[:reproduction][:bull]
-      end
-      if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
-        @new_reproduction.date = params[:reproduction][:date]
       end
     end
     @new_reproduction.save
@@ -110,7 +112,7 @@ class ReproductionsController < ApplicationController
     @cow = current_user.cow.find_by_id(params[:id])
 
     @info_repro = Array.new(12, [])
-    @reproductions = current_user.reproduction.find_by_sql('select * from reproductions where cow_id = '+params[:id]+' order by month')
+    @reproductions = current_user.reproduction.actual_year.order('month').where('cow_id = '+params[:id])
     @reproductions.each do |r|
       if @info_repro[r.month-1] == []
         @info_repro[r.month-1] = [r]

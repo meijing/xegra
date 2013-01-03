@@ -79,6 +79,7 @@ gl:
     data_born: Data de nacemento
     num_borns: Número de partos
     father: Pai
+    mother: Nai
     ask_is_milk: ¿Está en fase de lactancia?
     btn_acept: Aceptar
     show:
@@ -100,6 +101,7 @@ gl:
       btn_update_cow: Modificar datos
     new:
       set_data_new_cow: Introduce os datos para a nova vaca
+      mother_in_farm_load: Se a vaca non está na lista anterior escribe o seu nome no cadro de abaixo
     update:
       set_modify_data_cow: Modifica os datos para a vaca
 

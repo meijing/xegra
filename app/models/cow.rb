@@ -2,8 +2,10 @@ class Cow < ActiveRecord::Base
   has_many :lactations
   has_many :reproductions
   belongs_to :user
+  belongs_to :mother, :class_name => 'Cow', :foreign_key => 'mother_in_farm'
+  has_many :children, :class_name => 'Cow', :foreign_key => 'mother_in_farm'
   
-  attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk
+  attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk, :ring_mother, :mother_in_farm
   validates :ring, :presence => true, :length => { :is => 14 }
   validates :name,:date_born,:num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
@@ -128,4 +130,15 @@ class Cow < ActiveRecord::Base
     end
     return false
   end
+
+  def set_mother(mother_farm, mother_text)
+    if !mother_farm.nil? && mother_farm != '-1'
+      self.mother_in_farm = mother_farm
+      self.ring_mother = ''
+    elsif !mother_text.nil?
+      self.ring_mother = mother_text
+      self.mother_in_farm = nil
+    end
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222174544) do
+ActiveRecord::Schema.define(:version => 20130102222209) do
 
   create_table "facturation_milks", :force => true do |t|
     t.date     "date"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20121222174544) do
     t.integer  "is_pregnant"
     t.date     "last_failed_insemination"
     t.integer  "user_id"
+    t.string   "ring_mother"
+    t.integer  "mother_in_farm"
   end
 
   create_table "lactations", :force => true do |t|

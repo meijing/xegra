@@ -1,6 +1,8 @@
 #= require jquery
 #= require jquery_ujs
 #= require_tree .
+#= require bootstrap
+
 $ ->
  $('#reproduction_reproduction_simbol').change () ->
    if ($('#reproduction_reproduction_simbol').val() == '▲ Inseminación')
