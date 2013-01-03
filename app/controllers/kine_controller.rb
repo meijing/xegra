@@ -81,8 +81,9 @@ class KineController < ApplicationController
   def destroy
     @cow = Cow.find(params[:id])
     @cow.is_active = 0
-    #@cow.date_down = Time.new
+    @cow.save_mother_when_down
     @cow.save
+    redirect_to kine_path
   end
 
   def notifications

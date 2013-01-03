@@ -141,4 +141,11 @@ class Cow < ActiveRecord::Base
     end
   end
 
+  def save_mother_when_down
+    @name = self.name.concat(' (').concat(self.short_ring.to_s).concat(')')
+    self.children.each do |c|
+      c.update_column('ring_mother', @name)
+    end
+  end
+
 end
