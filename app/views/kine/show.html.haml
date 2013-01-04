@@ -52,7 +52,7 @@
                       .alert.alert-error
                         =t('kine.show.is_not_milk')
                 %p
-                  - if @cow.get_has_failed_insemination(@current_user)
+                  - if @cow.get_has_failed_insemination(@current_user) && @cow.num_borns >0
                     .alert.alert-error
                       =t('kine.show.stoped_cow')
 
@@ -72,7 +72,9 @@
                         %p
                           = t('kine.show.previous_month_lactation')+' '+@previous_lactation.strftime("%d/%m/%Y") 
                         %p
-                          = t('kine.show.previous_month_parturition')+' '+ @previous_parturition.strftime("%d/%m/%Y") 
+                          = t('kine.show.previous_month_parturition')+' '+ @previous_parturition.strftime("%d/%m/%Y")
+                        %p
+                          = link_to t('kine.show.btn_is_not_pregnant'), remove_pregnant_path(@cow.id), class: "label label-important",:confirm => '¿Confirmas que a vaca non está preñada?'
 
             .span3
               .well

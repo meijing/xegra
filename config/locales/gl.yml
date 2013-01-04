@@ -99,6 +99,7 @@ gl:
       btn_lactation: Control leiteiro
       btn_down_cow: Dar de baixa
       btn_update_cow: Modificar datos
+      btn_is_not_pregnant: Eliminar. A vaca non está preñada
     new:
       set_data_new_cow: Introduce os datos para a nova vaca
       mother_in_farm_load: Se a vaca non está na lista anterior escribe o seu nome no cadro de abaixo

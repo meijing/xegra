@@ -49,7 +49,7 @@ class Cow < ActiveRecord::Base
     @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
 
     @reproductions.each do |r|
-      if r.cow.is_milk && r.cow.is_pregnant == 1 && r.cow.is_active == 1
+      if r.cow.is_milk && r.cow.is_pregnant == 1 && r.cow.is_active == 1 && r.cow.num_borns>0
         @notifications << [r.cow.id, r.cow.short_ring.to_s+' ('+r.cow.name+') - '+r.date.strftime("%d/%m/%Y")]
       end
     end

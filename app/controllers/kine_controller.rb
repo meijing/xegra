@@ -18,7 +18,8 @@ class KineController < ApplicationController
     if @last_insemination != []
       @exists_born = @cow.get_last_parturitiun(@last_insemination[0],current_user)
    
-      @num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
+      #@num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
+      @num_months_pregnant = month_difference(DateTime.now, @last_insemination[0].date)
    
       if @num_months_pregnant<=9
         @previous_lactation = @last_insemination[0].date.advance(:months=>7)
@@ -110,6 +111,28 @@ class KineController < ApplicationController
     @cow = Cow.find(params[:cow_id])
     @cow.set_is_milk(false)
     redirect_to notifications_path 
+  end
+
+  def remove_is_pregnant
+    @cow = Cow.find(params[:cow_id])
+    @cow.set_is_pregnant(0)
+    @cow.decrement_num_borns
+    @cow.save
+    redirect_to @cow
+  end
+
+  private
+
+  def month_difference(a, b)
+    @difference = 0
+    if a.year != b.year
+      @difference += 12 * (b.year - a.year)
+    end
+    @difference = @difference + b.month - a.month
+    if @difference < 0
+      @difference = @difference * (-1)
+    end
+    return @difference
   end
 end
 
