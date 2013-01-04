@@ -37,6 +37,8 @@ Xegra::Application.routes.draw do
     
     root :to => 'kine#index'
 
+    get "links" => "application#links", :as => "links"
+
   end
 
   root :to => 'kine#index'

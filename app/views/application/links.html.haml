@@ -1,0 +1,18 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span7
+            %h2= t('menu.links')
+
+        .row
+          .span3
+            = image_tag "ligal.jpg"
+          .span3
+            = image_tag "ligal.jpg"
+        .row
+          .span3
+            %span= link_to t("links.ligal"), "http://www.ligal.es" , class: "label label-info", target: :_blank
+          .span3
+            %span= link_to t("links.ovi"), "http://www.ligal.es" , class: "label label-info", target: :_blank

@@ -63,6 +63,7 @@ gl:
     facturation_milk: Facturación do leite
     reports: Listados
     account: A miña conta
+    links: Ligazóns
     
   notifications:
     title: AVISOS
@@ -221,3 +222,7 @@ gl:
     is_pregnant: Sí. Data
     is_not_pregnant: No.
     is_stopped: Está parada
+
+  links:
+    ligal: Visita a páxina do Ligal
+    ovi: Acceder á Oficina agraria virtual
