@@ -46,7 +46,8 @@ class Cow < ActiveRecord::Base
     @start_date = DateTime.now - 7.months - 1.day
     @end_date = DateTime.now.advance(:days => 5) - 7.months + 1.day
 
-    @reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
+    #@reproductions = current_user.reproduction.find(:all, :conditions=>["date between ? and ? ",@start_date.to_date,@end_date.to_date])
+    @reproductions = current_user.reproduction.joins('join reproductions r on r.cow_id = reproductions.cow_id').find(:all, :conditions=>["reproductions.date between ? and ? and reproductions.date = (select max(re.date) from reproductions re where re.cow_id = reproductions.cow_id and re.reproduction_simbol_id = 6)",@start_date.to_date,@end_date.to_date])
 
     @reproductions.each do |r|
       if r.cow.is_milk && r.cow.is_pregnant == 1 && r.cow.is_active == 1 && r.cow.num_borns>0

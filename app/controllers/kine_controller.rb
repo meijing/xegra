@@ -12,12 +12,12 @@ class KineController < ApplicationController
   def show
     @cow = Cow.find(params[:id])
     @reproductions = @cow.reproductions
-p '-----------------------'
+
     @last_insemination = @cow.get_last_insemination(current_user)
 
     if @last_insemination != []
       @exists_born = @cow.get_last_parturitiun(@last_insemination[0],current_user)
-p @exists_born
+
       #@num_months_pregnant = DateTime.now.month - @last_insemination[0].date.month
       @num_months_pregnant = month_difference(DateTime.now, @last_insemination[0].date)
    
