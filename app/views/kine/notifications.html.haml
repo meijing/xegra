@@ -6,22 +6,24 @@
           .span7
             %h2= t('notifications.title')
 
-        .row
-          .span11
-            .well
-              %h4= t('notifications.not_lactation')
-              - if !@notification_lactation.nil? and @notification_lactation != []
+        - if !@notification_lactation.nil? and @notification_lactation != []
+          .row
+            .span11
+              .well
+                %h4= t('notifications.not_lactation')
+
                 %ul
                   - @notification_lactation.each do |n|
                     %li
                       = t('notifications.cow')+': '+n[1]
                       = link_to t('notifications.set_is_not_milk'), set_is_not_milk_path(:cow_id =>n[0]) , class: "label label-success"
-        .row
-          .span11
-            .well
-              %h4= t('notifications.not_parturition')
-              - if !@notification_parturition.nil? and @notification_parturition != []
+        - if !@notification_parturition.nil? and @notification_parturition != []
+          .row
+            .span11
+              .well
+                %h4= t('notifications.not_parturition')
+                %span= t('notifications.parturition_end')
                 %ul
-                  - @notification_parturition.each do |n|
-                    %li
-                      = t('notifications.cow')+': '+n
+                - @notification_parturition.each do |n|
+                  %li
+                    = t('notifications.cow')+': '+n
