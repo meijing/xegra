@@ -111,6 +111,8 @@ gl:
   reproductions:
     title: Carta de reprodución 
     no_simbol: Ningún
+    dist_born: Parto distódico
+    abortion: Aborto
     table_index:
       cow: Vaca
       january: Xaneiro

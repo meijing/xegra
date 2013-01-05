@@ -85,7 +85,7 @@ class Cow < ActiveRecord::Base
   end
 
   def get_last_parturitiun(last_insemination, current_user)
-    return current_user.reproduction.order('date desc').find(:all,:conditions=>['cow_id = ? and date between ? and ? and reproduction_simbol_id = 1 or reproduction_simbol_id=2',self.id,last_insemination.date,DateTime.now])
+    return current_user.reproduction.find(:all, :conditions=>["cow_id = ? and date between ? and ?  and (reproduction_simbol_id = 1 or reproduction_simbol_id=2 or reproduction_simbol_id=3 or reproduction_simbol_id=4)",self.id, last_insemination.date.to_date.to_s,(DateTime.now+ 1.day).to_date.to_s])
   end
 
   def set_is_pregnant(is_or_not_pregnant)

@@ -50,11 +50,14 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != t('reproductions.no_simbol'))
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @new_reproduction.reproduction_simbol_id = @simbol.id
-      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
-        if @simbolId[0] == '♀' || @simbolId[0] == '♂'
+      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂' || @simbolId[0] == '●')
+        if @simbolId[0] == '♀' || @simbolId[0] == '♂' || (@simbolId[0] == '●' && @simbolId[1] == t('reproductions.dist_born'))
           @new_reproduction.cow.set_is_milk(true)
           @new_reproduction.cow.increment_num_borns
+        elsif @simbolId[0] == '●' && @simbolId[1] == t('reproductions.abortion')
+          @new_reproduction.cow.set_is_milk(true)
         end
+        @new_reproduction.cow.set_is_pregnant(0)
         @new_reproduction.bull = params[:reproduction][:bull]
       end
     end
@@ -73,10 +76,14 @@ class ReproductionsController < ApplicationController
     if (@simbolId[0] != t('reproductions.no_simbol'))
       @simbol = ReproductionSimbol.find_by_simbol(@simbolId)
       @reproduction.reproduction_simbol_id = @simbol.id
-      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂')
-        if (@reproduction.reproduction_simbol_id != 1 && @reproduction.reproduction_simbol_id != 1) && @simbolId[0] == '♀' || @simbolId[0] == '♂'
+      if (@simbolId[0] == '▲' || @simbolId[0] == '♀' || @simbolId[0] == '♂' || @simbolId[0] == '●')
+        if @simbolId[0] == '♀' || @simbolId[0] == '♂' || (@simbolId[0] == '●' && @simbolId[1] == t('reproductions.dist_born'))
+          @reproduction.cow.set_is_milk(true)
           @reproduction.cow.increment_num_borns
+        elsif @simbolId[0] == '●' && @simbolId[1] == t('reproductions.abortion')
+          @reproduction.cow.set_is_milk(true)
         end
+        @reproduction.cow.set_is_pregnant(0)
         @reproduction.bull = params[:reproduction][:bull]
       else
         @reproduction.bull = nil
