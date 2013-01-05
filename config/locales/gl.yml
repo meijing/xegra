@@ -58,6 +58,7 @@ gl:
           
   menu:
     cow: Vacas
+    list_all: Ver todas
     reproduction: Carta de reprodución
     lactations: Control do leite
     facturation_milk: Facturación do leite
