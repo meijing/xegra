@@ -74,6 +74,32 @@ class Cow < ActiveRecord::Base
     return @notifications
   end
 
+  def self.watch_inseminations(current_user)
+    @notifications = []
+    @not_from_born = []
+    @not_last_part = []
+    current_user.cow.is_active.each do |cow|
+      @last_ins = cow.get_last_insemination(current_user)
+      @diff_days = (DateTime.now.to_date - cow.date_born).to_i
+      if @diff_days > 445 && @diff_days < 455 && cow.num_borns == 0 && @last_ins==[]
+        @not_from_born << cow.name + ' (' + cow.short_ring.to_s + '): ' + (@diff_days/30.0).ceil.to_s
+      end
+
+      if !@last_ins.nil? && @last_ins != [] && cow.num_borns > 0
+        @last_parturition = cow.get_last_parturitiun(@last_ins[0], current_user)
+        if !@last_parturition.nil? && @last_parturition != []
+          @diff_days_part = (DateTime.now.to_date - @last_parturition[0].date.to_date).to_i
+          if @diff_days_part > 35 && @diff_days_part < 43
+            @not_last_part << cow.name + ' (' + cow.short_ring.to_s + '): ' + @diff_days_part.to_s
+          end
+        end
+      end
+    end
+
+    @notifications << @not_from_born
+    @notifications << @not_last_part
+  end
+
   def get_last_insemination(current_user)
     return current_user.reproduction.where('cow_id = '+self.id.to_s+' and date = (select max(date) from reproductions where cow_id = '+self.id.to_s+' and reproduction_simbol_id = 6)')
   end

@@ -27,3 +27,29 @@
                 - @notification_parturition.each do |n|
                   %li
                     = t('notifications.cow')+': '+n
+
+        - if !@notification_watch_next_insemination.nil? and @notification_watch_next_insemination != []
+          .row
+            .span11
+              = t('notifications.watch_next_insemination_end')
+          - if @notification_watch_next_insemination[0] != []
+            .row
+              .span11
+                .well
+                  %h5= t('notifications.title_not_from_born')
+                  %ul
+                  - @notification_watch_next_insemination[0].each do |n|
+                    %li
+                      = t('notifications.not_from_born')
+                      = n +' '+ t('notifications.months')
+
+          - if @notification_watch_next_insemination[1] != []
+            .row
+              .span11
+                .well
+                  %h5= t('notifications.title_not_from_last_parturition')
+                  %ul
+                  - @notification_watch_next_insemination[1].each do |n|
+                    %li
+                      = t('notifications.not_from_parturition')
+                      = n +' '+ t('notifications.days')

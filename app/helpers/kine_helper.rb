@@ -17,4 +17,13 @@ module KineHelper
     end
     return @names
   end
+
+  def farm_has_notifications(notification_lactation, notification_parturition, notification_watch_next_insemination)
+    if (!notification_lactation.nil? and notification_lactation != []) or 
+        (!notification_parturition.nil? and notification_parturition != []) or
+        (!notification_watch_next_insemination.nil? and notification_watch_next_insemination != [])
+      return true
+    end
+    return false
+  end
 end

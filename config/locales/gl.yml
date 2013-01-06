@@ -73,6 +73,14 @@ gl:
     cow: Vaca
     set_is_not_milk: Marcar a vaca como seca
     parturition_end: Os avisos de parto desaparecerán automáticamente cando se introduza o parto na carta de reproducción
+    watch_next_insemination_end: Os avisos de ollo ó celo desaparecerán automáticamente cando se introduza a inseminación na carta de reproducción
+    not_watch_next_insemination: Ollo ó celo
+    not_from_born: Meses que fai que naceu a novilla
+    months: meses
+    days: días
+    not_from_parturition: Días que fai que tivo o último parto a vaca
+    title_not_from_born: Aviso para a primeira semilla de novillas
+    title_not_from_last_parturition: Aviso para a seguinte semilla das vacas
 
   kine:
     up_cow: Alta dunha vaca

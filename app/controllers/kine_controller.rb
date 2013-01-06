@@ -5,6 +5,7 @@ class KineController < ApplicationController
     @kine = current_user.cow.order('short_ring').is_active.page(params[:page]).per(15)
     @notification_lactation = Cow.get_notification_lactation(current_user)
     @notification_parturition = Cow.get_notification_parturition(current_user)
+    @notification_watch_next_insemination = Cow.watch_inseminations(current_user)
   end
   
   # GET /kine/1
@@ -90,6 +91,7 @@ class KineController < ApplicationController
   def notifications
     @notification_lactation = Cow.get_notification_lactation(current_user)
     @notification_parturition = Cow.get_notification_parturition(current_user)
+    @notification_watch_next_insemination = Cow.watch_inseminations(current_user)
   end
 
   def set_is_pregnant
