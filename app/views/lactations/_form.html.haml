@@ -11,7 +11,10 @@
       .field
         = t('lactations.edit.date')+':'
         #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
-          = f.text_field  :date,:size => "16", :type => "text"
+          - if @lactation.date.nil?
+            = f.text_field :date, :value=>@date,:size => "16"
+          - else
+            = f.text_field :date, :value=>@lactation.date.strftime('%d/%m/%Y'),:size => "16"
           %span.add-on
             %i.icon-th
       .field

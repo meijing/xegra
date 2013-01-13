@@ -49,7 +49,7 @@ class LactationsController < ApplicationController
   # PUT /lactations/1.json
   def update
     @lactation = Lactation.find(params[:id])
-    params[:lactation][:date] = Date.strptime(params[:lactation][:date], "%d-%m-%Y")
+    @lactation.date = @lactation.date.strftime('%d/%m/%Y')
 
     if @lactation.update_attributes(params[:lactation])
       redirect_to lactation_path(params[:lactation][:cow_id])
