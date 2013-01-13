@@ -78,7 +78,7 @@ class Cow < ActiveRecord::Base
     @notifications = []
     @not_from_born = []
     @not_last_part = []
-    p '----------------------------'
+
     current_user.cow.is_active.each do |cow|
       @last_ins = cow.get_last_insemination(current_user)
       @diff_days = (DateTime.now.to_date - cow.date_born).to_i
@@ -87,11 +87,8 @@ class Cow < ActiveRecord::Base
         @not_from_born << cow.name + ' (' + cow.short_ring.to_s + '): ' + (@diff_days/30.0).ceil.to_s
       end
 
-      p @last_ins
       if !@last_ins.nil? && @last_ins != [] && cow.num_borns > 0
         @last_parturition = cow.get_last_parturitiun(@last_ins[0], current_user)
-        p '---last'
-        p @last_parturition
         if !@last_parturition.nil? && @last_parturition != []
           @diff_days_part = (DateTime.now.to_date - @last_parturition[0].date.to_date).to_i
           p @diff_days_part
