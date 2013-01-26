@@ -1,13 +1,13 @@
 Xegra::Application.routes.draw do
   
 
-  devise_for :controller_milks
+  devise_for :controller_milks, :controllers => { :invitations => 'controller_milks' }
 
-  devise_for :cooperatives
+  devise_for :cooperatives, :controllers => { :invitations => 'cooperatives' }
 
-  devise_for :veterinarians
+  devise_for :veterinarians, :controllers => { :invitations => 'veterinarians' }
 
-  devise_for :ads
+  devise_for :ads, :controllers => { :invitations => 'ads' }
 
   devise_for :admins, :controllers => { :invitations => 'admins' }
 
