@@ -1,6 +1,16 @@
 Xegra::Application.routes.draw do
   
 
+  devise_for :controller_milks
+
+  devise_for :cooperatives
+
+  devise_for :veterinarians
+
+  devise_for :ads
+
+  devise_for :admins, :controllers => { :invitations => 'admins' }
+
   resources :notifications
 
   devise_for :users

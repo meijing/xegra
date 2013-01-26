@@ -28,7 +28,7 @@
                   %li
                     = t('notifications.cow')+': '+n
 
-        - if !@notification_watch_next_insemination.nil? and @notification_watch_next_insemination != []
+        - if !@notification_watch_next_insemination.nil? and (@notification_watch_next_insemination[0] != [] or @notification_watch_next_insemination[1] != [])
           .row
             .span11
               = t('notifications.watch_next_insemination_end')
