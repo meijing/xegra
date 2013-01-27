@@ -1,0 +1,39 @@
+.container
+  .row
+    .span6
+      .well
+        .row
+          .span5
+            %h2= t('session.new_session')
+
+            = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+              .inputs
+                = f.input :email, :required => false, :autofocus => true
+                = f.input :password, :required => false, :label=>t('session.password')
+                = f.input :remember_me, :label=>t('session.remember_me'),:as => :boolean if devise_mapping.rememberable?
+              .actions
+                = f.button :submit, t('session.btn_aceptar') , :class=>'btn btn-success'
+            %br
+            %br
+            = render "links"
+            
+
+    .span6
+      .row
+        .span6
+          .well
+            .row
+              .span3
+                .start_veterinarian
+                  Son un veterinario
+                  %br
+                  = image_tag 'veterinario.jpg'
+      .row
+        .span6
+          .well
+            .row
+              .span3
+                .start_cooperative
+                  Son unha cooperativa
+                  %br
+                  = image_tag 'cooperativa.jpg'
