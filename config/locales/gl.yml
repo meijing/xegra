@@ -239,3 +239,12 @@ gl:
   links:
     ligal: Visita a páxina do Ligal
     ovi: Acceder á Oficina agraria virtual
+
+  page_index:
+    veterinarians: Son un veterinario
+    cooperatives: Son unha cooperativa
+    farmers: Son un granxeiro
+    single_veterinarian: veterinario
+    single_cooperative: cooperativa
+    single_farmer: granxeiro
+    title_sign_in: Entra na paxina como

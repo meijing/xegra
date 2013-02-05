@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
+  
   protect_from_forgery
 
   before_filter :set_locale
@@ -16,5 +16,18 @@ class ApplicationController < ActionController::Base
 
   def links
     render 'links'
+  end
+
+  def set_start_profile
+    session[:profile]="lk"
+  end
+
+  def set_profile
+    session[:profile]=params[:profile]
+    redirect_to new_veterinarian_session_path
+  end
+
+  def home
+    session[:profile]="lk"
   end
 end

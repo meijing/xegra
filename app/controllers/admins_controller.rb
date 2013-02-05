@@ -1,4 +1,4 @@
-class Admins::InvitationsController < Devise::InvitationsController
+class Admins< ApplicationController
   def update
     
   end

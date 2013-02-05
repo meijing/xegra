@@ -4,8 +4,8 @@
       .well
         .row
           .span5
-            %h2= t('session.new_session')
-
+            %h3= t('page_index.title_sign_in')+' '+t('page_index.single_farmer')
+            
             = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
               .inputs
                 = f.input :email, :required => false, :autofocus => true
@@ -25,15 +25,11 @@
             .row
               .span3
                 .start_veterinarian
-                  Son un veterinario
-                  %br
-                  = image_tag 'veterinario.jpg'
+                  = link_to image_tag('veterinario.jpg') + t('page_index.veterinarians'), new_veterinarian_session_path
       .row
         .span6
           .well
             .row
               .span3
                 .start_cooperative
-                  Son unha cooperativa
-                  %br
-                  = image_tag 'cooperativa.jpg'
+                  = link_to image_tag('cooperativa.jpg') + t('page_index.cooperatives'), new_cooperative_session_path

@@ -1,4 +1,6 @@
 class KineController < ApplicationController
+  before_filter :authenticate_user!
+  
   # GET /kine
   # GET /kine.json
   def index

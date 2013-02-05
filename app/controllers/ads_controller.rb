@@ -1,4 +1,4 @@
-class Ads::InvitationsController < Devise::InvitationsController
+class Ads< ApplicationController
   def update
 
   end

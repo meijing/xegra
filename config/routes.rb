@@ -15,6 +15,8 @@ Xegra::Application.routes.draw do
 
   devise_for :users
 
+  match '/veterinarians' => 'application#set_profile',:as=>'veterinarian_profile'
+
   match 'reproductions/new/:id/:repro_id/:simbol_id/:month' =>'reproductions#single_reproduction', :as =>'proba_repro'
   match 'reproductions/new/:id' =>'reproductions#single_reproduction', :as =>'proba'
   
