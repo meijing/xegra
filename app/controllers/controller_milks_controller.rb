@@ -1,4 +1,4 @@
-class ControllerMilks::InvitationsController < Devise::InvitationsController
+class ControllerMilks< ApplicationController
   def update
 
   end
