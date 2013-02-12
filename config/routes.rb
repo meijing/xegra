@@ -25,7 +25,8 @@ Xegra::Application.routes.draw do
   resources :reproduction_simbols
   scope "/:locale", :constraints => {:locale => /es|gl/} do
     match 'kine/remove_pregnant/:cow_id'=>'kine#remove_is_pregnant', :as => 'remove_pregnant'
-    match 'kine/notifications/set_is_not_milk/:cow_id'=>'kine#notifications_is_not_milk', :as => 'set_is_not_milk'
+    match 'notifications/set_is_not_milk/:cow_id'=>'notifications#notifications_is_not_milk', :as => 'set_is_not_milk'
+    match 'notifications/index_active_notifications'=>'notifications#index_active_notifications', :as=>'active_notifications'
     delete '/facturation_milks', :to => 'facturation_milks#destroy'
     resources :reports, only: :index do
       collection do
@@ -40,7 +41,7 @@ Xegra::Application.routes.draw do
     end
     match 'kine/is_not_pregnant' =>'kine#set_is_not_pregnant', :as =>'is_not_pregnant'
     match 'kine/is_pregnant' =>'kine#set_is_pregnant', :as =>'is_pregnant'
-    match 'kine/notifications' =>'kine#notifications', :as =>'notifications'
+    #match 'kine/notifications' =>'kine#notifications', :as =>'notifications'
     match 'lactations/2/edit/:cow_id/:id' => 'lactations#edit', :as => 'update_lactation'
     match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
 

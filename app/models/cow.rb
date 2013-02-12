@@ -1,6 +1,7 @@
 class Cow < ActiveRecord::Base
   has_many :lactations
   has_many :reproductions
+  has_many :notifications
   belongs_to :user
   belongs_to :mother, :class_name => 'Cow', :foreign_key => 'mother_in_farm'
   has_many :children, :class_name => 'Cow', :foreign_key => 'mother_in_farm'

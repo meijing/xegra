@@ -43,8 +43,9 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(params[:notification])
 
     respond_to do |format|
+      @notification.active = 1
       if @notification.save
-        format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
+        format.html { redirect_to notifications_path}
         format.json { render json: @notification, status: :created, location: @notification }
       else
         format.html { render action: "new" }
@@ -60,7 +61,7 @@ class NotificationsController < ApplicationController
 
     respond_to do |format|
       if @notification.update_attributes(params[:notification])
-        format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
+        format.html { redirect_to notifications_path}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,5 +80,17 @@ class NotificationsController < ApplicationController
       format.html { redirect_to notifications_url }
       format.json { head :no_content }
     end
+  end
+
+  def notifications_is_not_milk
+    @cow = Cow.find(params[:cow_id])
+    @cow.set_is_milk(false)
+    redirect_to notifications_path
+  end
+
+  def index_active_notifications
+    @notification_lactation = Cow.get_notification_lactation(current_user)
+    @notification_parturition = Cow.get_notification_parturition(current_user)
+    @notification_watch_next_insemination = Cow.watch_inseminations(current_user)
   end
 end

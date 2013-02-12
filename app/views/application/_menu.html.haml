@@ -15,8 +15,15 @@
                 = link_to t('menu.reproduction'), reproductions_path
               %li
                 = link_to t('menu.lactations'), lactations_path
-          %li
-            = link_to t('menu.notifications'), notifications_path
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              = t('menu.notifications')
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                = link_to t('menu.notif_all'), active_notifications_path
+              %li
+                = link_to t('menu.notif_veterinarian'), lactations_path
           %li
             = link_to t('menu.facturation_milk'), facturation_milks_path(:month=>DateTime.now.month)
           %li

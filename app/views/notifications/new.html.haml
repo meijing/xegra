@@ -1,5 +1,9 @@
-%h1 New notification
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span11
+            %legend= t('notifications.new.title')
 
-= render 'form'
-
-= link_to 'Back', notifications_path
+            = render 'form' 

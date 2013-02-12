@@ -1,0 +1,66 @@
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span12
+            %h2= t('notifications.title')
+          .span11
+            .well
+              .row
+                .span11
+                  %h5= t('notifications.not_auto')
+                - if !@notification_lactation.nil? and @notification_lactation != []
+                  .row
+                    .span11
+                      .well
+                        %h4= t('notifications.not_lactation')
+
+                        %ul
+                          - @notification_lactation.each do |n|
+                            %li
+                              = t('notifications.cow')+': '+n[1]
+                              = link_to t('notifications.set_is_not_milk'), set_is_not_milk_path(:cow_id =>n[0]) , class: "label label-success"
+                - if !@notification_parturition.nil? and @notification_parturition != []
+                  .row
+                    .span11
+                      .well
+                        %h4= t('notifications.not_parturition')
+                        %span= t('notifications.parturition_end')
+                        %ul
+                        - @notification_parturition.each do |n|
+                          %li
+                            = t('notifications.cow')+': '+n
+
+                - if !@notification_watch_next_insemination.nil? and (@notification_watch_next_insemination[0] != [] or @notification_watch_next_insemination[1] != [])
+                  .row
+                    .span11
+                      = t('notifications.watch_next_insemination_end')
+                  - if @notification_watch_next_insemination[0] != []
+                    .row
+                      .span11
+                        .well
+                          %h5= t('notifications.title_not_from_born')
+                          %ul
+                          - @notification_watch_next_insemination[0].each do |n|
+                            %li
+                              = t('notifications.not_from_born')
+                              = n +' '+ t('notifications.months')
+
+                  - if @notification_watch_next_insemination[1] != []
+                    .row
+                      .span11
+                        .well
+                          %h5= t('notifications.title_not_from_last_parturition')
+                          %ul
+                          - @notification_watch_next_insemination[1].each do |n|
+                            %li
+                              = t('notifications.not_from_parturition')
+                              = n +' '+ t('notifications.days')
+          .span11
+            .well
+              .row
+                .span6
+                  %h5= t('notifications.custom')
+                .span4
+                  = link_to  t('notifications.manage'), notifications_path , class: "btn btn-info"

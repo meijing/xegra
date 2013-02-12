@@ -1,6 +1,32 @@
-%p#notice= notice
+.container
+  .row
+    .span12
+      .well
+        .row
+          .span11
+            %legend= t('notifications.show.title')
 
+        .row
+          .span8
+            .well
+            
+              %p
+                = t('notifications.custom_start_date') +':'
+                - if !@notification.start_date.nil?
+                  = @notification.start_date.strftime("%d/%m/%Y")
 
-= link_to 'Edit', edit_notification_path(@notification)
-\|
-= link_to 'Back', notifications_path
+              %p
+                = t('notifications.custom_end_date') +':'
+                - if !@notification.end_date.nil?
+                  = @notification.end_date.strftime("%d/%m/%Y")
+
+              %p
+                = t('notifications.custom_description') +':'
+                = @notification.description
+
+              - if !@notification.cow_id.nil? and @notification.cow_id != -1
+                %p
+                  = t('notifications.custom_cow') +':'
+                  = @notification.cow.name
+          .span3
+            .well

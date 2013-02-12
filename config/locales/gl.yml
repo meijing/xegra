@@ -65,10 +65,15 @@ gl:
     reports: Listados
     account: A miña conta
     links: Ligazóns
+    notif_all: Ver todos
+    notif_veterinarian: Avisos do veterinario
     notifications: Avisos
     
   notifications:
-    title: AVISOS
+    title: Avisos
+    not_auto: Automáticos
+    custom: Personalizados
+    manage: Xestión de avisos
     not_lactation: Avisos de secado
     not_parturition: Avisos de parto
     cow: Vaca
@@ -82,6 +87,16 @@ gl:
     not_from_parturition: Días que fai que tivo o último parto a vaca
     title_not_from_born: Aviso para a primeira semilla de novillas
     title_not_from_last_parturition: Aviso para a seguinte semilla das vacas
+    custom_start_date: Data inicio
+    custom_end_date: Data final
+    custom_description: Descrición
+    custom_cow: Vaca
+    add: Engadir aviso
+    new:
+      title: Datos do novo aviso
+      btn_acept: Aceptar
+    show:
+      title: Datos do aviso
 
   kine:
     up_cow: Alta dunha vaca

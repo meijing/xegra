@@ -1,10 +1,35 @@
-= form_for @notification do |f|
-  - if @notification.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@notification.errors.count, "error")} prohibited this notification from being saved:"
-      %ul
-        - @notification.errors.full_messages.each do |msg|
-          %li= msg
+.span11
+  .well
+    .form-horizontal
+      = form_for(@notification) do |f|
 
-  .actions
-    = f.submit 'Save'
+        .control-group
+          %label.control-label=t('notifications.custom_start_date') +':'
+          .controls
+            #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+              = f.text_field  :start_date,:size => "16", :type => "text"
+              %span.add-on
+                %i.icon-th
+
+        .control-group
+          %label.control-label=t('notifications.custom_end_date') +':'
+          .controls
+            #dp4.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
+              = f.text_field  :end_date,:size => "16", :type => "text"
+              %span.add-on
+                %i.icon-th
+
+        .control-group
+          %label.control-label=t('notifications.custom_description') +':'
+          .controls
+            = f.text_field :description
+
+        .control-group
+          %label.control-label=t('notifications.cow') +':'
+          .controls
+            = f.select :cow_id, get_all_cows
+
+        .form-horizontal
+          .form-actions
+            %button.btn.btn-success{:type => "submit"}= t('notifications.new.btn_acept')
+
