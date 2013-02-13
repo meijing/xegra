@@ -64,3 +64,11 @@
                   %h5= t('notifications.custom')
                 .span4
                   = link_to  t('notifications.manage'), notifications_path , class: "btn btn-info"
+                .span11
+                  %ul
+                  - @custom_notifications.each do |n|
+                    %li
+                      = n.description + ' (' + n.start_date.strftime("%d/%m/%Y")+' - '+n.end_date.strftime("%d/%m/%Y")+')'
+                      - if !n.cow.nil?
+                        = ' --> ' + n.cow.name+' ('+n.cow.short_ring.to_s+')'
+                      = link_to t('notifications.desactive'), desactive_notification_path(n), class: "label label-important"

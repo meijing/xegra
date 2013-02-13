@@ -8,21 +8,47 @@
           .span4
             = link_to  t('notifications.add'), new_notification_path , class: "btn btn-info"
           .span11
-            %table.table.cell_reports
-              %th= t('notifications.custom_start_date')
-              %th= t('notifications.custom_end_date')
-              %th= t('notifications.custom_description')
-              %th= t('notifications.custom_cow')
-              %th
+            .well
+              %h4= t('notifications.index.actives')
+              %table.table.cell_reports
+                %th= t('notifications.custom_start_date')
+                %th= t('notifications.custom_end_date')
+                %th= t('notifications.custom_description')
+                %th= t('notifications.custom_cow')
+                %th
 
-              - @notifications.each do |n|
-                %tr
-                  %td= n.start_date
-                  %td= n.end_date
-                  %td= n.description
-                  %td
-                    - if !n.cow.nil?
-                      = n.cow.name.concat(' (').concat(n.cow.short_ring.to_s).concat(')')
-                  %td
-                    = link_to image_tag("lapiz.jpg", :size=>"18x18"), edit_notification_path(n)
-                    = link_to image_tag("images.jpg", :size=>"17x17"), n,method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }
+                - @notifications_active.each do |n|
+                  %tr
+                    %td= n.start_date.strftime("%d/%m/%Y")
+                    %td= n.end_date.strftime("%d/%m/%Y")
+                    %td= n.description
+                    %td
+                      - if !n.cow.nil?
+                        = n.cow.name.concat(' (').concat(n.cow.short_ring.to_s).concat(')')
+                    %td
+                      = link_to image_tag("lapiz.jpg", :size=>"18x18"), edit_notification_path(n)
+                      = link_to image_tag("images.jpg", :size=>"17x17"), n,method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }
+                      = link_to t('notifications.desactive'), desactive_notification_path(n), class: "label label-important"
+
+          .span11
+            .well
+              %h4= t('notifications.index.desactives')
+              %table.table.cell_reports
+                %th= t('notifications.custom_start_date')
+                %th= t('notifications.custom_end_date')
+                %th= t('notifications.custom_description')
+                %th= t('notifications.custom_cow')
+                %th
+
+                - @notifications_desactive.each do |n|
+                  %tr
+                    %td= n.start_date.strftime("%d/%m/%Y")
+                    %td= n.end_date.strftime("%d/%m/%Y")
+                    %td= n.description
+                    %td
+                      - if !n.cow.nil?
+                        = n.cow.name.concat(' (').concat(n.cow.short_ring.to_s).concat(')')
+                    %td
+                      = link_to image_tag("lapiz.jpg", :size=>"18x18"), edit_notification_path(n)
+                      = link_to image_tag("images.jpg", :size=>"17x17"), n,method: :delete, data: { confirm: '¿Está seguro de borrar os datos?' }
+                      = link_to t('notifications.active'), active_notification_path(n), class: "label label-important"

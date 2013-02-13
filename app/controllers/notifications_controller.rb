@@ -2,11 +2,11 @@ class NotificationsController < ApplicationController
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @notifications_active = Notification.is_active
+    @notifications_desactive = Notification.is_desactive
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @notifications }
     end
   end
 
@@ -92,5 +92,18 @@ class NotificationsController < ApplicationController
     @notification_lactation = Cow.get_notification_lactation(current_user)
     @notification_parturition = Cow.get_notification_parturition(current_user)
     @notification_watch_next_insemination = Cow.watch_inseminations(current_user)
+    @custom_notifications = Notification.is_active.check_custom_notifications
+  end
+
+  def desactive_notification
+    @notification = Notification.find(params[:id])
+    @notification.desactive
+    redirect_to notifications_path
+  end
+
+  def active_notification
+    @notification = Notification.find(params[:id])
+    @notification.active
+    redirect_to notifications_path
   end
 end

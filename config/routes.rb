@@ -27,6 +27,8 @@ Xegra::Application.routes.draw do
     match 'kine/remove_pregnant/:cow_id'=>'kine#remove_is_pregnant', :as => 'remove_pregnant'
     match 'notifications/set_is_not_milk/:cow_id'=>'notifications#notifications_is_not_milk', :as => 'set_is_not_milk'
     match 'notifications/index_active_notifications'=>'notifications#index_active_notifications', :as=>'active_notifications'
+    match 'notifications/desactive_notification/:id'=>'notifications#desactive_notification', :as=>'desactive_notification'
+    match 'notifications/active_notification/:id'=>'notifications#active_notification', :as=>'active_notification'
     delete '/facturation_milks', :to => 'facturation_milks#destroy'
     resources :reports, only: :index do
       collection do

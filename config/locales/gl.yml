@@ -97,6 +97,11 @@ gl:
       btn_acept: Aceptar
     show:
       title: Datos do aviso
+    desactive: Desactivar
+    active: Activar
+    index:
+      actives: Activos
+      desactives: Desactivados
 
   kine:
     up_cow: Alta dunha vaca
