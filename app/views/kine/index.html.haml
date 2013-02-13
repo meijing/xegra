@@ -11,8 +11,8 @@
 
         .row
           .span11
-            -if farm_has_notifications(@notification_lactation, @notification_parturition, @notification_watch_next_insemination)
-              = link_to t('notifications.title'), notifications_path , class: "btn btn-danger btn-large"
+            -if farm_has_notifications(@notification_lactation, @notification_parturition, @notification_watch_next_insemination, @custom_notifications)
+              = link_to t('notifications.title'), active_notifications_path , class: "btn btn-danger btn-large"
           .span11
             #teams_catalogue
               = paginate @kine
