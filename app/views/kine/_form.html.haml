@@ -18,6 +18,8 @@
         .control-group
           %label.control-label=t('kine.data_born') +':'
           .controls
+            = t('format.dates')
+            %br
             #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
               = f.text_field  :date_born,:size => "16", :type => "text"
               %span.add-on
@@ -36,7 +38,7 @@
         .control-group
           %label.control-label=t('kine.mother') +':'
           .controls
-            = f.select :mother_in_farm, get_ring_name_cows
+            = f.select :parent_id, get_ring_name_cows
             %br
             = t('kine.new.mother_in_farm_load')
             = f.text_field :ring_mother

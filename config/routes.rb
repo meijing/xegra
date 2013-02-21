@@ -17,7 +17,7 @@ Xegra::Application.routes.draw do
 
   match '/veterinarians' => 'application#set_profile',:as=>'veterinarian_profile'
 
-  match 'reproductions/new/:id/:repro_id/:simbol_id/:month' =>'reproductions#single_reproduction', :as =>'proba_repro'
+  match 'reproductions/new/:id/:repro_id/:simbol_id/:month/:year' =>'reproductions#single_reproduction', :as =>'proba_repro'
   match 'reproductions/new/:id' =>'reproductions#single_reproduction', :as =>'proba'
   
   resources :reproductions
@@ -39,11 +39,14 @@ Xegra::Application.routes.draw do
         get "is_not_milk_cow"
         get "total_facturation"
         get "cow_without_born"
+        get "tree_familiar"
+        post 'tree_familiar'
       end
     end
+
+
     match 'kine/is_not_pregnant' =>'kine#set_is_not_pregnant', :as =>'is_not_pregnant'
     match 'kine/is_pregnant' =>'kine#set_is_pregnant', :as =>'is_pregnant'
-    #match 'kine/notifications' =>'kine#notifications', :as =>'notifications'
     match 'lactations/2/edit/:cow_id/:id' => 'lactations#edit', :as => 'update_lactation'
     match 'lactations/new/:cow_id' => 'lactations#new', :as=>'create_new_lactation'
 

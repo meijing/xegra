@@ -20,7 +20,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
+gem 'ancestry'
 gem 'unicorn'
 gem "tabs_on_rails"
 

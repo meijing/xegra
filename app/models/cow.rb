@@ -3,10 +3,11 @@ class Cow < ActiveRecord::Base
   has_many :reproductions
   has_many :notifications
   belongs_to :user
-  belongs_to :mother, :class_name => 'Cow', :foreign_key => 'mother_in_farm'
-  has_many :children, :class_name => 'Cow', :foreign_key => 'mother_in_farm'
+  has_ancestry
+  belongs_to :mother, :class_name => 'Cow', :foreign_key => 'parent_id'
+  has_many :children, :class_name => 'Cow', :foreign_key => 'parent_id',:autosave => true
   
-  attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk, :ring_mother, :mother_in_farm
+  attr_accessible :father, :name, :num_borns, :ring, :date_born, :short_ring, :is_milk, :ring_mother, :parent_id
   validates :ring, :presence => true, :length => { :is => 14 }
   validates :name,:date_born,:num_borns, :presence => true
   validates_length_of :num_borns, :minimum => 0
@@ -39,6 +40,10 @@ class Cow < ActiveRecord::Base
 
   scope :with_born, lambda {
     where('num_borns > 0')
+  }
+
+  scope :children, lambda {
+    where({ancestry: self.id})
   }
 
   def self.get_notification_lactation(current_user)
@@ -165,11 +170,11 @@ class Cow < ActiveRecord::Base
 
   def set_mother(mother_farm, mother_text)
     if !mother_farm.nil? && mother_farm != '-1'
-      self.mother_in_farm = mother_farm
+      self.parent_id = mother_farm
       self.ring_mother = ''
     elsif !mother_text.nil?
       self.ring_mother = mother_text
-      self.mother_in_farm = nil
+      self.parent_id = nil
     end
   end
 
@@ -179,5 +184,24 @@ class Cow < ActiveRecord::Base
       c.update_column('ring_mother', @name)
     end
   end
+
+
+    # --- Permissions --- #
+
+    def create_permitted?
+        acting_user.administrator?
+    end
+
+    def update_permitted?
+        acting_user.administrator?
+    end
+
+    def destroy_permitted?
+        acting_user.administrator?
+    end
+
+    def view_permitted?(field)
+        true
+    end
 
 end

@@ -3,7 +3,10 @@
     .span12
       .well
         .row
-          .span11
+          .span9
             %legend= get_title_individual_repro_page(@cow)
-
+          .span2
+            = t('reproductions.actual_card').concat(' '+@year.to_s)
+          .span11
             = render 'form'
+

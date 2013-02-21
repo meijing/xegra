@@ -1,0 +1,19 @@
+%p
+  =t('kine.ring') +':'
+  = @cow.ring.concat(' ')
+%p
+  =t('kine.name') +':'
+  = @cow.name
+
+%p
+  =t('kine.data_born') +':'
+  - if !@cow.date_born.nil?
+    = @cow.date_born.strftime("%d/%m/%Y")
+
+%p
+  =t('kine.num_borns') +':'
+  = @cow.num_borns
+- if @cow.father != ''
+  %p
+    =t('kine.father') +':'
+    = @cow.father

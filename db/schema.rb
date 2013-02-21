@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212190751) do
+ActiveRecord::Schema.define(:version => 20130218181048) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -109,8 +109,11 @@ ActiveRecord::Schema.define(:version => 20130212190751) do
     t.date     "last_failed_insemination"
     t.integer  "user_id"
     t.string   "ring_mother"
-    t.integer  "mother_in_farm"
+    t.integer  "parent_id"
+    t.string   "ancestry"
   end
+
+  add_index "kine", ["ancestry"], :name => "index_kine_on_ancestry"
 
   create_table "lactations", :force => true do |t|
     t.integer  "greasy_kg"
@@ -174,6 +177,8 @@ ActiveRecord::Schema.define(:version => 20130212190751) do
     t.string   "surname2"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "farm_name"
+    t.integer  "cooperative_id"
   end
 
   add_index "users", ["cea"], :name => "index_users_on_cea", :unique => true

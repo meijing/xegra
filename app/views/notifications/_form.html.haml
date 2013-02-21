@@ -6,6 +6,8 @@
         .control-group
           %label.control-label=t('notifications.custom_start_date') +':'
           .controls
+            = t('format.dates')
+            %br
             #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
               = f.text_field  :start_date,:size => "16", :type => "text"
               %span.add-on
@@ -14,6 +16,8 @@
         .control-group
           %label.control-label=t('notifications.custom_end_date') +':'
           .controls
+            = t('format.dates')
+            %br
             #dp4.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
               = f.text_field  :end_date,:size => "16", :type => "text"
               %span.add-on

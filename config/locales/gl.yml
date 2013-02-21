@@ -68,6 +68,9 @@ gl:
     notif_all: Ver todos
     notif_veterinarian: Avisos do veterinario
     notifications: Avisos
+
+  format:
+    dates: dd/mm/aaaa
     
   notifications:
     title: Avisos
@@ -143,6 +146,8 @@ gl:
     no_simbol: Ningún
     dist_born: Parto distódico
     abortion: Aborto
+    last_year: Ver carta do ano
+    actual_card: Carta do 
     table_index:
       cow: Vaca
       january: Xaneiro
@@ -225,6 +230,8 @@ gl:
     name: Nome
     first_surname: Primeiro apelido
     second_surname: Segundo apelido
+    farm_name: Nome da granxa
+    cooperative: Cooperativa
     get_in: Entrar
     sing_up_now: Rexístrate
     update: Modificar os datos do usuario
@@ -250,11 +257,14 @@ gl:
     total_facturation_milk: Total de facturación de leite no ano
     total_lactation_cow: Resumo do control de leite
     cow_without_born: Novillas
+    tree_familiar: Árbore xenealóxica
     back: Volver ós listados
     total_anual_facturation: Facturado no ano
     is_pregnant: Sí. Data
     is_not_pregnant: No.
     is_stopped: Está parada
+    generate_tree: Xerar
+    select_mother: Selecione a nai
 
   links:
     ligal: Visita a páxina do Ligal

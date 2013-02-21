@@ -71,4 +71,13 @@ module ApplicationHelper
       end
     end
   end
+
+  def get_cooperatives_name
+    @names = []
+    @names << ['',-1]
+    Cooperative.all.each do |c|
+      @names << [c.name, c.id]
+    end
+    return @names
+  end
 end

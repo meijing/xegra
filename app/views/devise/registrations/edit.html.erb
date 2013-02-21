@@ -12,6 +12,9 @@
     <%= f.input :name, :required => false, :label=> t('session.name') %>
     <%= f.input :surname1, :required => false, :label=> t('session.first_surname') %>
     <%= f.input :surname2, :required => false, :label=> t('session.second_surname') %>
+    <%= f.input :farm_name, :required => true, :label=>t('session.farm_name') %>
+    <%= f.label t('session.cooperative')%>
+    <%= f.select :cooperative_id, get_cooperatives_name %>
   </div>
 
   <div class="actions">

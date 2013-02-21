@@ -1,0 +1,6 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/kristianmandrup/acts_as_tree_rails3.git

@@ -24,9 +24,9 @@
                     - if (r.reproduction_simbol_id.nil? and r.comment.nil?) or (r.reproduction_simbol_id.nil? and r.comment=='')
                       = ''
                       - 'Esto e pa quitar'
-                      - link_to t('reproductions.update.add'), proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month), :class =>'label label-success'
+                      - link_to t('reproductions.update.add'), proba_repro_path(:id=>@cow.id,:repro_id=>-1,:simbol_id=>-1,:month=>r.month, :year=>@year), :class =>'label label-success'
                     - else
-                      = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month)
+                      = link_to get_text_simbol_reproduction(r).html_safe, proba_repro_path(:id=>@cow.id,:repro_id=>r.id,:simbol_id=>(r.reproduction_simbol_id.nil? ? -1:r.reproduction_simbol_id),:month=>r.month,:year=>@year)
                       = r.bull
                       - if !r.date.nil?
                         = ('<br/>'+r.date.strftime('%d/%m/%Y')).html_safe
@@ -63,6 +63,8 @@
           .control-group
             %label.control-label= t('reproductions.update.data')+':'
             .controls
+              = t('format.dates')
+              %br
               #dp3.input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
                 - if !@date.nil?
                   = text_field :reproduction, :date, :value=>@date.strftime('%d/%m/%Y'),:size => "16"
@@ -78,6 +80,7 @@
           = f.text_field :idReproduccion, :value=>@reproduction.id, :class=>'input-small'
           = f.text_field :cow_id, :value=>@cow.id, :class=>'input-small'
           = f.text_field :repro_month, :value=>@reproduction.month, :class=>'input-small'
+          = f.text_field :year, :value=>@year, :class=>'input-small'
       .span11
         .form-horizontal
           .form-actions

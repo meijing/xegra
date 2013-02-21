@@ -1,3 +1,12 @@
 // Place all the styles related to the reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.nested_messages {
+  margin-left: 30px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.header_tree_familiar{
+  color: yellow;
+}

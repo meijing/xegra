@@ -3,14 +3,22 @@ class ReproductionsController < ApplicationController
   # GET /reproductions
   # GET /reproductions.json
   def index
-    @reproductions = current_user.reproduction.actual_year.order('month')
+    
+    if (params[:year].nil? || (!params[:year].nil? && params[:year].to_i == DateTime.now.year))
+      @year_btn = (DateTime.now.year-1).to_s
+      @year = DateTime.now.year.to_s
+      @reproductions = current_user.reproduction.actual_year.order('month')
+    else
+      @year_btn = DateTime.now.year.to_s
+      @year = (DateTime.now.year-1).to_s
+      @reproductions = current_user.reproduction.last_year.order('month')
+    end
 
     if @reproductions.nil?
       @reproductions = []
     end
 
     @cows = current_user.cow.order('short_ring').is_active
-    #@reproductions = @cows.map {|cow| cow.reproductions.for_year}
   end
 
   # GET /reproductions/1
@@ -44,7 +52,7 @@ class ReproductionsController < ApplicationController
       @new_reproduction.date = params[:reproduction][:date]
       @new_reproduction.year = @new_reproduction.date.year
     else
-      @new_reproduction.year = DateTime.now.year
+      @new_reproduction.year = params[:reproduction][:year]
     end
 
     if (@simbolId[0] != t('reproductions.no_simbol'))
@@ -63,7 +71,7 @@ class ReproductionsController < ApplicationController
     end
     @new_reproduction.save
 
-    redirect_to proba_path(params[:reproduction][:cow_id])
+    redirect_to proba_path(:id=>params[:reproduction][:cow_id],:year=>@new_reproduction.year)
     #redirect_to proba_repro_path(:id=>@new_reproduction.cow_id,:repro_id=>@new_reproduction.id,:simbol_id=>@new_reproduction.reproduction_simbol_id,:month=>@new_reproduction.month)
   end
 
@@ -95,11 +103,12 @@ class ReproductionsController < ApplicationController
     @reproduction.comment = params[:reproduction][:comment]
     if !params[:reproduction][:date].nil? && params[:reproduction][:date] !=""
       @reproduction.date = params[:reproduction][:date]
+      @reproduction.year = @reproduction.date.year
     end
     
     @reproduction.save
-    redirect_to proba_path(@reproduction.cow_id)
-    #redirect_to proba_repro_path(:id=>@reproduction.cow_id,:repro_id=>@reproduction.id,:simbol_id=>@reproduction.reproduction_simbol_id,:month=>@reproduction.month)
+    redirect_to proba_path(:id=>@reproduction.cow_id,:year=>@reproduction.year)
+    
   end
 
   # DELETE /reproductions/1
@@ -118,8 +127,16 @@ class ReproductionsController < ApplicationController
   def single_reproduction
     @cow = current_user.cow.find_by_id(params[:id])
 
+    if (params[:year].nil? || (!params[:year].nil? && params[:year].to_i == DateTime.now.year))
+      @reproductions = current_user.reproduction.actual_year.order('month').where('cow_id = '+params[:id])
+      @year = @year = DateTime.now.year
+    else
+      @reproductions = current_user.reproduction.last_year.order('month').where('cow_id = '+params[:id])
+      @year = @year = DateTime.now.year-1
+    end
+
     @info_repro = Array.new(12, [])
-    @reproductions = current_user.reproduction.actual_year.order('month').where('cow_id = '+params[:id])
+    
     @reproductions.each do |r|
       if @info_repro[r.month-1] == []
         @info_repro[r.month-1] = [r]

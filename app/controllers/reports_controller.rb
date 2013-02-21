@@ -45,4 +45,37 @@ class ReportsController < ApplicationController
     @title = t('reports.total_facturation_milk')
     @cont_liters = FacturationMilk.get_totals_for_month(current_user)
   end
+
+  def tree_familiar
+    @title = t('reports.tree_familiar')
+    @cow_id =''
+    @cow = nil
+    if !params[:cow_id].nil? and params[:cow_id]!= '-1'
+      @all_children = Cow.arrange()
+      @c = Cow.find(params[:cow_id])
+      @cow = find_cow_ancestry(@all_children, @c )
+      @actual_cow = Cow.find(params[:cow_id])
+    end
+    
+  end
+
+  private
+  def find_cow_ancestry(all_cow, cow_id)
+    all_cow.map do |cow, sub_children|
+      if (cow == cow_id)
+        p '---------------igual'
+        p cow
+        p cow_id
+        p sub_children
+        p all_cow
+        return sub_children
+      end
+      if (!sub_children.nil?)
+        sub_children.each do |c|
+          find_cow_ancestry(c,cow_id)
+        end
+      end
+    end
+  end
+
 end

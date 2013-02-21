@@ -3,8 +3,10 @@
     .span12
       .well
         .row
-          .span9
-            %h2= t('reproductions.title') + ' '+DateTime.now.year.to_s
+          .span8
+            %h2= t('reproductions.title') + ' '+@year
+          .span3
+            = link_to  t('reproductions.last_year').concat(' '+@year_btn),reproductions_path(:year=>@year_btn) , class: "btn btn-info"
         .row
           %table.table.table-bordered.table-striped
             %thead
@@ -26,7 +28,7 @@
                 - @cows.each do |cow|
                   %tr
                     %td
-                      = link_to (cow.short_ring.to_s+'<br />'+cow.name).html_safe, proba_path(cow.id)
+                      = link_to (cow.short_ring.to_s+'<br />'+cow.name).html_safe, proba_path(:id=>cow.id, :year=>@year)
                     - repro = get_simbol_reproduction(@reproductions, cow.id)
                     - if !repro.nil?
                       - repro.each do |r|
