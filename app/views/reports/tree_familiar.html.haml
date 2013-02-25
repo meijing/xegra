@@ -27,6 +27,9 @@
               %h4=@actual_cow.name
             - if !@cow.nil?
               = nested_children @cow
-              
-              
-              
+        .row
+          .well
+            .css-treeview
+              = d(@all_children,0).html_safe
+            
+            

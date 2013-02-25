@@ -47,6 +47,9 @@ class KineController < ApplicationController
   # POST /kine
   # POST /kine.json
   def create
+    if params[:cow][:parent_id] == "-1"
+      params[:cow][:parent_id] = nil
+    end
     @cow = current_user.cow.new(params[:cow])
     @cow.set_mother(params[:cow][:parent_id],params[:cow][:ring_mother])
     respond_to do |format|

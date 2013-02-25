@@ -56,7 +56,7 @@ class ReportsController < ApplicationController
       @cow = find_cow_ancestry(@all_children, @c )
       @actual_cow = Cow.find(params[:cow_id])
     end
-    
+    @all_children = Cow.arrange()
   end
 
   private
