@@ -51,23 +51,18 @@ class ReportsController < ApplicationController
     @cow_id =''
     @cow = nil
     if !params[:cow_id].nil? and params[:cow_id]!= '-1'
-      @all_children = Cow.arrange()
+      @all_children = Cow.current_user.arrange()
       @c = Cow.find(params[:cow_id])
       @cow = find_cow_ancestry(@all_children, @c )
       @actual_cow = Cow.find(params[:cow_id])
     end
-    @all_children = Cow.arrange()
+    @all_children = current_user.cow.arrange()
   end
 
   private
   def find_cow_ancestry(all_cow, cow_id)
     all_cow.map do |cow, sub_children|
       if (cow == cow_id)
-        p '---------------igual'
-        p cow
-        p cow_id
-        p sub_children
-        p all_cow
         return sub_children
       end
       if (!sub_children.nil?)

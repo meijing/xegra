@@ -1,7 +1,7 @@
 # encoding: utf-8
 module ReportsHelper
 
-  def nested_children(children)
+  def nested_childrenk(children)
     if (!children.nil?)
       children.map do |children, sub_children|
         content_tag(:ul)+content_tag(:li)+
@@ -11,18 +11,25 @@ module ReportsHelper
     end
   end
 
-  def d (cow,level)
+  def nested_children (cow, text_level)
     text = "<ul>"
-    text = text + "<li>"
+    
+    level = 0
     if (!cow.nil?)
       cow.map do |cow, children|
+        text = text + "<li>"
+        text_level = text_level + '-'+level.to_s
         if !children.nil? and children != {}
-          text = text + "<input type='checkbox' id='item-"+level.to_s+"' /><label for='item-"+level.to_s+"'>"+make_info_child(cow)+"</label>"
-          text = text + d(children,level+1)
+          text = text + "<input type='checkbox' id='item-"+text_level+"' /><label for='item-"+text_level+"'>"+make_info_child(cow)+"</label>"
+          text = text + nested_children(children,text_level)
+          level += 1
         else
+          
           text = text + "<li>"+cow.name+"</li>"
+
         end
       end
+      text = text + "</ul>"
     end
     return text
   end

@@ -9,27 +9,10 @@
         .row
           .span11
             = link_to t('reports.back'), reports_path, class: "btn btn-info"
-            %br
-            %br
-            .row                
-              .span11
-                .form-horizontal
-                  = form_for(@cow_id) do |f|
-                    .control-group
-                      %label.control-label=t('reports.select_mother') +':'
-                      .controls
-                        = f.select :cow_id, get_ring_name_cows
-                        %button.btn.btn-success{:type => "submit"}= t('reports.generate_tree')
 
         .row
           .well
-            - if !@actual_cow.nil?
-              %h4=@actual_cow.name
-            - if !@cow.nil?
-              = nested_children @cow
-        .row
-          .well
             .css-treeview
-              = d(@all_children,0).html_safe
+              = nested_children(@all_children,'').html_safe
             
             
