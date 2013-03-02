@@ -185,6 +185,27 @@ class Cow < ActiveRecord::Base
     end
   end
 
+  def self.find_all_cows_for_tree (current_user)
+    @all_children = current_user.cow.is_active
+    @new_cow_for_add = []
+    @all_children.each do |cow|
+      if !cow.ancestry.nil?
+        @id_ancestries = cow.ancestry.split("/")
+        @id_ancestries.each do |a|
+          @c = Cow.find(a)
+          if !@all_children.include?(@c)
+            @all_children << @c
+          end
+        end
+      end
+    end
+    p @all_children.sort_by { |e| e[:id]}
+p '--------------------------'
+#p @all_children.sort_by { |e| e[:id]}.arrange()
+    return @all_children.arrange()
+  end
+
+
 
     # --- Permissions --- #
 
@@ -203,5 +224,6 @@ class Cow < ActiveRecord::Base
     def view_permitted?(field)
         true
     end
+
 
 end

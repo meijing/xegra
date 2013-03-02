@@ -48,29 +48,39 @@ class ReportsController < ApplicationController
 
   def tree_familiar
     @title = t('reports.tree_familiar')
-    @cow_id =''
-    @cow = nil
-    if !params[:cow_id].nil? and params[:cow_id]!= '-1'
-      @all_children = Cow.current_user.arrange()
-      @c = Cow.find(params[:cow_id])
-      @cow = find_cow_ancestry(@all_children, @c )
-      @actual_cow = Cow.find(params[:cow_id])
+    
+    @all_children = current_user.cow
+    @cows_to_delete = []
+    @all_children = @all_children.arrange()
+    
+    @all_children.map do |cow, sub_children|
+      @check = false
+      if (cow.is_active != 1)
+        @c = check_exists_active_cows(sub_children)
+        if !@c
+          @cows_to_delete << cow
+        end
+      end
+      
     end
-    @all_children = current_user.cow.is_active.arrange()
+
+    @cows_to_delete.each do |d|
+       @all_children.delete(d)
+    end
+    p '--------------------'
+    p @all_children
   end
 
   private
-  def find_cow_ancestry(all_cow, cow_id)
-    all_cow.map do |cow, sub_children|
-      if (cow == cow_id)
-        return sub_children
+  def check_exists_active_cows(sub_children)
+    @check = false
+    sub_children.map do |c, sc|
+      if c.is_active == 1
+        return true
       end
-      if (!sub_children.nil?)
-        sub_children.each do |c|
-          find_cow_ancestry(c,cow_id)
-        end
-      end
+      @check = check_exists_active_cows(sc)
     end
+    return @check
   end
 
 end
