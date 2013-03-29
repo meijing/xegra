@@ -8,13 +8,12 @@
 
     = csrf_meta_tags
 
-  %body
+  %body.probafondo
     .container
       %header
         .row
           .span7
-            %h1 XEGRA
-            %p.lead Xestión de Granxas
+            =image_tag 'xegra.jpg', :size=>"300x80"
           .span5
             -if !current_user.nil?
               .bsa.well
@@ -29,7 +28,13 @@
                           = t('welcome_user.cea')+' ' + current_user.cea
                         .span2
                           = link_to t('welcome_user.sign_out'), destroy_user_session_path, :method => :delete, class: "btn btn-inverse"
-      =render 'menu'
+            - else
+              .bsa.well
+                .bsap_1277971.bsap
+                  .bsa_it.one
+                    .bsa_it_ad.ad1.odd
+                      %p.lead Xestión de Granxas
+      
       = yield
 
-    = render 'footer'
+    

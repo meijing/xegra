@@ -220,6 +220,7 @@ gl:
 
   session:
     new_session: Entra na páxina
+    email: Email
     password: Contrasinal
     remember_me: Recórdame
     btn_aceptar: Aceptar
@@ -277,4 +278,11 @@ gl:
     single_veterinarian: veterinario
     single_cooperative: cooperativa
     single_farmer: granxeiro
-    title_sign_in: Entra na paxina como
+    title_sign_in: Entra na páxina como
+
+  benefit:
+    title: Por qué usar Xegra
+    ben_1: Xestión sen papeles
+    ben_2: Sempre dispoñible
+    ben_3: Redución de custos
+    ben_4: Constante comunicación (veterinarios, cooperativas, granxeixos...)
