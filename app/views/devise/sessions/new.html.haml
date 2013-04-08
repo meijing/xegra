@@ -17,8 +17,9 @@
             %h4= t('page_index.title_sign_in')+' '+t('page_index.single_farmer')
             = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
               .inputs
-                = f.text_field :email, :required => false, :autofocus => true, :placeholder => t('session.email') 
-                = f.text_field :password, :required => false, :placeholder => t('session.password')
+                = f.text_field :email, :required => false, :autofocus => true, :placeholder => t('session.email')
+                
+                = f.text_field :password, :required => false, :placeholder => t('session.password'),:type => "password"
               .actions
                 = f.button :submit, t('session.btn_aceptar') , :class=>'btn btn-success'
             = render "links"
