@@ -3,8 +3,11 @@
     .span12
       .well
         .row
-          .span11
+          .span9
             %legend= t('kine.show.data_cow')
+
+          .span2
+            = link_to  t('kine.up_cow'), new_cow_path , class: "btn btn-info"
           %hr.space
             .span8
               .well
@@ -65,3 +68,5 @@
                   =link_to t('kine.show.btn_down_cow'), @cow ,method: :delete, class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
                 %p
                   = link_to t('kine.show.btn_update_cow'), edit_cow_path(@cow) , class: "btn btn-info"
+                %p
+                  = link_to t('reports.tree_familiar'), tree_familiar_reports_path , class: "btn btn-info"

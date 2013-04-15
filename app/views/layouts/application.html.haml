@@ -34,7 +34,8 @@
                   .bsa_it.one
                     .bsa_it_ad.ad1.odd
                       %p.lead Xestión de Granxas
-      
+      - if !current_user.nil?
+        = render 'menu'
       = yield
 
     
