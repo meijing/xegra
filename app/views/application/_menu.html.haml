@@ -15,6 +15,10 @@
                 = link_to t('menu.reproduction'), reproductions_path
               %li
                 = link_to t('menu.lactations'), lactations_path
+              %li
+                = link_to t('reports.tree_familiar'), tree_familiar_reports_path
+              %li
+                = link_to t('menu.reports'),reports_path
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
               = t('menu.notifications')
@@ -25,13 +29,10 @@
               %li
                 = link_to t('menu.notif_veterinarian'), lactations_path
           %li
-            = link_to t('menu.notif_all'), active_notifications_path
-          %li
             = link_to t('menu.facturation_milk'), facturation_milks_path(:month=>DateTime.now.month)
-          %li
-            = link_to t('menu.reports'),reports_path
+          
           %li
             = link_to t('menu.links'),links_path
           %li
-            = link_to t('menu.account'),edit_user_registration_path
+            // link_to t('menu.account'),edit_user_registration_path
           

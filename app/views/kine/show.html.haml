@@ -61,12 +61,12 @@
             .span3
               .well
                 %p
+                  = link_to t('kine.show.btn_update_cow'), edit_cow_path(@cow) , class: "btn btn-info"
+                %p
                   = link_to t('kine.show.btn_lactation'), lactation_path(@cow.id) , class: "btn btn-info"
                 %p
                   =link_to t('kine.show.btn_reproduction'), proba_path(@cow.id) , class: "btn btn-info"
                 %p
-                  =link_to t('kine.show.btn_down_cow'), @cow ,method: :delete, class: "btn btn-info",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
-                %p
-                  = link_to t('kine.show.btn_update_cow'), edit_cow_path(@cow) , class: "btn btn-info"
-                %p
                   = link_to t('reports.tree_familiar'), tree_familiar_reports_path , class: "btn btn-info"
+                %p
+                  =link_to t('kine.show.btn_down_cow'), @cow ,method: :delete, class: "btn btn-danger",  :confirm => '¿Está seguro que quere dar de baixa esta vaca?'
